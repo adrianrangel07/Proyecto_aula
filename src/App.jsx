@@ -3,10 +3,9 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //Paginas
-import InicioSesion from "./componentes/paginas/InicioSesion.jsx";
-import RegistroUsuario from "./componentes/paginas/RegistroUsuario.jsx";
-import Principal from "./componentes/paginas/Principal.jsx";
-import RegistroEmpresa from "./componentes/paginas/RegistroEmpresa.jsx";
+import InicioSesion from "./paginas/Inicio Sesion/InicioSesion.jsx";
+import RegistroUsuario from "./paginas/Registro/Usuario/RegistroUsuario.jsx";
+import Principal from "./paginas/Principal.jsx";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Routes>
           <Route path="/" element={<InicioSesion />} />
           <Route path="/registrousuario" element={<RegistroUsuario />} />
-          <Route path="/registroempresa" element={<RegistroEmpresa />} />
           <Route path="/principal" element={<Principal />} />
         </Routes>
       </BrowserRouter>

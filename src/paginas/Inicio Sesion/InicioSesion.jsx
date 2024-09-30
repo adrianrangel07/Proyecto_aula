@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/InicioSesion.css';
+import './InicioSesion.css';
 import { useNavigate } from 'react-router-dom';
 import { LuUser } from "react-icons/lu";
 import { GoLock } from "react-icons/go";
@@ -9,15 +9,16 @@ import { GoLock } from "react-icons/go";
 function InicioSesion() {
   const navigate = useNavigate()
   return (
-    <div className='wrapper'>
+    <div className='iscontainer'>
+    <div className='iswrapper'>
       <form action="">
         <h1>Inicio Sesion</h1>
-        <div className="input-box">
+        <div className="isinput-box">
             <input type="text" placeholder='Usuario / Correo' required />
             <LuUser className='icono'/>
         </div>
 
-        <div className="input-box">
+        <div className="isinput-box">
             <input type="password" placeholder='Contraseña' required />
             <GoLock className='icono' />
         </div>
@@ -38,6 +39,7 @@ function InicioSesion() {
         </div>
 
       </form>
+    </div>
     </div>
   )
 }

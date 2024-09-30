@@ -6,20 +6,20 @@
   box-sizing: border-box;
 }
 
-body {
+ .iscontainer{
   font-family: "Fredoka", system-ui;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items:center;
   min-height: 100vh;
-  background-image: url('../extra/bgIS.jpeg');
+  background-image: url('./bgIS.jpeg');
 }
 
-
-
-.wrapper {
+.iswrapper {
+    padding: 0;
+    box-sizing: border-box;
     width: 600px;
     height: 720px;
     background:transparent;
@@ -28,15 +28,18 @@ body {
     color:white;
     border-radius: 5px;
     padding: 120px 40px;
+    margin-top: 20px;
+  margin-bottom: 20px;
+    
       
 }
 
-.wrapper h1{
+.iswrapper h1{
     font-size: 36px;
     text-align: center;
 }
 
-.wrapper .input-box{
+.iswrapper .isinput-box{
     position:relative;
     width: 100%;
     height: 50px;
@@ -45,7 +48,7 @@ body {
 
 
 
-.input-box input {
+.isinput-box input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -56,13 +59,14 @@ body {
     font-size: 16px;
     color: #fff;
     padding: 20px 45px 20px 20px;
+    
 
 }
 
-.input-box input::placeholder{
+.isinput-box input::placeholder{
     color: white;
 }
-.input-box .icono{
+.isinput-box .icono{
     position: absolute;
     right: 20px;
     top: 50%;
@@ -79,7 +83,7 @@ body {
 
 
 
-.wrapper button{
+.iswrapper button{
     margin-top: 20px;
     width: 100%;
     height: 45px;
@@ -94,7 +98,7 @@ body {
     font-weight: 700;
 }
 
-.wrapper .registro-usuario{
+.iswrapper .registro-usuario{
     font-size: 14.5px;
     text-align: center;
     margin-top: 20px;
@@ -106,7 +110,7 @@ body {
     font-weight: 600px;
 }
 
-.wrapper .registro-empresa{
+.iswrapper .registro-empresa{
     font-size: 14.5px;
     text-align: center;
     margin-top: 20px;
