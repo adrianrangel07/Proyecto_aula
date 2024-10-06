@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/Perfil.css">
+    <link rel="stylesheet" href="../CSS/normalize.css">
+    <title>Workwise Navigator</title>
+    <link rel="website icon" href="../imagenes/wknlogo2.png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
+</head>
+
+<body>
+    <header class="top-bar">
+        <nav class="navbar navbar-dark  fixed-top">
+            <div class="container-fluid"> <!-- barra superior-->
+                <a class="navbar-brand" th:href=@{/login_inicio}>
+                    <img src="../Imagenes/wknname.png" alt="Logo" id="logo" class="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- de aqui para abajo barra de navegacion lateral-->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
+                    aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h4 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">WORKWISE</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-header">
+                        <h5 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="letras nav-rp nav-link " aria-current="page" th:href="@{/login_inicio}">VOLVER
+                                    AL INICIO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="letras nav-rp nav-link" href="#">CONFIGURACION</a>
+                            </li>
+                            <li class="nav-item dropdown"> <!-- barra desplagable dentro de la barrra lateral-->
+                                <a class="letras nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ver Más
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="letras dropdown-item" th:href="@{/Estadisticas}">Estadisticas</a></li>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="letras dropdown-item" th:href="@{/Nosotros}">¿Quienes Somos?</a>
+                            </li>
+                        </ul>
+                        </li>
+                        </ul>
+                        <div class="barra_busqueda_responsive" id="formBusqueda">
+                            <form class="d-flex" role="search">
+                                <input class="form form-control me-2" type="search" id="termino" name="termino"
+                                    placeholder="Buscar ofertas..." aria-label="Search">
+                                <button class="btn btn-outline-success" id="btn" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!-- Page Container -->
+        <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+
+                <!-- Left Column -->
+                <div class="w3-third">
+                    <div class="w3-white w3-text-grey w3-card-4 ">
+                        <div class="content">
+                            <div class="w3-display-container">
+                                <i class="fa fa-camera camara"></i>
+                                <img src="../Imagenes/userperfil.png" style="width:100%" alt="Avatar">
+                            </div>
+                            <div class="w3-container">
+                                <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-tealp"></i>*Nombre*</p>
+                                <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-tealp"></i>*Apellido*</p>
+                                <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-tealp"></i>*email*</p>
+                                <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-tealp"></i>123456</p>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="w3-container">
+                            <h2><i class="fa fa-suitcase fa-fw w3-margin-right  w3-text-tealp porta"></i>Subir hoja de vida</h2>
+                            <button type="submit" id="validar">Subir hoja de vida</button>
+                            <hr>
+                        </div>
+                    </div><br>
+
+                    <!-- End Left Column -->
+                </div>
+
+                <!-- Right Column -->
+                <div class="w3-twothird">
+
+                    <div class="w3-container w3-card w3-white w3-margin-bottom">
+                        <h2 class="w3-text-grey w3-padding-16"><i
+                                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-tealp"></i>Cambio de datos
+                        </h2>
+                        <div class="w3-container">
+                            <h5 class="w3-opacity"><b>Nombre</b></h5>
+                            <input type="text" placeholder="Nuevo Nombre">
+                            <hr>
+                        </div>
+                        <div class="w3-container">
+                            <h5 class="w3-opacity"><b>Apellido</b></h5>
+                            <input type="text" placeholder="Nuevo Apellido">
+                            <hr>
+                        </div>
+                        <div class="w3-container">
+                            <h5 class="w3-opacity"><b>Email</b></h5>
+                            <input type="text" placeholder="Nuevo Email">
+                            <hr>
+                        </div>
+                        <div class="w3-container">
+                            <h5 class="w3-opacity"><b>Contraseña</b></h5>
+                            <input type="text" placeholder="Nuevo Contraseña">
+                            <hr>
+                        </div>
+                        <div class="w3-container">
+                            <button type="submit" id="validar">Guardar Datos</button>
+                        </div>
+
+                    </div>
+
+                
+                    <!-- End Right Column -->
+                </div>
+
+                <!-- End Grid -->
+            </div>
+
+            <!-- End Page Container -->
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="sticky-lg-bottom">
+                <div class="row">
+                    <div class="col">
+                        <div class="contacto">
+                            <h5>Contacto</h5>
+                            <p>info@Workwise.com</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="link">
+                            <h5>Links</h5>
+                            <ul>
+                                <div class="Links">
+                                    <li><a th:href="@{/}">Inicio</a></li>
+                                    <li><a th:href="@{/registrar_persona}">Registrate</a></li>
+                                    <li><a th:href="@{/login_persona}">Iniciar sesion</a></li>
+                                    <li><a th:href="@{/Nosotros}">Nosotros</a></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="redes-1">
+                            <h5>Redes</h5>
+                            <div class="redes">
+                                <div class="facebook">
+                                    <a class="facebook" href="https://www.facebook.com/profile.php?id=61558650706843"
+                                        target="_blank">
+                                        <img class="facebook"
+                                            src="https://faldin.com/wp-content/uploads/2018/01/logo-facebook.png"
+                                            alt="facebook">
+                                    </a>
+                                </div>
+                                <div class="instagram">
+                                    <a class="instagram" href="https://www.instagram.com/work_wise.0.1/"
+                                        target="_blank">
+                                        <img class="instagram" src="../Imagenes/instagram.png" alt="instagram">
+                                    </a>
+                                </div>
+                                <div class="twitter">
+                                    <a class="twitter" href="https://www.tiktok.com/@work_wise?lang=es" target="_blank">
+                                        <img class="twitter"
+                                            src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png"
+                                            alt="twitter">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

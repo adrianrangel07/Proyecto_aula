@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/inicioPer.css">
+    <link rel="stylesheet" href="../CSS/normalize.css">
+    <title>Workwise Navigator</title>
+    <link rel="website icon" href="../imagenes/wknlogo2.png">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="top-bar">
+        <nav class="navbar navbar-dark  fixed-top">
+            <div class="container-fluid"> <!-- barra superior-->
+                <a class="navbar-brand" th:href="@{/login_inicio}">
+                    <img src="../Imagenes/wknname.png" alt="Logo" id="logo" class="logo">
+                </a>
+                <div class="barra_busqueda" id="formBusqueda">
+                    <form class="d-flex" role="search">
+                        <input class="form form-control me-2" type="search" id="termino" name="termino"
+                            placeholder="Buscar ofertas..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+                <div class="option">
+
+                    <div class="imguser">
+                        <a href="#"><img src="../Imagenes/user.png" alt=""></a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <!-- de aqui para abajo barra de navegacion lateral-->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
+                    aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h4 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">WORKWISE</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-header">
+                        <h5 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="letras nav-rp nav-link " aria-current="page" th:href="@{/}">Cerrar Sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="letras nav-rp nav-link " aria-current="page" th:href="@{/perfil}">Mi
+                                    perfil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="letras nav-rp nav-link " aria-current="page"
+                                    th:href="@{/configuracion}">Configuracion</a>
+                            </li>
+                            <li class="nav-item dropdown"> <!-- barra desplagable dentro de la barrra lateral-->
+                                <a class="letras nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Ver Más
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="letras dropdown-item" th:href="@{/Estadisticas}">Estadisticas</a></li>
+                                    <li><a class="letras dropdown-item" th:href="@{/login_empresa}">Empresa</a></li>
+                                    <li><a class="letras dropdown-item" href="#">Aprende con nosotros</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="letras dropdown-item" th:href="@{/Nosotros}">¿Quienes Somos?</a>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="barra_busqueda_responsive" id="formBusqueda">
+                            <form class="d-flex" role="search">
+                                <input class="form form-control me-2" type="search" id="termino" name="termino"
+                                    placeholder="Buscar ofertas..." aria-label="Search">
+                                <button class="btn btn-outline-success" id="btn" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div id="resultadoBusqueda">
+                        <div th:each="Oferta:${Ofertas1}">
+                            <div class="offer" data-id="${Oferta.id}">
+                                <h3 th:text="${Oferta.titulo_puesto}"></h3>
+                                <p th:text="${Oferta.descripcion}"></p>
+                                <p style="display: none;" class="salario"><span th:text="${Oferta.salario}"></span>
+                                </p>
+                                <p style="display: none;" class="duracion"><span th:text="${Oferta.duracion}"></span>
+                                </p>
+                                <p style="display: none;" class="periodo"><span th:text="${Oferta.periodo}"></span>
+                                </p>
+                                <p style="display: none;" class="tipo_empleo"><span
+                                        th:text="${Oferta.tipo_empleo}"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="container">
+                        <div class="border-imagen">
+                            <img src="../Imagenes/wknLogo.png" alt="Descripción de la imagen" class="imagen">
+                        </div>
+                        <div class="offerDetails" style="display: none;">
+                            <button id="closeOfferDetails">X</button>
+                            <h3></h3>
+                            <span>=========================================</span>
+                            <p></p>
+                            <p>Salario: <span class="salarioSpan"></span></p>
+                            <p>Duración: <span class="duracionSpan"></span></p>
+                            <p>Período: <span class="periodoSpan"></span></p>
+                            <p>Tipo de empleo: <span class="tipo_empleoSpan"></span></p>
+                            <div class="centered-btn">
+                                <button id="postularseBtn">Postularse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="sticky-lg-bottom">
+                <div class="row">
+                    <div class="col">
+                        <div class="contacto">
+                            <h5>Contacto</h5>
+                            <p>info@Workwise.com</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="link">
+                            <h5>Links</h5>
+                            <ul>
+                                <li><a th:href="@{/login_inicio}">Inicio</a></li>
+                                <li><a th:href="@{/Estadisticas}">Estadisticas</a></li>
+                                <li><a href="#">Aprende con nosotros</a></li>
+                                <li><a th:href="@{/Nosotros}">Nosotros</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h5>Redes</h5>
+                        <div class="redes">
+                            <div class="facebook">
+                                <a class="facebook" href="https://www.facebook.com/profile.php?id=61558650706843"
+                                    target="_blank">
+                                    <img class="facebook"
+                                        src="https://faldin.com/wp-content/uploads/2018/01/logo-facebook.png"
+                                        alt="facebook">
+                                </a>
+                            </div>
+                            <div class="instagram">
+                                <a class="instagram" href="https://www.instagram.com/work_wise.0.1/" target="_blank">
+                                    <img class="instagram" src="../Imagenes/instagram.png" alt="instagram">
+                                </a>
+                            </div>
+                            <div class="twitter">
+                                <a class="twitter" href="https://www.tiktok.com/@work_wise?lang=es" target="_blank">
+                                    <img class="twitter"
+                                        src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png"
+                                        alt="twitter">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/Inicio_persona.js"></script>
+</body>
+
+</html>

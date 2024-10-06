@@ -1,0 +1,334 @@
+
+* {
+    font-family: Arial, sans-serif;
+}
+
+/* te sivre para cambiar el fondo */
+
+.navbar {
+    background-color: #0a1128;
+    /* barra superior */
+}
+
+.offcanvas {
+    background-color: #0a1128;
+    /* barra de navegacion */
+}
+
+.letras {
+    color: #ffffff;
+}
+
+.dropdown-menu {
+    background-color: #001f54;
+    /* barra desplegable dentro de la barra lateral de navegacion */
+}
+
+
+.nav-rp {
+    border-radius: 8px;
+    /* el bordeado de las opciones de inicio de sesesion y registrarse */
+    width: 100%;
+}
+
+.nav-rp:hover {
+    color: #001f54;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+#logo {
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#logo:hover {
+    transform: scale(1.1);
+}
+
+.form{
+    /*barra de busqueda */
+    width: 300px;
+    background: transparent;
+    border-radius: 0;         
+    border-bottom: 1px solid #ffffff;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.form::placeholder{
+    color: #ffffff;
+}
+
+.btn{
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.btn:hover{
+    color: #001f54;
+    border-color: #ffffff;
+    background-color: #ffffff;
+}
+
+#btn:active{
+    color: #001f54;
+    border-color: #ffffff;
+    background-color: #ffffff;
+}
+
+.barra_busqueda_responsive{
+    display: none;
+}
+
+.offer {  
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 8px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+}
+
+.offer.pressed {
+    border: 1px solid #0a1128; /* Estilo del borde cuando está presionado */
+    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5); /* Sombra para resaltar */
+}
+
+.offer:hover {
+    border: 1px solid #0a1128;
+    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5);
+}
+
+.offer h3 {
+    font-size: 24px;  
+    text-align: center;  
+}
+
+/* estilo de la seccion detalles de la ofertas */
+.offerDetails {
+    position: fixed;
+    border: 2px solid #000;
+    padding: 20px;
+    min-height: 400px;
+    max-height: 320px;
+    overflow-y: auto;
+    width: 470px; /* ancho de la oferta */
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    transition: opacity 0.4s ease-in-out;
+
+    scrollbar-color: #001f54 #ffffff; /* Cambiar el color de la barra y el thumb */
+    scrollbar-width: thin; 
+    
+}
+
+.offerDetails h3{
+    text-align: center;
+}
+
+.offerDetails p{
+    text-align: justify;
+}
+
+/* boton x en los detalles de oferts */
+ #closeOfferDetails {   
+    margin-bottom: 20px;
+    border-radius: 20px;
+    height: 30px;
+    width: 40px;
+    font-size: 16px; 
+}
+
+#closeOfferDetails:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+/* footer */
+
+.footer {
+    background-color: #99B3FF;
+    padding: 20px;
+    text-align: center;
+    bottom: 0;
+    left: 0; /* Ajustado a 0 */
+    width: 100%; /* Ajuste para el ancho del footer */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Añade sombra al footer */
+    border-top: 1px solid #ccc; /* Añade borde superior */
+    z-index: -1;
+}
+
+/* Ajuste de la altura del contenido para evitar que se solape con el footer */
+main {
+    margin-top: 80px; /* Altura del header */
+    margin-bottom: 100px; /* Altura del footer */
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.letras {
+    font-size: 14px; /* Ajusta el tamaño de la fuente */
+}
+
+/* redes */
+
+.redes {
+    background-color: #99B3FF;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    height: 30px;
+    margin-left: 15%;
+}
+
+.redes-1{
+    color: #000;
+}
+
+.Links{
+    text-decoration: none;
+}
+
+.link{
+    margin-left: -10%;
+    color: #000;
+}
+
+.contacto{
+    margin-right: 10%;
+    color: #000;
+}
+
+.facebook{
+    width: 50px;
+    height: 50px;
+    image-rendering: auto;
+    margin-top: 1%;
+    cursor: pointer;
+}
+
+.instagram{
+    width: 60px;
+    height: 60px;
+    image-rendering: auto;
+    cursor: pointer;
+}
+
+.twitter{
+    width: 40px;
+    height: 40px;
+    image-rendering: auto;
+    margin-top: 2.6%;
+    cursor: pointer;
+}
+
+.facebook:hover{
+    transform: scale(1.1);
+}
+.facebook{
+    transition: .4s;
+}
+
+.instagram:hover{
+    transform: scale(1.1);
+}
+.instagram{
+    transition: .4s;
+}
+
+.twitter{
+    transition: .4s;
+}
+
+.twitter:hover{
+    transform: scale(1.1);
+}
+
+.imagen{
+    border-radius: 30px ;
+    position: fixed;
+    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5);
+    width: 480px;
+    height: 350px;
+    opacity: 0.9;
+}
+
+@media (max-width: 600px){
+    .barra_busqueda{
+        display: none;
+    }
+
+    .barra_busqueda_responsive{
+        display: block;
+    }
+    .imagen {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .offer {
+        padding: 4px; 
+        font-size: 16px; 
+    }
+    .offerDetails {
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+    }
+    .imagen {
+        display: none;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 991px) {
+    .offer {
+        padding: 6px; 
+        font-size: 18px;
+    }
+    .offerDetails {
+        position: fixed;
+        z-index: 9999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+    }
+    .imagen {
+        display: none;
+    }
+}
+
+.centered-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+
+#postularseBtn {
+    padding: 10px 20px;
+    background-color: #001f54;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#postularseBtn:hover{
+    background-color: #007bff;
+}

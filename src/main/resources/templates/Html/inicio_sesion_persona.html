@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión</title>
+    <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="website icon" href="../Imagenes/wknlogo2.png">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="img-log">
+                <a href="/">
+                    <img src="../Imagenes/wknblack.png" alt="">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="iscontainer">
+            <div class="iswrapper">
+                <form action="">
+                    <h1>Inicio Sesión</h1>
+                    <div class="isinput-box">
+                        <input type="text" placeholder="Usuario / Correo" required>
+                        <i class="fas fa-user icono"></i>
+                    </div>
+    
+                    <div class="isinput-box">
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                        <i class="icono"> <!-- Icono del candado --> </i>
+                        <span class="toggle-password" onclick="togglePasswordVisibility()">
+                            <i id="eye-icon" class="far fa-eye"></i>
+                        </span>
+                    </div>
+    
+                    <div class="password-forgot">
+                        <a th:href="@{/Contraseña-olvidada}">Recordar Contraseña</a>
+                    </div>
+    
+                    <button type="submit">Ingresar</button>
+    
+                    <div class="registro-usuario">
+                        <p>¿Eres nuevo? <a th:href="@{/Register/personas}">Regístrate aquí</a></p>
+                    </div>
+    
+                    <div class="registro-empresa">
+                        <p>¿Tienes una empresa? <a th:href="@{/registrar/Empresa}">Regístrate aquí</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- No Borrar-->
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("eye-icon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("far", "fa-eye");
+                eyeIcon.classList.add("far", "fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("far", "fa-eye-slash");
+                eyeIcon.classList.add("far", "fa-eye");
+            }
+        }
+    </script>
+</body>
+
+</html>

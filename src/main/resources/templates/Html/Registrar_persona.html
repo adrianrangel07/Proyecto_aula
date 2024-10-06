@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="../CSS/Registrar_persona.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="website icon" href="../Imagenes/wknlogo2.png">
+    <link rel="stylesheet" href="../CSS/normalize.css">
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+        <div class="rupage"> 
+            <div class="rucontainer"> 
+                <div class="ruwrapper"> 
+                    <h1>Empecemos una nueva aventura...</h1>
+                    <form th:action="@{/Register/personas}" method="post" onsubmit="return validatePassword()">
+                        <div class="input-columns">
+                            <div class="input-column-left">
+                                <div class="input-box">
+                                    <label>Primer nombre y Segundo nombre</label>
+                                    <input type="text" id="nombre" name="nombre" required />
+                                </div>
+    
+                                <div class="input-box">
+                                    <label>Primer apellido y Segundo apellido</label>
+                                    <input type="text" id="apellido" name="apellido" required />
+                                </div>
+    
+                                <div class="input-box-date">
+                                    <label>Fecha de Nacimiento</label>
+                                    <input type="date" id="fecha" name="fecha_nacimiento" required />
+                                </div>
+    
+                                <div class="input-box">
+                                    <label>Número de Identificación</label>
+                                    <input type="text" id="cedula" name="identificacion" required />
+                                    <select id="tipo-identificacion" name="tipoIdentificacion">
+                                        <option value="cc">Cédula de Ciudadanía</option>
+                                        <option value="ce">Cédula de Extranjería</option>
+                                        <option value="rc">Registro Civil</option>
+                                        <option value="dni">Documento de Identidad</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+    
+                            <div class="input-column-right">
+                                <div class="input-box">
+                                    <label>Correo Electrónico</label>
+                                    <input type="email" id="email" name="email" required />
+                                </div>
+    
+                                <div class="input-box">
+                                    <label>Contraseña</label>
+                                    <input type="password" id="password" name="contraseña" required />
+                                </div>
+
+                                <div class="input-box">
+                                    <label>Confirmar Contraseña</label>
+                                    <input type="password" id="confirm-password" name="confirm-password" required />
+                                </div>
+    
+                                <div class="input-box">
+                                    <label>Número de Teléfono</label>
+                                    <input type="tel" id="telefono" name="num_tel" required />
+                                </div>
+                                
+                                <div class="inicio-usuario">
+                                    <p>Tienes cuenta? <a th:href="@{/login/personas}">Inicia Sesion aquí</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+    
+                        <div class="button">
+                            <button type="submit">Registrarse</button>
+                        </div>
+                    </form>
+                </div> 
+            </div> 
+        </div> 
+    </main>
+
+    <!-- No Borrar -->
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var confirmPasswordField = document.getElementById("confirm-password");
+            var eyeIcon = document.getElementById("eye-icon");
+    
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                confirmPasswordField.type = "text"; 
+                eyeIcon.classList.remove("far", "fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                confirmPasswordField.type = "password"; 
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+    
+        function validatePassword() {
+            var passwordField = document.getElementById("password");
+            var confirmPasswordField = document.getElementById("confirm-password");
+    
+            if (passwordField.value !== confirmPasswordField.value) {
+                alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
+                return false; 
+            }
+            return true; 
+        }
+    </script>
+</body>
+</html>
