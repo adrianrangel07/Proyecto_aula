@@ -79,9 +79,8 @@ public class EmpresaController {
 		return "html/Oferta";
 	}
 
-    @GetMapping("/Contraseña-olvidada-empresa") //cuando quieren recuperar la contraseña de la cuenta de empresa ok?
+    @GetMapping("/Contraseña-olvidada-empresa") //cuando quieren recuperar la contraseña de la cuenta de empresa
     public String olvidar_emp(){
         return "html/contraseña_olvidada_emp";
     }
-
 }
