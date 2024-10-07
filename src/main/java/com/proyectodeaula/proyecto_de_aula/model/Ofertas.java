@@ -31,12 +31,15 @@ public class Ofertas {
 
     @Column(name = "Periodo", columnDefinition = "Varchar(45)", nullable = false)
     String periodo;
+
+    @Column(name = "modalidad", columnDefinition = "varchar(45)", nullable = false)
+    String modalidad;
     
     public Ofertas(){
     }
 
     public Ofertas(int id, String titulo_puesto, String descripcion, String duracion, String tipo_empleo, int salario,
-            String periodo) {
+            String periodo, String modalidad) {
         this.id = id;
         this.titulo_puesto = titulo_puesto;
         this.descripcion = descripcion;
@@ -44,6 +47,7 @@ public class Ofertas {
         this.tipo_empleo = tipo_empleo;
         this.salario = salario;
         this.periodo = periodo;
+        this.modalidad = modalidad;
     }
 
     public int getId() {
@@ -102,6 +106,12 @@ public class Ofertas {
         this.periodo = periodo;
     }
 
-    
-    
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
 }

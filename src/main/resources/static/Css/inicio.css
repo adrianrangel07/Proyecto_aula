@@ -3,8 +3,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* te sivre para cambiar el fondo */
-
 .navbar {
     background-color: #0a1128;
     /* barra superior */
@@ -23,7 +21,6 @@
     background-color: #001f54;
     /* barra desplegable dentro de la barra lateral de navegacion */
 }
-
 
 .nav-rp {
     border-radius: 8px;
@@ -82,74 +79,7 @@
     display: none;
 }
 
-.offer {  
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 8px;
-    cursor: pointer;
-    background-color: #f8f9fa;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-}
-
-.offer.pressed {
-    border: 1px solid #0a1128; /* Estilo del borde cuando está presionado */
-    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5); /* Sombra para resaltar */
-}
-
-.offer:hover {
-    border: 1px solid #0a1128;
-    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5);
-}
-
-.offer h3 {
-    font-size: 24px;  
-    text-align: center;  
-}
-
-/* estilo de la seccion detalles de la ofertas */
-.offerDetails {
-    position: fixed;
-    border: 2px solid #000;
-    padding: 20px;
-    min-height: 400px;
-    max-height: 320px;
-    overflow-y: auto;
-    width: 470px; /* ancho de la oferta */
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    transition: opacity 0.4s ease-in-out;
-
-    scrollbar-color: #001f54 #ffffff; /* Cambiar el color de la barra y el thumb */
-    scrollbar-width: thin; 
-    
-}
-
-.offerDetails h3{
-    text-align: center;
-}
-
-.offerDetails p{
-    text-align: justify;
-}
-
-/* boton x en los detalles de oferts */
- #closeOfferDetails {   
-    margin-bottom: 20px;
-    border-radius: 20px;
-    height: 30px;
-    width: 40px;
-    font-size: 16px; 
-}
-
-#closeOfferDetails:hover {
-    background-color: #ccc;
-    color: #000;
-}
-
 /* footer */
-
 .footer {
     background-color: #99B3FF;
     padding: 20px;
@@ -183,7 +113,6 @@ main {
 }
 
 /* redes */
-
 .redes {
     background-color: #99B3FF;
     display: flex;
@@ -314,21 +243,206 @@ main {
     }
 }
 
-.centered-btn {
+
+.main {
     display: flex;
-    justify-content: center;
-    align-items: center;   
+  }
+  
+.filtrador{
+    position: absolute;
 }
 
-#postularseBtn {
-    padding: 10px 20px;
-    background-color: #001f54;
+
+.filter-container {
+    padding: 1.5rem; /* Aumenta el padding interno */
+    margin-bottom: 1.5rem; /* Agrega margen en la parte inferior */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+}
+
+.filter-button {
+    background-color:  #0a1128; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    cursor: pointer; /* Cambiar cursor a pointer */
+    transition: background-color 0.3s; /* Transición suave para el hover */
+}
+
+.filter-button:hover {
+    background-color: #929292; /* Color de fondo en hover */
+}
+
+.filter-item {
+    padding: 0.75rem; /* Aumenta el padding de cada elemento del filtrador */
+    border: 1px solid #ddd; /* Borde para separación */
+    border-radius: 0.25rem; /* Bordes redondeados */
+    background-color: #fff; /* Color de fondo blanco */
+}
+
+.filter-title {
+    cursor: pointer; /* Cambia el cursor para indicar que es clickeable */
+    display: flex; /* Usar flexbox para alinear texto e icono */
+    justify-content: space-between; /* Espacio entre el texto y el icono */
+    align-items: center; /* Centrar verticalmente */
+}
+
+.filter-options {
+    padding: 0.5rem; /* Agregar algo de espacio */
+}
+
+.filter-title {
+    font-weight: bold; /* Para hacer que el título sea más notorio */
+}
+
+/* Aumentar el tamaño de los inputs y selects */
+input.form-control,
+select.form-select {
+    width: 100%; /* ocupan el 100% del ancho */
+    margin-top: 0.5rem; /* Añade margen superior */
+}
+
+  
+.arrow {
+    margin-left: 10px;
+  }
+  
+
+.offer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Contenedor principal que envuelve las tarjetas */
+.offer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Estilo general de las tarjetas */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(25% - 40px); /* 25% del ancho para 4 tarjetas y resta espacio para el gap */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Estilo al hacer hover sobre las tarjetas */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Título de la oferta */
+.offer-content h3 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Descripción de la oferta */
+.offer-content p {
+    color: #666;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* Información oculta que se mostrará al hacer clic */
+.hidden-info {
+    display: none;
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #444;
+}
+
+/* Estilos específicos para las etiquetas dentro de la información oculta */
+.hidden-info p {
+    margin: 5px 0;
+}
+
+/* Responsivo: 2 tarjetas en filas horizontales en pantallas pequeñas */
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 40px); /* 50% para 2 tarjetas en pantallas pequeñas */
+    }
+}
+
+/* Responsivo: 1 tarjeta por fila en pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .card {
+        width: calc(100% - 40px); /* 100% para 1 tarjeta en pantallas muy pequeñas */
+    }
+}
+
+/* Diseño general de las tarjetas */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: calc(25% - 40px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Botón para postularse */
+.apply-btn-modal {
+    background-color: #28a745;
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
-#postularseBtn:hover{
-    background-color: #007bff;
+ .apply-btn-modal:hover {
+    background-color: #218838;
+}
+
+/* Diseño del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000; /* Siempre al frente */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    color: red;
 }

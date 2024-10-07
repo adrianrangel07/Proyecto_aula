@@ -6,6 +6,18 @@
   box-sizing: border-box;
 }
 
+.img-log img {
+    position: absolute;
+    margin: 15px;
+    height: 70px;
+    width: 70px;
+    transition: 0.5s ease;
+}
+
+.img-log img:hover{
+    transform: scale(1.2);
+}
+
 .rucontainer{
   font-family: "Fredoka", system-ui;
   -webkit-font-smoothing: antialiased;
