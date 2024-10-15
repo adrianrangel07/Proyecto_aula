@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Sesión</title>
     <link rel="stylesheet" href="../CSS/login.css">
+    <script src="../js/Contraseña_incorrecta.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="website icon" href="../Imagenes/wknlogo2.png">
 </head>
@@ -42,14 +43,14 @@
                         <a th:href="@{/Contraseña-olvidada}">Recordar Contraseña</a>
                     </div>
     
-                    <button type="submit">Ingresar</button>
+                    <button type="submit"><a th:href="@{/login_inicio}" id="Contraseña"></a>Ingresar</button>
     
                     <div class="registro-usuario">
                         <p>¿Eres nuevo? <a th:href="@{/Register/personas}">Regístrate aquí</a></p>
                     </div>
     
                     <div class="registro-empresa">
-                        <p>¿Tienes una empresa? <a th:href="@{/registrar/Empresa}">Regístrate aquí</a></p>
+                        <p>¿Tienes una empresa? <a th:href="@{/Registrar/Empresa}">Regístrate aquí</a></p>
                     </div>
                 </form>
             </div>

@@ -1,4 +1,5 @@
-(() => {
+
+function contraseña_Incorreta(Contraseña){
     Swal.fire({
         icon : "error",
         title: "Datos incorrectos",
@@ -7,4 +8,4 @@
         with: "30%",
         padding: "1 rem"
     })
-})()
+}

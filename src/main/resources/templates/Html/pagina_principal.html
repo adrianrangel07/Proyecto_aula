@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"   
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../CSS/inicio.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
     <header class="top-bar">
         <nav class="navbar navbar-dark  fixed-top">
             <div class="container-fluid"> <!-- barra superior-->
@@ -86,7 +85,7 @@
 
     <main class="d-flex mt-5">
         <!-- Botón desplegable para mostrar/ocultar el filtrador -->
-        <div  id="filtrador" class="d-flex flex-column">
+        <div id="filtrador" class="d-flex flex-column">
             <button class="btn btn-outline-secondary mb-2 filter-button" onclick="toggleFilter()" aria-expanded="false">
                 <i class="fas fa-filter"></i> <!-- Icono del filtro -->
             </button>
@@ -94,7 +93,7 @@
             <!-- Filtrador -->
             <div id="filterContainer" class="filter-container bg-light rounded p-3" style="display: none;">
                 <h2 class="h5 mb-4">Filtrar por:</h2>
-                
+
                 <!-- Salario -->
                 <div class="filter-item mb-3">
                     <div onclick="toggleCategory('salario')" class="filter-title">
@@ -108,7 +107,7 @@
                         <input type="number" id="salarioMax" class="form-control" placeholder="Salario máximo" />
                     </div>
                 </div>
-            
+
                 <!-- Duración -->
                 <div class="filter-item mb-3">
                     <div onclick="toggleCategory('duracion')" class="filter-title">
@@ -119,7 +118,7 @@
                         <input type="text" id="duracion" class="form-control" placeholder="Ej: 3 meses, 6 meses" />
                     </div>
                 </div>
-            
+
                 <!-- Tipo de Empleo -->
                 <div class="filter-item mb-3">
                     <div onclick="toggleCategory('tipoEmpleo')" class="filter-title">
@@ -135,7 +134,7 @@
                         </select>
                     </div>
                 </div>
-            
+
                 <!-- Modalidad -->
                 <div class="filter-item mb-3">
                     <div onclick="toggleCategory('modalidad')" class="filter-title">
@@ -154,59 +153,61 @@
                         </label>
                     </div>
                 </div>
-            
+
                 <button class="btn btn-primary mt-3" onclick="applyFilters()">Aplicar Filtros</button>
             </div>
 
-        <!-- Contenido Principal -->
-        <div class="content-area flex-grow-1 p-3">
+            <!-- Contenido Principal -->
+            <div class="content-area flex-grow-1 p-3">
 
-            <div id="resultadoBusqueda"></div>
+                <div id="resultadoBusqueda"></div>
 
-            <div class="offer-container">
-                <div th:each="Oferta:${Ofertas}" class="card">
-                    <div class="offer-content" data-id="${Oferta.id}">
-                        <h3 th:text="${Oferta.titulo_puesto}"></h3>
-                        <p th:text="${Oferta.descripcion}"></p>
-                        <div class="hidden-info">
-                            <p class="salario"><strong>Salario:</strong> <span th:text="${Oferta.salario}"></span></p>
-                            <p class="duracion"><strong>Duración:</strong> <span th:text="${Oferta.duracion}"></span>
-                            </p>
-                            <p class="periodo"><strong>Periodo:</strong> <span th:text="${Oferta.periodo}"></span></p>
-                            <p class="tipo_empleo"><strong>Tipo de empleo:</strong> <span
-                                    th:text="${Oferta.tipo_empleo}"></span></p>
-                            <p class="modalidad"><strong>Modalidad:</strong> <span th:text="${Oferta.modalidad}"></span>
-                            </p>
+                <div class="offer-container">
+                    <div th:each="Oferta:${Ofertas}" class="card">
+                        <div class="offer-content" data-id="${Oferta.id}">
+                            <h3 th:text="${Oferta.titulo_puesto}"></h3>
+                            <p th:text="${Oferta.descripcion}"></p>
+                            <div class="hidden-info">
+                                <p class="salario"><strong>Salario:</strong> <span th:text="${Oferta.salario}"></span>
+                                </p>
+                                <p class="duracion"><strong>Duración:</strong> <span
+                                        th:text="${Oferta.duracion}"></span>
+                                </p>
+                                <p class="periodo"><strong>Periodo:</strong> <span th:text="${Oferta.periodo}"></span>
+                                </p>
+                                <p class="tipo_empleo"><strong>Tipo de empleo:</strong> <span
+                                        th:text="${Oferta.tipo_empleo}"></span></p>
+                                <p class="modalidad"><strong>Modalidad:</strong> <span
+                                        th:text="${Oferta.modalidad}"></span>
+                                </p>
+                            </div>
+
                         </div>
-
                     </div>
                 </div>
-            </div>
 
-            <!-- Modal que se mostrará al hacer clic en una tarjeta -->
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-btn">&times;</span>
-                    <h3 id="modal-title"></h3>
-                    <p id="modal-description"></p>
-                    <p id="modal-salary"></p>
-                    <p id="modal-duration"></p>
-                    <p id="modal-period"></p>
-                    <p id="modal-modalidad"></p>
-                    <p id="modal-type"></p>
-                    <!-- Botón para postularse dentro del modal -->
-                    <button class="apply-btn-modal" id="postularseBtn">Postularse</button>
+                <!-- Modal que se mostrará al hacer clic en una tarjeta -->
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <h3 id="modal-title"></h3>
+                        <p id="modal-description"></p>
+                        <p id="modal-salary"></p>
+                        <p id="modal-duration"></p>
+                        <p id="modal-period"></p>
+                        <p id="modal-modalidad"></p>
+                        <p id="modal-type"></p>
+                        <!-- Botón para postularse dentro del modal -->
+                        <button class="apply-btn-modal" id="postularseBtn">Postularse</button>
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
     </main>
 
 
 
-
-    <!-- 
-    <footer class="footer">
+    <!-- <footer class="footer">
         <div class="container">
             <div class="sticky-lg-bottom">
                 <div class="row">

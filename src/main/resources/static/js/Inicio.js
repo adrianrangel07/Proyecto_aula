@@ -22,79 +22,38 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-//filtro de busqueda
-document.getElementById('formBusqueda').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var termino = document.getElementById('termino').value;
-    buscarOfertas(termino);
-});
+// //oferta de detalles
+// document.addEventListener('DOMContentLoaded', function () {
+//     const offerDetails = document.querySelector('.offerDetails');
 
-// Capturar el evento de submit del formulario
-document.getElementById('formBusqueda').addEventListener('submit', function (event) {
-    event.preventDefault();
+//     const resultadoBusqueda = document.getElementById('resultadoBusqueda');
 
-    // Obtener el valor del término de búsqueda
-    var termino = document.getElementById('termino').value;
+//     resultadoBusqueda.addEventListener('click', function (event) {
+//         const clickedOffer = event.target.closest('.offer');
+//         if (clickedOffer) { // Check if clicked element or its ancestor is an offer
+//             const tituloPuesto = clickedOffer.querySelector('h3').innerText;
+//             const descripcion = clickedOffer.querySelector('p').innerText;
 
-    // Llamar a la función para buscar ofertas
-    buscarOfertas(termino);
-});
+//             const salarioElement = clickedOffer.querySelector('.salario span');
+//             const duracionElement = clickedOffer.querySelector('.duracion span');
+//             const periodoElement = clickedOffer.querySelector('.periodo span');
+//             const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
 
-// Capturar el evento de submit del formulario
-document.getElementById('formBusqueda').addEventListener('submit', function (event) {
-    event.preventDefault();
-    
-    // Obtener el valor del término de búsqueda
-    var termino = document.getElementById('termino').value.toLowerCase(); // Convertir a minúsculas para comparación
-    
-    // Llamar a la función para buscar ofertas
-    buscarOfertas(termino);
-});
+//             const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
+//             const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
+//             const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
+//             const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
 
-// Capturar el evento de submit del formulario
-document.getElementById('formBusqueda').addEventListener('submit', function (event) {
-    event.preventDefault();
-    
-    // Obtener el valor del término de búsqueda
-    var termino = document.getElementById('termino').value.toLowerCase(); // Convertir a minúsculas para comparación
-    console.log("Término de búsqueda:", termino); // Verifica el término que ingresaste
-    
-    // Llamar a la función para buscar ofertas
-    buscarOfertas(termino);
-});
-
-//oferta de detalles
-document.addEventListener('DOMContentLoaded', function () {
-    const offerDetails = document.querySelector('.offerDetails');
-
-    const resultadoBusqueda = document.getElementById('resultadoBusqueda');
-
-    resultadoBusqueda.addEventListener('click', function (event) {
-        const clickedOffer = event.target.closest('.offer');
-        if (clickedOffer) { // Check if clicked element or its ancestor is an offer
-            const tituloPuesto = clickedOffer.querySelector('h3').innerText;
-            const descripcion = clickedOffer.querySelector('p').innerText;
-
-            const salarioElement = clickedOffer.querySelector('.salario span');
-            const duracionElement = clickedOffer.querySelector('.duracion span');
-            const periodoElement = clickedOffer.querySelector('.periodo span');
-            const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
-
-            const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
-            const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
-            const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
-            const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
-
-            offerDetails.style.display = 'block';
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.querySelector('.salarioSpan').innerText = salario;
-            offerDetails.querySelector('.duracionSpan').innerText = duracion;
-            offerDetails.querySelector('.periodoSpan').innerText = periodo;
-            offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
-        }
-    });
-});
+//             offerDetails.style.display = 'block';
+//             offerDetails.querySelector('h3').innerText = tituloPuesto;
+//             offerDetails.querySelector('p').innerText = descripcion;
+//             offerDetails.querySelector('.salarioSpan').innerText = salario;
+//             offerDetails.querySelector('.duracionSpan').innerText = duracion;
+//             offerDetails.querySelector('.periodoSpan').innerText = periodo;
+//             offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
+//         }
+//     });
+// });
 
 // no borrar
 document.addEventListener('DOMContentLoaded', function () {
@@ -117,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//mostrar y ocultar filtro 
 let openCategory = null;
 function toggleFilter() {
     const filterContainer = document.getElementById('filterContainer');
@@ -129,54 +89,6 @@ function toggleFilter() {
         filterText.innerHTML = 'Mostrar Filtrador';
     }
 }
-
-// Función para alternar la visibilidad de las categorías
-function toggleCategory(categoryId) {
-    const filterOptions = document.getElementById(`filter${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
-    const arrow = document.getElementById(`arrow${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
-
-    // Alternar la visibilidad
-    if (filterOptions.style.display === 'none') {
-        filterOptions.style.display = 'block';
-        arrow.textContent = '▲'; // Cambiar el ícono a "arriba"
-    } else {
-        filterOptions.style.display = 'none';
-        arrow.textContent = '▼'; // Cambiar el ícono a "abajo"
-    }
-}
-
-// Función para aplicar los filtros
-function applyFilters() {
-    const salarioMin = parseFloat(document.getElementById('salarioMin').value) || 0;
-    const salarioMax = parseFloat(document.getElementById('salarioMax').value) || Infinity;
-    const sueldo = document.getElementById('sueldo').value;
-    const duracion = document.getElementById('duracion').value;
-
-    // Aquí debes implementar la lógica para filtrar los elementos de tu página
-    // Por ejemplo, si tienes un arreglo de trabajos, puedes filtrarlos así:
-    
-    // Suponiendo que `trabajos` es un arreglo de objetos que representan empleos
-    const trabajos = [
-        { salario: 500, tipo: "Mensual", duracion: "3 meses" },
-        { salario: 700, tipo: "Quincenal", duracion: "6 meses" },
-        // ... más trabajos
-    ];
-
-    const trabajosFiltrados = trabajos.filter(trabajo => {
-        const cumpleSalario = trabajo.salario >= salarioMin && trabajo.salario <= salarioMax && trabajo.tipo === sueldo;
-        const cumpleDuracion = trabajo.duracion.includes(duracion);
-        return cumpleSalario && cumpleDuracion;
-    });
-
-    // Aquí puedes mostrar los trabajos filtrados en tu página
-    console.log(trabajosFiltrados); // Para ver el resultado en la consola
-}
-
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 
 //de aqui en adelante la tarjeta
 document.addEventListener('DOMContentLoaded', function () {
@@ -279,6 +191,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Función para alternar la visibilidad de las categorías
+function toggleCategory(categoryId) {
+    const filterOptions = document.getElementById(`filter${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
+    const arrow = document.getElementById(`arrow${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
+
+    // Alternar la visibilidad
+    if (filterOptions.style.display === 'none') {
+        filterOptions.style.display = 'block';
+        arrow.textContent = '▲'; // Cambiar el ícono a "arriba"
+    } else {
+        filterOptions.style.display = 'none';
+        arrow.textContent = '▼'; // Cambiar el ícono a "abajo"
+    }
+}
 
 function toggleCategory(category) {
     const filterOptions = document.getElementById(`filter${capitalizeFirstLetter(category)}`);
