@@ -22,38 +22,38 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// //oferta de detalles
-// document.addEventListener('DOMContentLoaded', function () {
-//     const offerDetails = document.querySelector('.offerDetails');
+//oferta de detalles
+document.addEventListener('DOMContentLoaded', function () {
+    const offerDetails = document.querySelector('.offerDetails');
 
-//     const resultadoBusqueda = document.getElementById('resultadoBusqueda');
+    const resultadoBusqueda = document.getElementById('resultadoBusqueda');
 
-//     resultadoBusqueda.addEventListener('click', function (event) {
-//         const clickedOffer = event.target.closest('.offer');
-//         if (clickedOffer) { // Check if clicked element or its ancestor is an offer
-//             const tituloPuesto = clickedOffer.querySelector('h3').innerText;
-//             const descripcion = clickedOffer.querySelector('p').innerText;
+    resultadoBusqueda.addEventListener('click', function (event) {
+        const clickedOffer = event.target.closest('.offer');
+        if (clickedOffer) { // Check if clicked element or its ancestor is an offer
+            const tituloPuesto = clickedOffer.querySelector('h3').innerText;
+            const descripcion = clickedOffer.querySelector('p').innerText;
 
-//             const salarioElement = clickedOffer.querySelector('.salario span');
-//             const duracionElement = clickedOffer.querySelector('.duracion span');
-//             const periodoElement = clickedOffer.querySelector('.periodo span');
-//             const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
+            const salarioElement = clickedOffer.querySelector('.salario span');
+            const duracionElement = clickedOffer.querySelector('.duracion span');
+            const periodoElement = clickedOffer.querySelector('.periodo span');
+            const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
 
-//             const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
-//             const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
-//             const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
-//             const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
+            const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
+            const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
+            const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
+            const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
 
-//             offerDetails.style.display = 'block';
-//             offerDetails.querySelector('h3').innerText = tituloPuesto;
-//             offerDetails.querySelector('p').innerText = descripcion;
-//             offerDetails.querySelector('.salarioSpan').innerText = salario;
-//             offerDetails.querySelector('.duracionSpan').innerText = duracion;
-//             offerDetails.querySelector('.periodoSpan').innerText = periodo;
-//             offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
-//         }
-//     });
-// });
+            offerDetails.style.display = 'block';
+            offerDetails.querySelector('h3').innerText = tituloPuesto;
+            offerDetails.querySelector('p').innerText = descripcion;
+            offerDetails.querySelector('.salarioSpan').innerText = salario;
+            offerDetails.querySelector('.duracionSpan').innerText = duracion;
+            offerDetails.querySelector('.periodoSpan').innerText = periodo;
+            offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
+        }
+    });
+});
 
 // no borrar
 document.addEventListener('DOMContentLoaded', function () {
@@ -154,27 +154,29 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener("DOMContentLoaded", function () {
     const formBusqueda = document.getElementById('formBusqueda');
     const terminoInput = document.getElementById('termino');
-    const ofertas = document.querySelectorAll('.offer-container .card'); // Selecciona todas las tarjetas de ofertas
+    const ofertas = document.querySelectorAll('.offer-container .card');
+
+    // Función para normalizar el texto y quitar tildes
+    function normalizeText(text) {
+        return text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
 
     formBusqueda.addEventListener('submit', function (event) {
-        event.preventDefault(); // Evita el envío del formulario
+        event.preventDefault();
 
-        const termino = terminoInput.value.toLowerCase(); // Obtiene el término de búsqueda y lo convierte a minúsculas
-        let ofertasEncontradas = false; // Variable para verificar si se encontraron ofertas
+        const termino = normalizeText(terminoInput.value); // Normaliza el término de búsqueda
+        let ofertasEncontradas = false;
 
-        // Recorre todas las ofertas y muestra/oculta según el término
         ofertas.forEach(oferta => {
-            const titulo = oferta.querySelector('h3').textContent.toLowerCase(); // Obtiene el título de la oferta
-            // Verifica si el término está en el título o la descripción
+            const titulo = normalizeText(oferta.querySelector('h3').textContent); // Normaliza el título de la oferta
             if (titulo.includes(termino)) {
-                oferta.style.display = 'block'; // Muestra la oferta
-                ofertasEncontradas = true; // Se encontró al menos una oferta
+                oferta.style.display = 'block';
+                ofertasEncontradas = true;
             } else {
-                oferta.style.display = 'none'; // Oculta la oferta si no coincide
+                oferta.style.display = 'none';
             }
         });
-        
-        // Si no se encontraron ofertas, muestra una alerta y recarga la página después de 2 segundos
+
         if (!ofertasEncontradas) {
             Swal.fire({
                 icon: 'warning',
@@ -186,80 +188,59 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Limpiar el campo de búsqueda después de la búsqueda
         terminoInput.value = '';
     });
 });
 
+
 // Función para alternar la visibilidad de las categorías
-function toggleCategory(categoryId) {
-    const filterOptions = document.getElementById(`filter${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
-    const arrow = document.getElementById(`arrow${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`);
 
-    // Alternar la visibilidad
-    if (filterOptions.style.display === 'none') {
-        filterOptions.style.display = 'block';
-        arrow.textContent = '▲'; // Cambiar el ícono a "arriba"
-    } else {
-        filterOptions.style.display = 'none';
-        arrow.textContent = '▼'; // Cambiar el ícono a "abajo"
+const filtersToggle = document.getElementById('filtersToggle');
+const filtersDropdown = document.getElementById('filtersDropdown');
+
+filtersToggle.addEventListener('click', function (event) {
+    event.preventDefault();
+    filtersDropdown.classList.toggle('show'); // Alternar la visibilidad del menú
+});
+
+document.addEventListener('click', function (event) {
+    if (!filtersToggle.contains(event.target) && !filtersDropdown.contains(event.target)) {
+        filtersDropdown.classList.remove('show');
     }
-}
-
-function toggleCategory(category) {
-    const filterOptions = document.getElementById(`filter${capitalizeFirstLetter(category)}`);
-    const arrow = document.getElementById(`arrow${capitalizeFirstLetter(category)}`);
-    
-    if (filterOptions.style.display === "none") {
-        filterOptions.style.display = "block";
-        arrow.textContent = "▲"; // Cambia la flecha a arriba
-    } else {
-        filterOptions.style.display = "none";
-        arrow.textContent = "▼"; // Cambia la flecha a abajo
-    }
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+});
 
 function applyFilters() {
-    // Obtener valores de los filtros
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
     const duracion = document.getElementById("duracion").value.toLowerCase();
-    const tipoEmpleo = document.getElementById("tipoEmpleoSelect").value; // Asegúrate de que esto sea el ID correcto
+    const tipoEmpleo = document.getElementById("tipoEmpleoSelect").value.toLowerCase();
 
-    // Obtener todas las ofertas
     const ofertas = document.querySelectorAll(".offer-container .card");
 
-    // Filtrar ofertas
     ofertas.forEach(oferta => {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
         const duracionOferta = oferta.querySelector(".duracion span").innerText.toLowerCase();
         const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
         const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
 
-        // Lógica de filtrado
         let isVisible = true;
 
-        // Filtrar por salario
         if (salario < salarioMin || salario > salarioMax) isVisible = false;
-
-        // Filtrar por duración
         if (duracion && !duracionOferta.includes(duracion)) isVisible = false;
-
-        // Filtrar por tipo de empleo
         if (tipoEmpleo && tipoEmpleo !== tipoEmpleoOferta) isVisible = false;
 
-        // Filtrar por modalidad
         const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
         const selectedModalities = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.value);
         if (selectedModalities.length > 0 && !selectedModalities.includes(modalidadOferta)) isVisible = false;
 
-        // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
     });
 }
+
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
+}
+

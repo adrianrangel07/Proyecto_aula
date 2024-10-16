@@ -58,7 +58,7 @@ public class PersonaController {
         // Validar si la persona existe
         if (persona != null) {
             model.addAttribute("nombreUsuario", persona.getnombre()); // si es correcto
-            return "redirect:/personas/pagina_principal"; // Redirigir a la ruta de inicio de persona registrada
+            return "html/pagina_principal_personas"; // Redirigir a la ruta de inicio de persona registrada
         } else {
             model.addAttribute("error", "Credenciales incorrectas"); // si hay algun error
             return "redirect:/datos_incorrectos"; // Vista de error

@@ -4,160 +4,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"   
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/inicio.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Workwise Navigator</title>
-    <link rel="website icon" href="../imagenes/wknlogo2.png">
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
+    <link rel="website icon" href="../Imagenes/wknLogo2.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="../Css/general/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10-style.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10.css">
+    <link rel="stylesheet" href="../Css/general/Nunito.css">
+    <link rel="stylesheet" href="../Css/general/styles.min.css">
+    <link rel="stylesheet" href="../Css/inicio.css">
+
 </head>
 
-<body>
-    <header class="top-bar">
-        <nav class="navbar navbar-dark  fixed-top">
-            <div class="container-fluid"> <!-- barra superior-->
-                <a class="navbar-brand" href="/">
-                    <img src="../Imagenes/wknname.png" alt="Logo" id="logo" class="logo">
+<body id="page-top">
+    <div id="wrapper" style="margin: 500;">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark"
+            style="background: #0a1128;">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    th:href="@{/}"><img src="../Imagenes/working wise 32x32 white.png" width="61" height="58"
+                        style="width: 50px;height: 50px;">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>Workwise</span></div>
                 </a>
-                <div class="barra_busqueda">
-                    <form class="d-flex" role="search" id="formBusqueda">
-                        <input class="form form-control me-2" type="search" id="termino" name="termino"
-                            placeholder="Buscar ofertas..." aria-label="Search">
-                        <button class="btn btn-outline-success" id="btn" type="submit">Buscar</button>
-                    </form>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- de aqui para abajo barra de navegacion lateral-->
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
-                    aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h4 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">WORKWISE</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-header">
-                        <h5 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="letras nav-rp nav-link " aria-current="page"
-                                    th:href="@{/login/personas}">INICIAR SESIÓN </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="letras nav-rp nav-link" th:href="@{/Register/personas}">REGISTRARSE</a>
-                            </li>
-                            <li class="nav-item dropdown"> <!-- barra desplagable dentro de la barrra lateral-->
-                                <a class="letras nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Ver Más
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="letras dropdown-item" th:href="@{/Estadisticas}">Estadisticas</a></li>
-                                    <li><a class="letras dropdown-item" th:href="@{/login/Empresa}">Empresa</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="letras dropdown-item" th:href="@{/Nosotros}">¿Quienes Somos?</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <div class="barra_busqueda_responsive" id="formBusqueda">
-                            <form class="d-flex" role="search">
-                                <input class="form form-control me-2" type="search" id="termino" name="termino"
-                                    placeholder="Buscar ofertas..." aria-label="Search">
-                                <button class="btn btn-outline-success" id="btn" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/}"><i
+                                class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/login/personas}"><i
+                                class="far fa-user-circle"></i><span>Login</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Register/personas}"><i
+                                class="fas fa-user-circle"></i><span>Register</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Estadisticas}"><i
+                                class="fas fa-chart-bar"></i><span>Statistics</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Nosotros}"><i
+                                class="fas fa-users"></i><span>About Us</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Registrar/Empresa}"><i
+                                class="fas fa-building"></i><span>Do you have a company? </span></a></li>
+
+
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
-    </header>
-
-    <main class="d-flex mt-5">
-        <!-- Botón desplegable para mostrar/ocultar el filtrador -->
-        <div id="filtrador" class="d-flex flex-column">
-            <button class="btn btn-outline-secondary mb-2 filter-button" onclick="toggleFilter()" aria-expanded="false">
-                <i class="fas fa-filter"></i> <!-- Icono del filtro -->
-            </button>
-
-            <!-- Filtrador -->
-            <div id="filterContainer" class="filter-container bg-light rounded p-3" style="display: none;">
-                <h2 class="h5 mb-4">Filtrar por:</h2>
-
-                <!-- Salario -->
-                <div class="filter-item mb-3">
-                    <div onclick="toggleCategory('salario')" class="filter-title">
-                        <strong>Salario</strong>
-                        <span id="arrowSalario">▼</span>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light"
+                    style="background: var(--bs-body-bg);">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
+                            id="formBusqueda">
+                            <div class="input-group"
+                                style="text-align: center;margin: 500px;border-color: var(--bs-emphasis-color);">
+                                <input id="termino" name="termino" class=" bg-light form-control border-0 small"
+                                    type="text" placeholder="Search for ...">
+                                <button class="btn btn-primary py-0" type="submit" style="background: #0a1128;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown" style="position: relative;">
+                                <a class="nav-link" id="filtersToggle" role="button" aria-expanded="false">
+                                    Filtros
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="filtersToggle" id="filtersDropdown">
+                                    <div class="filter-container">
+                                        <h5>Filtros</h5>
+                                        <div>
+                                            <label for="salarioMin">Salario Mínimo:</label>
+                                            <input type="number" id="salarioMin" placeholder="0" class="form-control mb-2">
+                                        </div>
+                                        <div>
+                                            <label for="salarioMax">Salario Máximo:</label>
+                                            <input type="number" id="salarioMax" placeholder="10000" class="form-control mb-2">
+                                        </div>
+                                        <div>
+                                            <label for="duracion">Duración:</label>
+                                            <select id="duracion" class="form-control mb-2">
+                                                <option value="">--Seleccione--</option>
+                                                <option value="temporal">Temporal</option>
+                                                <option value="indefinido">Indefinido</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="tipoEmpleoSelect">Tipo de Empleo:</label>
+                                            <select id="tipoEmpleoSelect" class="form-control mb-2">
+                                                <option value="">--Seleccione--</option>
+                                                <option value="tiempo completo">Tiempo Completo</option>
+                                                <option value="medio tiempo">Medio Tiempo</option>
+                                            </select>
+                                        </div>
+                                        <div id="filterModalidad">
+                                            <h6>Modalidad</h6>
+                                            <label><input type="checkbox" value="presencial"> Presencial</label>
+                                            <label><input type="checkbox" value="remoto"> Remoto</label>
+                                            <label><input type="checkbox" value="híbrido"> Híbrido</label>
+                                        </div>
+                                        <button class="btn btn-primary" onclick="applyFilters()">Aplicar Filtros</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- rensposive -->
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                                    aria-expanded="false" data-bs-toggle="dropdown" href="#"><i
+                                        class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small"
+                                                type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0"
+                                                    type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div id="filterSalario" class="filter-options" style="display: none;">
-                        <label for="salarioMin">Mínimo:</label>
-                        <input type="number" id="salarioMin" class="form-control" placeholder="Salario mínimo" />
-                        <label for="salarioMax">Máximo:</label>
-                        <input type="number" id="salarioMax" class="form-control" placeholder="Salario máximo" />
-                    </div>
-                </div>
-
-                <!-- Duración -->
-                <div class="filter-item mb-3">
-                    <div onclick="toggleCategory('duracion')" class="filter-title">
-                        <strong>Duración</strong>
-                        <span id="arrowDuracion">▼</span>
-                    </div>
-                    <div id="filterDuracion" class="filter-options" style="display: none;">
-                        <input type="text" id="duracion" class="form-control" placeholder="Ej: 3 meses, 6 meses" />
-                    </div>
-                </div>
-
-                <!-- Tipo de Empleo -->
-                <div class="filter-item mb-3">
-                    <div onclick="toggleCategory('tipoEmpleo')" class="filter-title">
-                        <strong>Tipo de Empleo</strong>
-                        <span id="arrowTipoEmpleo">▼</span>
-                    </div>
-                    <div id="filterTipoEmpleo" class="filter-options" style="display: none;">
-                        <select id="tipoEmpleoSelect" class="form-select">
-                            <option value="">Seleccionar...</option>
-                            <option value="tiempo completo">Tiempo Completo</option>
-                            <option value="medio tiempo">Medio Tiempo</option>
-                            <option value="contrato"> Contrato</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Modalidad -->
-                <div class="filter-item mb-3">
-                    <div onclick="toggleCategory('modalidad')" class="filter-title">
-                        <strong>Modalidad</strong>
-                        <span id="arrowModalidad">▼</span>
-                    </div>
-                    <div id="filterModalidad" class="filter-options" style="display: none;">
-                        <label>
-                            <input type="checkbox" value="presencial"> Presencial
-                        </label>
-                        <label>
-                            <input type="checkbox" value="remota"> Remoto
-                        </label>
-                        <label>
-                            <input type="checkbox" value="híbrida"> Híbrido
-                        </label>
-                    </div>
-                </div>
-
-                <button class="btn btn-primary mt-3" onclick="applyFilters()">Aplicar Filtros</button>
+                </nav>
             </div>
+            
+            
 
-            <!-- Contenido Principal -->
             <div class="content-area flex-grow-1 p-3">
 
                 <div id="resultadoBusqueda"></div>
@@ -176,7 +149,8 @@
                                 <p class="periodo"><strong>Periodo:</strong> <span th:text="${Oferta.periodo}"></span>
                                 </p>
                                 <p class="tipo_empleo"><strong>Tipo de empleo:</strong> <span
-                                        th:text="${Oferta.tipo_empleo}"></span></p>
+                                        th:text="${Oferta.tipo_empleo}"></span>
+                                </p>
                                 <p class="modalidad"><strong>Modalidad:</strong> <span
                                         th:text="${Oferta.modalidad}"></span>
                                 </p>
@@ -200,77 +174,22 @@
                         <!-- Botón para postularse dentro del modal -->
                         <button class="apply-btn-modal" id="postularseBtn">Postularse</button>
                     </div>
-                </div>
 
-            </div>
-    </main>
-
-
-
-    <!-- <footer class="footer">
-        <div class="container">
-            <div class="sticky-lg-bottom">
-                <div class="row">
-                    <div class="col">
-                        <div class="contacto">
-                            <h5>Contacto</h5>
-                            <p>info@Workwise.com</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="link">
-                            <h5>Links</h5>
-                            <ul>
-                                <div class="Links">
-                                    <li><a th:href="@{/}">Inicio</a></li>
-                                    <li><a th:href="@{/Register/personas}">Registrate</a></li>
-                                    <li><a th:href="@{/login/personas}">Iniciar sesion</a></li>
-                                    <li><a th:href="@{/Nosotros}">Nosotros</a></li>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col">
-
-                        <div class="redes-1">
-                            <h5>Redes</h5>
-                            <div class="redes">
-                                <div class="facebook">
-                                    <a class="facebook" href="https://www.facebook.com/profile.php?id=61558650706843"
-                                        target="_blank">
-                                        <img class="facebook"
-                                            src="https://faldin.com/wp-content/uploads/2018/01/logo-facebook.png"
-                                            alt="facebook">
-                                    </a>
-                                </div>
-                                <div class="instagram">
-                                    <a class="instagram" href="https://www.instagram.com/work_wise.0.1/"
-                                        target="_blank">
-                                        <img class="instagram" src="../Imagenes/instagram.png" alt="instagram">
-                                    </a>
-                                </div>
-                                <div class="twitter">
-                                    <a class="twitter" href="https://www.tiktok.com/@work_wise?lang=es" target="_blank">
-                                        <img class="twitter"
-                                            src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png"
-                                            alt="twitter">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </footer> -->
 
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
 
-
-    <!-- Script de JavaScript -->
-    <script>
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
+    <script src="../js/General/script.min.js"></script>
+    <script src="../js/General/theme.js"></script>
     <script src="../js/Inicio.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
