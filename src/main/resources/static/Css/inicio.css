@@ -26,7 +26,8 @@
     height: 1.5em;
     vertical-align: middle;
     color: #000000;
-    /* background-repeat: no-repeat; */
+    margin-right: 5px;
+    background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
 }
