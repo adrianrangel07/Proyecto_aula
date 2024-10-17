@@ -192,9 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 // Función para alternar la visibilidad de las categorías
-
 const filtersToggle = document.getElementById('filtersToggle');
 const filtersDropdown = document.getElementById('filtersDropdown');
 
@@ -239,8 +237,12 @@ function applyFilters() {
     });
 }
 
-function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    navLinks.style.display = navLinks.style.display === 'block' ? 'none' : 'block';
-}
+// menu desplegable
+const toggler = document.getElementById('navbar-toggler');
+const offcanvas = document.getElementById('offcanvas');
+
+toggler.addEventListener('click', () => {
+    offcanvas.classList.toggle('active');
+});
+
 

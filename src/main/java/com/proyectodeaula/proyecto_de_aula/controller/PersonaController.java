@@ -58,16 +58,16 @@ public class PersonaController {
         // Validar si la persona existe
         if (persona != null) {
             model.addAttribute("nombreUsuario", persona.getnombre()); // si es correcto
-            return "html/pagina_principal_personas"; // Redirigir a la ruta de inicio de persona registrada
+            return "redirect:/login_inicio"; // Redirigir a la ruta de inicio de persona registrada
         } else {
             model.addAttribute("error", "Credenciales incorrectas"); // si hay algun error
             return "redirect:/datos_incorrectos"; // Vista de error
         }
     }
 
-    @GetMapping("/personas/pagina_principal")
+    @GetMapping("/login_inicio")
     public String pagina_principal() {
-        return "html/pagina_principal_personas";
+        return "redirect:/personas/pagina_principal";
     }
 
     @GetMapping("/Nosotros") // ruta para enviar a nosotros (informacion sobre la pagina )

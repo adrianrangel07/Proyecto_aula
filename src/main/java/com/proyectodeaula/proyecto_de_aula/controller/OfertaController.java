@@ -18,23 +18,23 @@ import org.springframework.ui.Model;
 @Controller
 @RequestMapping
 public class OfertaController {
- 
-    @Autowired
-    private IofertaService offerService;
+
+	@Autowired
+	private IofertaService offerService;
 
 	@Autowired
 	private OfertaService offerta;
 
-	@GetMapping("/login_inicio")
-	public String listar_ofertas_1(Model model){
-		List <Ofertas> Ofertas1=offerService.listar_ofertas();
-		model.addAttribute("Ofertas1", Ofertas1);
-		return "html/pagina_principal_persona";
+	@GetMapping("/personas/pagina_principal")
+	public String listar_ofertas_1(Model model) {
+		List<Ofertas> ofertas = offerService.listar_ofertas();
+		model.addAttribute("Ofertas", ofertas); 
+		return "html/pagina_principal_personas";
 	}
 
-    @GetMapping("/")
-	public String listar_ofertas(Model model){
-		List <Ofertas> Ofertas=offerService.listar_ofertas();
+	@GetMapping("/")
+	public String listar_ofertas(Model model) {
+		List<Ofertas> Ofertas = offerService.listar_ofertas();
 		model.addAttribute("Ofertas", Ofertas);
 		return "html/pagina_principal";
 	}

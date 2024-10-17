@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+//Mostrar las ofertas en la pagina 
 document.addEventListener('DOMContentLoaded', function () {
     const offers = document.querySelectorAll('.offer');
     const offerDetails = document.querySelector('.offerDetails');
@@ -52,53 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-//filtro de busqueda
-document.getElementById('formBusqueda').addEventListener('submit', function (event) {
-    event.preventDefault();
-    var termino = document.getElementById('termino').value;
-    buscarOfertas(termino);
-});
-
-function buscarOfertas(termino) {
-    fetch('/buscar_ofertas?termino=' + termino)
-        .then(response => response.json())
-        .then(data => {
-            var resultadoBusqueda = document.getElementById('resultadoBusqueda');
-            resultadoBusqueda.innerHTML = ''; // Limpiar el contenido anterior
-
-            if (data.length === 0) {
-                Swal.fire({
-                    icon: 'info',
-                    title: 'No hay ofertas disponibles',
-                    text: 'Por favor, intenta con otro término de búsqueda.'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload(); // Recargar la página
-                    }
-                });
-            } else {
-                data.forEach(function (oferta) {
-                    var div = document.createElement('div');
-                    div.classList.add('offer');
-                    div.innerHTML = '<h3>' + oferta.titulo_puesto + '</h3><p>' + oferta.descripcion + '</p>' +
-                        '<p style="display: none;" class="salario"><span>' + oferta.salario + '</span></p>' +
-                        '<p style="display: none;" class="duracion"><span>' + oferta.duracion + '</span></p>' +
-                        '<p style="display: none;" class="periodo"><span>' + oferta.periodo + '</span></p>' +
-                        '<p style="display: none;" class="tipo_empleo"><span>' + oferta.tipo_empleo + '</span></p>';
-                    resultadoBusqueda.appendChild(div);
-                });
-            }
-
-            // Mover el footer al final del cuerpo de la página
-            const footer = document.querySelector('.footer');
-            if (footer.style.position === 'relative') {
-                footer.style.position = 'fixed';
-            } else {
-                footer.style.position = 'relative';
-            }
-        });
-}
 
 //oferta de detalles
 document.addEventListener('DOMContentLoaded', function () {
@@ -133,162 +87,175 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const offerContainers = document.querySelectorAll('.offer');
-    const footer = document.querySelector('.footer');
-
-    function checkOfferPresence() {
-        if (offerContainers.length === 0) {
-            footer.style.position = 'fixed';
-        } else {
-            footer.style.position = 'relative';
-        }
+//mostrar y ocultar filtro 
+let openCategory = null;
+function toggleFilter() {
+    const filterContainer = document.getElementById('filterContainer');
+    const filterText = document.getElementById('filterText');
+    if (filterContainer.style.display === 'none' || filterContainer.style.display === '') {
+        filterContainer.style.display = 'block';
+        filterText.innerHTML = 'Ocultar Filtrador';
+    } else {
+        filterContainer.style.display = 'none';
+        filterText.innerHTML = 'Mostrar Filtrador';
     }
+}
 
-    checkOfferPresence();
+//de aqui en adelante la tarjeta
+document.addEventListener('DOMContentLoaded', function () {
+    // Seleccionar todas las tarjetas
+    const cards = document.querySelectorAll('.offer-content');
+    const modal = document.getElementById('modal');
+    const closeModalBtn = document.querySelector('.close-btn');
 
-    window.addEventListener('resize', checkOfferPresence);
+    // Elementos del modal
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalSalary = document.getElementById('modal-salary');
+    const modalDuration = document.getElementById('modal-duration');
+    const modalPeriod = document.getElementById('modal-period');
+    const modalType = document.getElementById('modal-type');
+    const modalModalidad = document.getElementById('modal-modalidad');
+
+    // Función para abrir el modal
+    const openModal = (card) => {
+        // Obtener los datos de la tarjeta
+        const title = card.querySelector('h3').innerText;
+        const description = card.querySelector('p').innerText;
+        const salary = card.querySelector('.salario span').innerText;
+        const duration = card.querySelector('.duracion span').innerText;
+        const period = card.querySelector('.periodo span').innerText;
+        const type = card.querySelector('.tipo_empleo span').innerText;
+        const modalidad = card.querySelector('.modalidad span').innerText;
+
+        // Llenar el modal con los datos de la tarjeta
+        modalTitle.innerText = title;
+        modalDescription.innerText = description;
+        modalSalary.innerHTML = `<strong>Salario:</strong> ${salary}`;
+        modalDuration.innerHTML = `<strong>Duración:</strong> ${duration}`;
+        modalPeriod.innerHTML = `<strong>Periodo:</strong> ${period}`;
+        modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${type}`;
+        modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${modalidad}`;
+
+        // Mostrar el modal
+        modal.style.display = 'flex';
+    };
+
+    // Agregar evento 'click' a cada tarjeta para abrir el modal
+    cards.forEach(card => {
+        card.addEventListener('click', function () {
+            openModal(card);
+        });
+    });
+
+    // Cerrar el modal al hacer clic en el botón de cierre
+    closeModalBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    // Cerrar el modal al hacer clic fuera del contenido
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 });
 
-//cuando le dan clic a una oferta se mantenga el borde  
-document.addEventListener('DOMContentLoaded', function () {
-    const offers = document.querySelectorAll('.offer');
 
-    offers.forEach(offer => {
-        offer.addEventListener('click', function () {
-            // Eliminar la clase 'pressed' de todas las ofertas
-            offers.forEach(otherOffer => {
-                if (otherOffer !== this) {
-                    otherOffer.classList.remove('pressed');
-                }
+//codigo para filtrador de busqueda por termino 
+document.addEventListener("DOMContentLoaded", function () {
+    const formBusqueda = document.getElementById('formBusqueda');
+    const terminoInput = document.getElementById('termino');
+    const ofertas = document.querySelectorAll('.offer-container .card');
+
+    // Función para normalizar el texto y quitar tildes
+    function normalizeText(text) {
+        return text.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    formBusqueda.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const termino = normalizeText(terminoInput.value); // Normaliza el término de búsqueda
+        let ofertasEncontradas = false;
+
+        ofertas.forEach(oferta => {
+            const titulo = normalizeText(oferta.querySelector('h3').textContent); // Normaliza el título de la oferta
+            if (titulo.includes(termino)) {
+                oferta.style.display = 'block';
+                ofertasEncontradas = true;
+            } else {
+                oferta.style.display = 'none';
+            }
+        });
+
+        if (!ofertasEncontradas) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'No se encontraron ofertas',
+                text: 'Por favor, verifica el término de búsqueda.',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                location.reload();
             });
+        }
 
-            // Agregar la clase 'pressed' a la oferta actual
-            this.classList.add('pressed');
-        });
+        terminoInput.value = '';
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const offerDetails = document.querySelector('.offerDetails');
-    const footer = document.querySelector('.footer');
+// Función para alternar la visibilidad de las categorías
+const filtersToggle = document.getElementById('filtersToggle');
+const filtersDropdown = document.getElementById('filtersDropdown');
 
-    function adjustOfferPosition() {
-        const lastOffer = document.querySelector('.offer:last-of-type');
-        const lastOfferRect = lastOffer.getBoundingClientRect();
-        const footerRect = footer.getBoundingClientRect();
-
-        const distanceToFooter = footerRect.top - lastOfferRect.bottom;
-
-        if (distanceToFooter < 20) {
-            offerDetails.style.bottom = (distanceToFooter - 20) + 'px'; // Ajustar la posición
-        } else {
-            offerDetails.style.bottom = '117px'; // Margen normal
-        }
-    }
-
-    window.addEventListener('scroll', adjustOfferPosition);
-    window.addEventListener('resize', adjustOfferPosition);
-
-    adjustOfferPosition(); // Llamar a la función al cargar la página
+filtersToggle.addEventListener('click', function (event) {
+    event.preventDefault();
+    filtersDropdown.classList.toggle('show'); // Alternar la visibilidad del menú
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const offerDetails = document.querySelector('.offerDetails');
-    const imagen = document.querySelector('.imagen');
-
-    const resultadoBusqueda = document.getElementById('resultadoBusqueda');
-
-    resultadoBusqueda.addEventListener('click', function (event) {
-        const clickedOffer = event.target.closest('.offer');
-        if (clickedOffer) { // Check if clicked element or its ancestor is an offer
-            const tituloPuesto = clickedOffer.querySelector('h3').innerText;
-            const descripcion = clickedOffer.querySelector('p').innerText;
-
-            const salarioElement = clickedOffer.querySelector('.salario span');
-            const duracionElement = clickedOffer.querySelector('.duracion span');
-            const periodoElement = clickedOffer.querySelector('.periodo span');
-            const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
-
-            const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
-            const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
-            const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
-            const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
-
-            offerDetails.style.display = 'block';
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.querySelector('.salarioSpan').innerText = salario;
-            offerDetails.querySelector('.duracionSpan').innerText = duracion;
-            offerDetails.querySelector('.periodoSpan').innerText = periodo;
-            offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
-
-            // Ocultar la imagen
-            imagen.style.display = 'none';
-        }
-    });
-
-    const closeOfferDetails = document.getElementById('closeOfferDetails');
-    if (closeOfferDetails) {
-        closeOfferDetails.addEventListener('click', function () {
-            offerDetails.style.display = 'none';
-
-            // Mostrar la imagen al cerrar offerDetails
-            imagen.style.display = 'block';
-        });
+document.addEventListener('click', function (event) {
+    if (!filtersToggle.contains(event.target) && !filtersDropdown.contains(event.target)) {
+        filtersDropdown.classList.remove('show');
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const offers = document.querySelectorAll('.offer');
-    const offerDetails = document.querySelector('.offerDetails');
-    const imagen = document.querySelector('.imagen');
+function applyFilters() {
+    const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
+    const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
+    const duracion = document.getElementById("duracion").value.toLowerCase();
+    const tipoEmpleo = document.getElementById("tipoEmpleoSelect").value.toLowerCase();
 
-    offers.forEach(offer => {
-        offer.addEventListener('click', function () {
-            const tituloPuesto = this.querySelector('h3').innerText;
-            const descripcion = this.querySelector('p').innerText;
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.style.display = 'block';
-            if (window.innerWidth <= 991) {
-                imagen.style.display = 'none';
-            }
-        });
+    const ofertas = document.querySelectorAll(".offer-container .card");
+
+    ofertas.forEach(oferta => {
+        const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
+        const duracionOferta = oferta.querySelector(".duracion span").innerText.toLowerCase();
+        const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
+        const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
+
+        let isVisible = true;
+
+        if (salario < salarioMin || salario > salarioMax) isVisible = false;
+        if (duracion && !duracionOferta.includes(duracion)) isVisible = false;
+        if (tipoEmpleo && tipoEmpleo !== tipoEmpleoOferta) isVisible = false;
+
+        const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
+        const selectedModalities = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+        if (selectedModalities.length > 0 && !selectedModalities.includes(modalidadOferta)) isVisible = false;
+
+        oferta.style.display = isVisible ? "block" : "none";
     });
+}
 
-    const closeOfferDetails = document.getElementById('closeOfferDetails');
-    if (closeOfferDetails) {
-        closeOfferDetails.addEventListener('click', function () {
-            offerDetails.style.display = 'none';
-            if (window.innerWidth <= 991) {
-                imagen.style.display = 'block';
-            }
-        });
-    }
+// menu desplegable
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.toggle('open');
+});
 
-    // Ocultar la imagen en dispositivos móviles y tablets al cargar la página
-    if (window.innerWidth <= 991) {
-        imagen.style.display = 'none';
-    }
-
-    // Agrega este código para manejar la redimensión de la ventana
-    window.addEventListener('resize', function () {
-        // Ocultar la imagen si el ancho de la ventana es menor o igual a 991px
-        if (window.innerWidth <= 991) {
-            imagen.style.display = 'none';
-        } else {
-            imagen.style.display = 'block'; // Mostrar la imagen en otros casos
-        }
-    });
-
-    // Agrega este código después de tu evento closeOfferDetails
-    closeOfferDetails.addEventListener('click', function () {
-        offerDetails.style.display = 'none';
-        if (window.innerWidth <= 991) {
-            imagen.style.display = 'none';
-        }
-    });
+document.getElementById('close-btn').addEventListener('click', function() {
+    document.getElementById('sidebar').classList.remove('open');
 });
 
 //mensaje de cerrar sesion
