@@ -55,26 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// no borrar
-document.addEventListener('DOMContentLoaded', function () {
-    const postularseBtn = document.getElementById('postularseBtn');
 
-    postularseBtn.addEventListener('click', function () {
-        Swal.fire({
-            icon: 'info',
-            title: 'Debes iniciar sesión primero',
-            text: 'Por favor, inicia sesión para poder postularte.',
-            showConfirmButton: false,
-            timerProgressBar: true,
-            position: "center",
-            color: "#000",
-            with: "30%",
-            padding: "1 rem",
-            toast: true,
-            timer: 3000,
-        });
-    });
-});
 
 //mostrar y ocultar filtro 
 let openCategory = null;
@@ -192,21 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Función para alternar la visibilidad de las categorías
-const filtersToggle = document.getElementById('filtersToggle');
-const filtersDropdown = document.getElementById('filtersDropdown');
-
-filtersToggle.addEventListener('click', function (event) {
-    event.preventDefault();
-    filtersDropdown.classList.toggle('show'); // Alternar la visibilidad del menú
-});
-
-document.addEventListener('click', function (event) {
-    if (!filtersToggle.contains(event.target) && !filtersDropdown.contains(event.target)) {
-        filtersDropdown.classList.remove('show');
-    }
-});
-
 function applyFilters() {
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
@@ -246,3 +212,23 @@ toggler.addEventListener('click', () => {
 });
 
 
+// no borrar
+document.addEventListener('DOMContentLoaded', function () {
+    const postularseBtn = document.getElementById('postularseBtn');
+
+    postularseBtn.addEventListener('click', function () {
+        Swal.fire({
+            icon: 'info',
+            title: 'Debes iniciar sesión primero',
+            text: 'Por favor, inicia sesión para poder postularte.',
+            showConfirmButton: false,
+            timerProgressBar: true,
+            position: "center",
+            color: "#000",
+            with: "30%",
+            padding: "1 rem",
+            toast: true,
+            timer: 3000,
+        });
+    });
+});

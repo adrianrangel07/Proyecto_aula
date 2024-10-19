@@ -14,47 +14,48 @@ import jakarta.persistence.Table;
 public class Personas {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @Column(name = "Nombre", columnDefinition = "VARCHAR(45)", nullable = false)
-    private String nombre;
+	@Column(name = "Nombre", columnDefinition = "VARCHAR(45)", nullable = false)
+	private String nombre;
 
-    @Column(name = "Apellido", columnDefinition = "VARCHAR(45)", nullable = false)
-    private String apellido;
+	@Column(name = "Apellido", columnDefinition = "VARCHAR(45)", nullable = false)
+	private String apellido;
 
-    @Column(name = "email", columnDefinition = "VARCHAR(45)", nullable = false)
-    private String email;
+	@Column(name = "email", columnDefinition = "VARCHAR(45)", nullable = false)
+	private String email;
 
-    @Column(name = "contraseña", columnDefinition = "VARCHAR(255)", nullable = false)
-    private String contraseña;
+	@Column(name = "contraseña", columnDefinition = "VARCHAR(255)", nullable = false)
+	private String contraseña;
 
-    @Column(name = "Cedula", columnDefinition = "VARCHAR(20)", nullable = false)
-    private String identificacion;
+	@Column(name = "Cedula", columnDefinition = "VARCHAR(20)", nullable = false)
+	private String identificacion;
 
-    @Column(name = "tipo_identificacion", columnDefinition = "VARCHAR(20)", nullable = false)
-    private String tipoIdentificacion;
+	@Column(name = "tipo_identificacion", columnDefinition = "VARCHAR(20)", nullable = false)
+	private String tipoIdentificacion;
 
-    @Column(name = "telefono", columnDefinition = "VARCHAR(10)", nullable = false)
-    private String num_tel;
+	@Column(name = "fecha_nacimiento", columnDefinition = "date", nullable = false)
+	private Date fecha_nacimiento;
 
-    @Column(name = "fecha_nacimiento", columnDefinition = "date", nullable = false)
-    private Date fecha_nacimiento;
+	@Column(name = "genero", columnDefinition = "VARCHAR(20)", nullable = false)
+	private String genero;
 
-    public Personas() {}
+	public Personas() {
+	}
 
-    // Constructor con parámetros
-    public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion, String tipoIdentificacion, String num_tel, Date fecha_nacimiento) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.contraseña = contraseña;
-        this.identificacion = identificacion;
-        this.tipoIdentificacion = tipoIdentificacion;
-        this.num_tel = num_tel;
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
+	public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
+			String tipoIdentificacion, Date fecha_nacimiento, String genero) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contraseña = contraseña;
+		this.identificacion = identificacion;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.genero = genero;
+	}
 
 	public int getId() {
 		return id;
@@ -128,13 +129,12 @@ public class Personas {
 		this.tipoIdentificacion = tipoIdentificacion;
 	}
 
-	public String getNum_tel() {
-		return num_tel;
+	public String getGenero() {
+		return genero;
 	}
 
-	public void setNum_tel(String num_tel) {
-		this.num_tel = num_tel;
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
-	
 
 }

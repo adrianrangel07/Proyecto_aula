@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,122 +8,122 @@
     <link rel="stylesheet" href="../CSS/Registrar_persona.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="website icon" href="../Imagenes/wknlogo2.png">
-    <link rel="stylesheet" href="../CSS/normalize.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="../Css/general/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10-style.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10.css">
+    <link rel="stylesheet" href="../Css/general/Nunito.css">
+    <link rel="stylesheet" href="../Css/general/styles.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="img-log">
-                <a href="/">
-                    <img src="../Imagenes/wknblack.png" alt="">
-                </a>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex">
+                        <div class="flex-grow-1 bg-register-image"
+                            style="background-image: url(../Imagenes/General/dogs/image2.jpeg);">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <a  th:href="@{/}" class="back_a">
+                            <i class="fas fa-arrow-left back"></i>
+                        </a>
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h4 class="text-dark mb-4">Create an Account!</h4>
+                            </div>
+                            <form id="registerForm" th:action="@{/Register/personas}" method="post" class="user">
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input class="form-control form-control-user" type="text" id="nombre"
+                                            placeholder="First Name" name="nombre" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input class="form-control form-control-user" type="text" placeholder="Last Name"
+                                            id="apellido" name="apellido" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control form-control-user" type="email" aria-describedby="emailHelp"
+                                        placeholder="Email Address" id="email" name="email" required>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input class="form-control form-control-user" type="password" placeholder="Password"
+                                            id="password" name="contraseña" required>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <input class="form-control form-control-user" type="password" placeholder="Repeat Password"
+                                            id="confirm-password" name="confirm-password" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6">
+                                        <input class="form-control form-control-user" type="text" placeholder="DNI" id="cedula"
+                                            name="identificacion" required>
+                                    </div>
+                                    <div id="select" class="col-sm-6 mb-3 mb-sm-0">
+                                        <select id="tipo-identificacion" name="tipoIdentificacion" class="form-control form-control-btn"
+                                            required>
+                                            <option value="cc">Cédula de Ciudadanía</option>
+                                            <option value="ce">Cédula de Extranjería</option>
+                                            <option value="rc">Registro Civil</option>
+                                            <option value="dni">Documento de Identidad</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input class="form-control form-control-user" type="date" placeholder="birthdate" id="fecha"
+                                            name="fecha_nacimiento" required>
+                                    </div>
+                                    <div id="select-genero" class="col-sm-6 ">
+                                        <select name="genero" id="genero" class="form-control form-control-btn">
+                                            <option value="Choose">Choose your gener...</option>
+                                            <option value="F">Female</option>
+                                            <option value="M">Male</option>
+                                            <option value="No-es">Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        <button id="btn-register" type="submit">Register</button>
+                        </form>
+                        <br>
+                        <div class="text-center"><a class="small" th:href="@{/login/personas}">Already have an
+                                account? Login!</a></div>
+                    </div>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </div>
 
-    <main>
-        <div class="rupage"> 
-            <div class="rucontainer"> 
-                <div class="ruwrapper"> 
-                    <h1>Empecemos una nueva aventura...</h1>
-                    <form th:action="@{/Register/personas}" method="post" onsubmit="return validatePassword()">
-                        <div class="input-columns">
-                            <div class="input-column-left">
-                                <div class="input-box">
-                                    <label>Primer nombre y Segundo nombre</label>
-                                    <input type="text" id="nombre" name="nombre" required />
-                                </div>
-    
-                                <div class="input-box">
-                                    <label>Primer apellido y Segundo apellido</label>
-                                    <input type="text" id="apellido" name="apellido" required />
-                                </div>
-    
-                                <div class="input-box-date">
-                                    <label>Fecha de Nacimiento</label>
-                                    <input type="date" id="fecha" name="fecha_nacimiento" required />
-                                </div>
-    
-                                <div class="input-box">
-                                    <label>Número de Identificación</label>
-                                    <input type="text" id="cedula" name="identificacion" required />
-                                    <select id="tipo-identificacion" name="tipoIdentificacion">
-                                        <option value="cc">Cédula de Ciudadanía</option>
-                                        <option value="ce">Cédula de Extranjería</option>
-                                        <option value="rc">Registro Civil</option>
-                                        <option value="dni">Documento de Identidad</option>
-                                    </select>
-                                </div>
-                                
-                            </div>
-    
-                            <div class="input-column-right">
-                                <div class="input-box">
-                                    <label>Correo Electrónico</label>
-                                    <input type="email" id="email" name="email" required />
-                                </div>
-    
-                                <div class="input-box">
-                                    <label>Contraseña</label>
-                                    <input type="password" id="password" name="contraseña" required />
-                                </div>
-
-                                <div class="input-box">
-                                    <label>Confirmar Contraseña</label>
-                                    <input type="password" id="confirm-password" name="confirm-password" required />
-                                </div>
-    
-                                <div class="input-box">
-                                    <label>Número de Teléfono</label>
-                                    <input type="tel" id="telefono" name="num_tel" required />
-                                </div>
-                                
-                                <div class="inicio-usuario">
-                                    <p>Tienes cuenta? <a th:href="@{/login/personas}">Inicia Sesion aquí</a></p>
-                                </div>
-
-                            </div>
-                        </div>
-    
-                        <div class="button">
-                            <button type="submit">Registrarse</button>
-                        </div>
-                    </form>
-                </div> 
-            </div> 
-        </div> 
-    </main>
-
-    <!-- No Borrar -->
     <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var confirmPasswordField = document.getElementById("confirm-password");
-            var eyeIcon = document.getElementById("eye-icon");
-    
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                confirmPasswordField.type = "text"; 
-                eyeIcon.classList.remove("far", "fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passwordField.type = "password";
-                confirmPasswordField.type = "password"; 
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
-        }
-    
-        function validatePassword() {
-            var passwordField = document.getElementById("password");
-            var confirmPasswordField = document.getElementById("confirm-password");
-    
-            if (passwordField.value !== confirmPasswordField.value) {
-                alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-                return false; 
-            }
-            return true; 
-        }
+        document.getElementById('registerForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Previene el envío automático del formulario
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Te registraste con éxito!',
+                confirmButtonText: 'Aceptar'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    document.getElementById('registerForm').submit(); // Envía el formulario después de la confirmación del SweetAlert
+                }
+            });
+        });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
+    <script src="../js/General/script.min.js"></script>
+    <script src="../js/General/theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/Registrar_persona.js"></script>
 </body>
+
 </html>

@@ -1,35 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-    fetch('/login_inicio') 
-      .then(response => response.json())
-      .then(persona => {
-        if (persona && persona.nombreUsuario) {
-          Swal.fire({
-            icon: "success",
-            title: "Bienvenido, " + persona.nombreUsuario,
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            position: "top",
-            with: "30%",
-            padding: "1 rem",
-            toast: true,
-          });
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching username:', error);
-        Swal.fire({
-          icon: "info",
-          title: "BIENVENID@",
-          showConfirmButton: false,
-          
-          timer: 3000,
-          timerProgressBar: true,
-          position: "top",
-          toast: true,
-        });
-      });
-  });
+
 
 //Mostrar las ofertas en la pagina 
 document.addEventListener('DOMContentLoaded', function () {
@@ -161,7 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
 //codigo para filtrador de busqueda por termino 
 document.addEventListener("DOMContentLoaded", function () {
     const formBusqueda = document.getElementById('formBusqueda');
@@ -204,21 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Función para alternar la visibilidad de las categorías
-const filtersToggle = document.getElementById('filtersToggle');
-const filtersDropdown = document.getElementById('filtersDropdown');
-
-filtersToggle.addEventListener('click', function (event) {
-    event.preventDefault();
-    filtersDropdown.classList.toggle('show'); // Alternar la visibilidad del menú
-});
-
-document.addEventListener('click', function (event) {
-    if (!filtersToggle.contains(event.target) && !filtersDropdown.contains(event.target)) {
-        filtersDropdown.classList.remove('show');
-    }
-});
-
 function applyFilters() {
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
@@ -250,12 +203,11 @@ function applyFilters() {
 }
 
 // menu desplegable
-document.getElementById('menu-toggle').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.toggle('open');
-});
+const toggler = document.getElementById('navbar-toggler');
+const offcanvas = document.getElementById('offcanvas');
 
-document.getElementById('close-btn').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.remove('open');
+toggler.addEventListener('click', () => {
+    offcanvas.classList.toggle('active');
 });
 
 //mensaje de cerrar sesion

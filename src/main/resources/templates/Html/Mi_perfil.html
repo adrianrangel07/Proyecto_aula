@@ -1,220 +1,384 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<html data-bs-theme="light" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/Perfil.css">
-    <link rel="stylesheet" href="../CSS/normalize.css">
-    <title>Workwise Navigator</title>
-    <link rel="website icon" href="../imagenes/wknlogo2.png">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.39.0/css-doodle.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile - Brand</title>
+    <link rel="website icon" href="../Imagenes/wknLogo2.png">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=97380e22c8933e9aa79cbc2390b9f15a">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="../Css/general/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10-style.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10.css">
+    <link rel="stylesheet" href="../Css/general/Nunito.css">
+    <link rel="stylesheet" href="../Css/general/styles.min.css">
+
 </head>
 
-<body>
-    <header class="top-bar">
-        <nav class="navbar navbar-dark  fixed-top">
-            <div class="container-fluid"> <!-- barra superior-->
-                <a class="navbar-brand" th:href=@{/login_inicio}>
-                    <img src="../Imagenes/wknname.png" alt="Logo" id="logo" class="logo">
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark"
+            style="background: #0a1128;">
+            <div class="container-fluid d-flex flex-column p-0"><a
+                    class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+                    href="#"><img src="../Imagenes/working wise 32x32 white.png" width="61" height="58"
+                        style="width: 50px;height: 50px;">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span>Workwise</span></div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- de aqui para abajo barra de navegacion lateral-->
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
-                    aria-labelledby="offcanvasDarkNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h4 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">WORKWISE</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-header">
-                        <h5 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">MENU</h5>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="letras nav-rp nav-link " aria-current="page" th:href="@{/login_inicio}">VOLVER
-                                    AL INICIO</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="letras nav-rp nav-link" href="#">CONFIGURACION</a>
-                            </li>
-                            <li class="nav-item dropdown"> <!-- barra desplagable dentro de la barrra lateral-->
-                                <a class="letras nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Ver Más
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="letras dropdown-item" th:href="@{/Estadisticas}">Estadisticas</a></li>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="letras dropdown-item" th:href="@{/Nosotros}">¿Quienes Somos?</a>
-                            </li>
-                        </ul>
-                        </li>
-                        </ul>
-                        <div class="barra_busqueda_responsive" id="formBusqueda">
-                            <form class="d-flex" role="search">
-                                <input class="form form-control me-2" type="search" id="termino" name="termino"
-                                    placeholder="Buscar ofertas..." aria-label="Search">
-                                <button class="btn btn-outline-success" id="btn" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/login_inicio}"><i
+                                class="fas fa-home"></i><span>Home</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/perfil/persona}"><i
+                                class="far fa-user-circle"></i><span>Profile</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Estadisticas}"><i
+                                class="fas fa-chart-bar"></i><span>Statistics</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Nosotros}"><i
+                                class="fas fa-users"></i><span>About Us</span></a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Registrar/Empresa}"><i
+                                class="fas fa-building"></i><span>Do you have a company? </span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
+                        id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
-    </header>
-    <main>
-        <!-- Page Container -->
-        <div class="w3-content w3-margin-top" style="max-width:1400px;">
-
-            <!-- The Grid -->
-            <div class="w3-row-padding">
-
-                <!-- Left Column -->
-                <div class="w3-third">
-                    <div class="w3-white w3-text-grey w3-card-4 ">
-                        <div class="content">
-                            <div class="w3-display-container">
-                                <i class="fa fa-camera camara"></i>
-                                <img src="../Imagenes/userperfil.png" style="width:100%" alt="Avatar">
-                            </div>
-                            <div class="w3-container">
-                                <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-tealp"></i>*Nombre*</p>
-                                <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-tealp"></i>*Apellido*</p>
-                                <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-tealp"></i>*email*</p>
-                                <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-tealp"></i>123456</p>
-                                <hr>
-                            </div>
-                        </div>
-                        <div class="w3-container">
-                            <h2><i class="fa fa-suitcase fa-fw w3-margin-right  w3-text-tealp porta"></i>Subir hoja de vida</h2>
-                            <button type="submit" id="validar">Subir hoja de vida</button>
-                            <hr>
-                        </div>
-                    </div><br>
-
-                    <!-- End Left Column -->
-                </div>
-
-                <!-- Right Column -->
-                <div class="w3-twothird">
-
-                    <div class="w3-container w3-card w3-white w3-margin-bottom">
-                        <h2 class="w3-text-grey w3-padding-16"><i
-                                class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-tealp"></i>Cambio de datos
-                        </h2>
-                        <div class="w3-container">
-                            <h5 class="w3-opacity"><b>Nombre</b></h5>
-                            <input type="text" placeholder="Nuevo Nombre">
-                            <hr>
-                        </div>
-                        <div class="w3-container">
-                            <h5 class="w3-opacity"><b>Apellido</b></h5>
-                            <input type="text" placeholder="Nuevo Apellido">
-                            <hr>
-                        </div>
-                        <div class="w3-container">
-                            <h5 class="w3-opacity"><b>Email</b></h5>
-                            <input type="text" placeholder="Nuevo Email">
-                            <hr>
-                        </div>
-                        <div class="w3-container">
-                            <h5 class="w3-opacity"><b>Contraseña</b></h5>
-                            <input type="text" placeholder="Nuevo Contraseña">
-                            <hr>
-                        </div>
-                        <div class="w3-container">
-                            <button type="submit" id="validar">Guardar Datos</button>
-                        </div>
-
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light"
+                    style="background: var(--bs-body-bg);">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
+                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group"
+                                style="text-align: center;margin: 500px;border-color: var(--bs-emphasis-color);"><input
+                                    class="bg-light form-control border-0 small" type="text"
+                                    placeholder="Buscar..."><button class="btn btn-primary py-0" type="button"
+                                    style="background: #0a1128;"><i class="fas fa-search"></i></button></div>
+                        </form>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
+                                    aria-expanded="false" data-bs-toggle="dropdown" href="#"><i
+                                        class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in"
+                                    aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small"
+                                                type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0"
+                                                    type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">alerts center</h6><a
+                                            class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-primary icon-circle"><i
+                                                        class="fas fa-file-alt text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 12, 2019</span>
+                                                <p>A new monthly report is ready to download!</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-success icon-circle"><i
+                                                        class="fas fa-donate text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 7, 2019</span>
+                                                <p>$290.29 has been deposited into your account!</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="me-3">
+                                                <div class="bg-warning icon-circle"><i
+                                                        class="fas fa-exclamation-triangle text-white"></i></div>
+                                            </div>
+                                            <div><span class="small text-gray-500">December 2, 2019</span>
+                                                <p>Spending Alert: We've noticed unusually high spending for your
+                                                    account.</p>
+                                            </div>
+                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                            Alerts</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"></a>
+                                    <div class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">alerts center</h6><a
+                                            class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
+                                                    src="/assets/img/avatars/avatar4.jpeg?h=fefb30b61c8459a66bd338b7d790c3d5">
+                                                <div class="bg-success status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>Hi there! I am wondering if you can
+                                                        help me with a problem I've been having.</span></div>
+                                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
+                                                    src="/assets/img/avatars/avatar2.jpeg?h=5d142be9441885f0935b84cf739d4112">
+                                                <div class="status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>I have the photos that you ordered last
+                                                        month!</span></div>
+                                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
+                                                    src="/assets/img/avatars/avatar3.jpeg?h=c5166867f10a4e454b5b2ae8d63268b3">
+                                                <div class="bg-warning status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>Last month's report looks great, I am
+                                                        very happy with the progress so far, keep up the good
+                                                        work!</span></div>
+                                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
+                                            </div>
+                                        </a><a class="dropdown-item d-flex align-items-center" href="#">
+                                            <div class="dropdown-list-image me-3"><img class="rounded-circle"
+                                                    src="/assets/img/avatars/avatar5.jpeg?h=35dc45edbcda6b3fc752dab2b0f082ea">
+                                                <div class="bg-success status-indicator"></div>
+                                            </div>
+                                            <div class="fw-bold">
+                                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is
+                                                        because someone told me that people say this to all dogs, even
+                                                        if they aren't good...</span></div>
+                                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                                            </div>
+                                        </a><a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                            Alerts</a>
+                                    </div>
+                                </div>
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small">Usuario</span></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
+                                            class="dropdown-item" th:href="@{/perfil/persona}"><i
+                                                class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
+                                            class="dropdown-item" th:href="@{/configuracion/persona}"><i
+                                                class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
+                                            class="dropdown-item" href="#"><i
+                                                class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
+                                            log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" th:href="@{/}"><i
+                                                class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-
-                
-                    <!-- End Right Column -->
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Profile</h3>
+                    <div class="row mb-3">
+                        <div class="col-lg-4">
+                            <div class="card mb-3">
+                                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4"
+                                        src="/assets/img/dogs/image2.jpeg?h=a0a7d00bcd8e4f84f4d8ce636a8f94d4"
+                                        width="160" height="160">
+                                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Change
+                                            Photo</button></div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary fw-bold m-0">Projects</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="small fw-bold">Server migration<span class="float-end">20%</span></h4>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 20%;"><span
+                                                class="visually-hidden">20%</span></div>
+                                    </div>
+                                    <h4 class="small fw-bold">Sales tracking<span class="float-end">40%</span></h4>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar bg-warning" aria-valuenow="40" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 40%;"><span
+                                                class="visually-hidden">40%</span></div>
+                                    </div>
+                                    <h4 class="small fw-bold">Customer Database<span class="float-end">60%</span></h4>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 60%;"><span
+                                                class="visually-hidden">60%</span></div>
+                                    </div>
+                                    <h4 class="small fw-bold">Payout Details<span class="float-end">80%</span></h4>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar bg-info" aria-valuenow="80" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 80%;"><span
+                                                class="visually-hidden">80%</span></div>
+                                    </div>
+                                    <h4 class="small fw-bold">Account setup<span class="float-end">Complete!</span></h4>
+                                    <div class="progress progress-sm mb-3">
+                                        <div class="progress-bar bg-success" aria-valuenow="100" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 100%;"><span
+                                                class="visually-hidden">100%</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row mb-3 d-none">
+                                <div class="col">
+                                    <div class="card text-white bg-primary shadow">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col">
+                                                    <p class="m-0">Peformance</p>
+                                                    <p class="m-0"><strong>65.2%</strong></p>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                            </div>
+                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5%
+                                                since last month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card text-white bg-success shadow">
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col">
+                                                    <p class="m-0">Peformance</p>
+                                                    <p class="m-0"><strong>65.2%</strong></p>
+                                                </div>
+                                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
+                                            </div>
+                                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i>&nbsp;5%
+                                                since last month</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">User Settings</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="username"><strong>Username</strong></label><input
+                                                                class="form-control" type="text" id="username"
+                                                                placeholder="user.name" name="username"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="email"><strong>Email Address</strong></label><input
+                                                                class="form-control" type="email" id="email"
+                                                                placeholder="user@example.com" name="email"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="first_name"><strong>First
+                                                                    Name</strong></label><input class="form-control"
+                                                                type="text" id="first_name" placeholder="John"
+                                                                name="first_name"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="last_name"><strong>Last Name</strong></label><input
+                                                                class="form-control" type="text" id="last_name"
+                                                                placeholder="Doe" name="last_name"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3"><button class="btn btn-primary btn-sm"
+                                                        type="submit">Save Settings</button></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">Contact Settings</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form>
+                                                <div class="mb-3"><label class="form-label"
+                                                        for="address"><strong>Address</strong></label><input
+                                                        class="form-control" type="text" id="address"
+                                                        placeholder="Sunset Blvd, 38" name="address"></div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="city"><strong>City</strong></label><input
+                                                                class="form-control" type="text" id="city"
+                                                                placeholder="Los Angeles" name="city"></div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="mb-3"><label class="form-label"
+                                                                for="country"><strong>Country</strong></label><input
+                                                                class="form-control" type="text" id="country"
+                                                                placeholder="USA" name="country"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3"><button class="btn btn-primary btn-sm"
+                                                        type="submit">Save&nbsp;Settings</button></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow mb-5">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Forum Settings</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form>
+                                        <div class="mb-3"><label class="form-label"
+                                                for="signature"><strong>Signature</strong><br></label><textarea
+                                                class="form-control" id="signature" rows="4"
+                                                name="signature"></textarea></div>
+                                        <div class="mb-3">
+                                            <div class="form-check form-switch"><input class="form-check-input"
+                                                    type="checkbox" id="formCheck-1"><label class="form-check-label"
+                                                    for="formCheck-1"><strong>Notify me about new
+                                                        replies</strong></label></div>
+                                        </div>
+                                        <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save
+                                                Settings</button></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- End Grid -->
             </div>
-
-            <!-- End Page Container -->
-        </div>
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <div class="sticky-lg-bottom">
-                <div class="row">
-                    <div class="col">
-                        <div class="contacto">
-                            <h5>Contacto</h5>
-                            <p>info@Workwise.com</p>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="link">
-                            <h5>Links</h5>
-                            <ul>
-                                <div class="Links">
-                                    <li><a th:href="@{/}">Inicio</a></li>
-                                    <li><a th:href="@{/registrar_persona}">Registrate</a></li>
-                                    <li><a th:href="@{/login_persona}">Iniciar sesion</a></li>
-                                    <li><a th:href="@{/Nosotros}">Nosotros</a></li>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col">
-
-                        <div class="redes-1">
-                            <h5>Redes</h5>
-                            <div class="redes">
-                                <div class="facebook">
-                                    <a class="facebook" href="https://www.facebook.com/profile.php?id=61558650706843"
-                                        target="_blank">
-                                        <img class="facebook"
-                                            src="https://faldin.com/wp-content/uploads/2018/01/logo-facebook.png"
-                                            alt="facebook">
-                                    </a>
-                                </div>
-                                <div class="instagram">
-                                    <a class="instagram" href="https://www.instagram.com/work_wise.0.1/"
-                                        target="_blank">
-                                        <img class="instagram" src="../Imagenes/instagram.png" alt="instagram">
-                                    </a>
-                                </div>
-                                <div class="twitter">
-                                    <a class="twitter" href="https://www.tiktok.com/@work_wise?lang=es" target="_blank">
-                                        <img class="twitter"
-                                            src="https://seeklogo.com/images/T/tiktok-logo-B9AC5FE794-seeklogo.com.png"
-                                            alt="twitter">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
                 </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Script de JavaScript -->
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
+    <script src="../js/General/script.min.js"></script>
+    <script src="../js/General/theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
 
 </html>

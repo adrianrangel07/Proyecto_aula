@@ -1,109 +1,79 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<html data-bs-theme="light" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workwise Navigator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link rel="stylesheet" href="../CSS/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="website icon" href="../Imagenes/wknlogo2.png">
-    <link rel="stylesheet" href="../CSS/normalize.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login users</title>
+    <link rel="website icon" href="../Imagenes/wknLogo2.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="../Css/general/bootstrap.min.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10-style.css">
+    <link rel="stylesheet" href="../Css/general/Grid-and-List-view-V10.css">
+    <link rel="stylesheet" href="../Css/general/Nunito.css">
+    <link rel="stylesheet" href="../Css/general/styles.min.css">
+    <link rel="stylesheet" href="../Css/inicio_sesion_persona.css">
 </head>
-<body>
-    <header>
-        <nav class="top-bar navbar navbar-dark">
-            <a href="/"><img src="../Imagenes/wknname.png" alt="Logo" id="logo" class="logo"></a>
-            <button class="nav-barra navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar"
-                aria-labelledby="offcanvasDarkNavbarLabel"> <!-- de aqui para abajo barra de navegacion lateral-->
-                <div class="offcanvas-header">
-                    <h5 class="letras offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="letras nav-rp nav-link " aria-current="page" th:href="@{/registrar_usuario}">Registrarse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="letras nav-rp nav-link" href="#">Empresa</a>
-                        </li>
-                        <li class="nav-item dropdown">    <!-- barra desplagable dentro de la barrra lateral-->
-                            <a class="letras nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ver Más
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="letras dropdown-item" href="#">Estadisticas</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="letras dropdown-item" href="#">Aprende con Nosotros</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div> 
-            <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a th:href="@{/registrar_usuario}">Registrarse</a>
-                </li>
-                <li class="nav-menu-item">
-                    <a th:href="@{/Inicio_Sesion_Empresa}">Empresa</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="login-form">
-            <div class="image-container">
-                <img src="../imagenes/imagenperfil.png" alt="Imagen de encabezado">
-            </div>
-            <h1>Iniciar Sesión</h1>
-            <form th:action="@{/login_inicio}" th:object="${Usuario}" method="POST">
-                <input type="email" name="email" placeholder="Correo electrónico" required>
-                <div class="password-field">
-                    <input type="password" name="contraseña" id="password" placeholder="Contraseña" required>
-                    <span class="toggle-password" onclick="togglePasswordVisibility()">
-                        <i id="eye-icon" class="far fa-eye"></i>
-                    </span>
-                </div>
-                <button type="submit" id="validar" onclick="validar">Ingresar</button>
-            </form>
-            <p class="contraseña_olvidada"><a href="#">¿Olvidaste tu contraseña?</a></p>
-        </div>
-    </main>
-    
-    <script>
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var eyeIcon = document.getElementById("eye-icon");
 
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                eyeIcon.classList.remove("far", "fa-eye");
-                eyeIcon.classList.add("far", "fa-eye-slash");
-            } else {
-                passwordField.type = "password";
-                eyeIcon.classList.remove("far", "fa-eye-slash");
-                eyeIcon.classList.add("far", "fa-eye");
-            }
-        }
-    </script>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image"
+                                    style="background-image: url(../Imagenes/General/dogs/image3.jpeg);">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <a  th:href="@{/}" class="back_a">
+                                    <i class="fas fa-arrow-left back"></i>
+                                </a>
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                    </div>
+                                    <form class="user" th:action="@{/login/personas}" th:object="${Usuario}"
+                                        method="post">
+
+                                        <div class="mb-3"><input class="form-control form-control-user" type="email"
+                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address..." name="email">
+                                        </div>
+                                        <div class="mb-3"><input class="form-control form-control-user" type="password"
+                                                id="password" placeholder="Password" name="contraseña"></div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small">
+                                                <div class="form-check"><input
+                                                        class="form-check-input custom-control-input" type="checkbox"
+                                                        id="formCheck-1"><label
+                                                        class="form-check-label custom-control-label"
+                                                        for="formCheck-1">Remember Me</label></div>
+                                            </div>
+                                        </div><button class="btn btn-primary d-block btn-user w-100"
+                                            type="submit" id="validar" onclick="validar" >Login</button>
+                                    </form>
+                                    <div class="text-center"><a class="small" th:href="@{/Contraseña-olvidada}">Forgot
+                                            Password?</a></div>
+                                    <div class="text-center"><a class="small" th:href="@{/Register/personas}">Create an
+                                            Account!</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
+    <script src="../js/General/script.min.js"></script>
+    <script src="../js/General/theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/contraseña_incorrecta.js"></script>
+    <script src="../js/inicio_sesion_persona.js"></script>
 </body>
 
 </html>

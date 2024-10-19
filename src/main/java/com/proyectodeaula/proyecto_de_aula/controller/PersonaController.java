@@ -38,7 +38,7 @@ public class PersonaController {
         per.save(persona);
 
         // Redireccionar a la página de inicio de sesión
-        return "redirect:/login/personas";
+        return "html/inicio_sesion_persona";
     }
 
     // Método para mostrar la página de inicio de sesión
@@ -57,12 +57,13 @@ public class PersonaController {
 
         // Validar si la persona existe
         if (persona != null) {
-            model.addAttribute("nombreUsuario", persona.getnombre()); // si es correcto
-            return "redirect:/login_inicio"; // Redirigir a la ruta de inicio de persona registrada
+            model.addAttribute("nombreUsuario", persona.getnombre());
+            return "redirect:/login_inicio";
         } else {
-            model.addAttribute("error", "Credenciales incorrectas"); // si hay algun error
-            return "redirect:/datos_incorrectos"; // Vista de error
+            model.addAttribute("error", "Credenciales incorrectas");
+            return "redirect:/datos_incorrectos";
         }
+
     }
 
     @GetMapping("/login_inicio")
@@ -99,5 +100,4 @@ public class PersonaController {
     public String configuracion() {
         return "html/Configuracion";
     }
-
 }
