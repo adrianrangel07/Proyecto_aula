@@ -232,3 +232,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function applyFilters() {
+    // Cerrar la barra lateral de filtros desmarcando el checkbox
+    document.getElementById('btn-menu').checked = false;
+}

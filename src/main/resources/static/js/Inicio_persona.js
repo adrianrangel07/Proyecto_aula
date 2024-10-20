@@ -210,23 +210,18 @@ toggler.addEventListener('click', () => {
     offcanvas.classList.toggle('active');
 });
 
-//mensaje de cerrar sesion
-document.addEventListener('DOMContentLoaded', function () {
-    const cerrarSesion = document.querySelector('.nav-rp');
-    if (cerrarSesion) {
-        cerrarSesion.addEventListener('click', function (event) {
-            event.preventDefault(); // Evitar que se ejecute el href del enlace
+function cerrarSesion(event) {
+    event.preventDefault(); // Evitar que se ejecute el href del enlace
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Cerró sesión exitosamente',
-                showConfirmButton: true,
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/'; // Redirigir a la página de inicio
-                }
-            });
-        });
-    }
-});
+    Swal.fire({
+        icon: 'success',
+        title: 'Cerró sesión exitosamente',
+        showConfirmButton: true,
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '/'; // Redirigir a la página de inicio
+        }
+    });
+}
+

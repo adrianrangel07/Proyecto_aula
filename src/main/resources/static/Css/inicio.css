@@ -189,23 +189,6 @@
     color: #ffffff;
 }
 
-.btn{
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-.btn:hover{
-    color: #001f54;
-    border-color: #ffffff;
-    background-color: #ffffff;
-}
-
-#btn:active{
-    color: #001f54;
-    border-color: #ffffff;
-    background-color: #ffffff;
-}
-
 .barra_busqueda_responsive{
     display: none;
 }
@@ -326,7 +309,7 @@
     align-items: center;
 }
 
-.modal-content {
+#modal-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -336,7 +319,7 @@
 }
 
 .close-btn {
-    position: absolute;
+    position: sticky;
     top: 10px;
     right: 20px;
     font-size: 50px;
