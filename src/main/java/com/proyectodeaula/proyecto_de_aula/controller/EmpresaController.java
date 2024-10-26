@@ -32,7 +32,7 @@ public class EmpresaController {
     }
 
     // Método para guardar una nueva empresa
-    @PostMapping("/registrar/Empresa") // aqui mismo se guarda las empresas
+    @PostMapping("/Registrar/Empresa") // aqui mismo se guarda las empresas
     public String save(@ModelAttribute("empresa") Empresas empresa, Model model) {
         // Guardar la empresa en la base de datos
         emp.save(empresa);
@@ -49,7 +49,7 @@ public class EmpresaController {
 
     // Método para validar las credenciales del usuario y redirigir a la página de
     // inicio
-    @PostMapping("/inicio_empresa") // ruta para validar si la cuenta es correcta o no
+    @PostMapping("/login/Empresa") // ruta para validar si la cuenta es correcta o no
     public String iniciarSesionemp(Model model, @RequestParam String email, @RequestParam String contraseña) {
         // Buscar al usuario_empresa por su email y contraseña
         Empresas empresa = u_emp.findByEmailAndContraseña(email, contraseña); // Reemplazamos Usuario_empresa con

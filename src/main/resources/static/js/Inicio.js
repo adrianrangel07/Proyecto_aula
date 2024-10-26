@@ -1,76 +1,4 @@
 
-//Mostrar las ofertas en la pagina 
-document.addEventListener('DOMContentLoaded', function () {
-    const offers = document.querySelectorAll('.offer');
-    const offerDetails = document.querySelector('.offerDetails');
-
-    offers.forEach(offer => {
-        offer.addEventListener('click', function () {
-            const tituloPuesto = this.querySelector('h3').innerText;
-            const descripcion = this.querySelector('p').innerText;
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.style.display = 'block';
-        });
-    });
-
-    const closeOfferDetails = document.getElementById('closeOfferDetails');
-    if (closeOfferDetails) {
-        closeOfferDetails.addEventListener('click', function () {
-            offerDetails.style.display = 'none';
-        });
-    }
-});
-
-//oferta de detalles
-document.addEventListener('DOMContentLoaded', function () {
-    const offerDetails = document.querySelector('.offerDetails');
-
-    const resultadoBusqueda = document.getElementById('resultadoBusqueda');
-
-    resultadoBusqueda.addEventListener('click', function (event) {
-        const clickedOffer = event.target.closest('.offer');
-        if (clickedOffer) { // Check if clicked element or its ancestor is an offer
-            const tituloPuesto = clickedOffer.querySelector('h3').innerText;
-            const descripcion = clickedOffer.querySelector('p').innerText;
-
-            const salarioElement = clickedOffer.querySelector('.salario span');
-            const duracionElement = clickedOffer.querySelector('.duracion span');
-            const periodoElement = clickedOffer.querySelector('.periodo span');
-            const tipoEmpleoElement = clickedOffer.querySelector('.tipo_empleo span');
-
-            const salario = salarioElement ? salarioElement.innerText : 'No hay información disponible';
-            const duracion = duracionElement ? duracionElement.innerText : 'No hay información disponible';
-            const periodo = periodoElement ? periodoElement.innerText : 'No hay información disponible';
-            const tipoEmpleo = tipoEmpleoElement ? tipoEmpleoElement.innerText : 'No hay información disponible';
-
-            offerDetails.style.display = 'block';
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.querySelector('.salarioSpan').innerText = salario;
-            offerDetails.querySelector('.duracionSpan').innerText = duracion;
-            offerDetails.querySelector('.periodoSpan').innerText = periodo;
-            offerDetails.querySelector('.tipo_empleoSpan').innerText = tipoEmpleo;
-        }
-    });
-});
-
-
-
-//mostrar y ocultar filtro 
-let openCategory = null;
-function toggleFilter() {
-    const filterContainer = document.getElementById('filterContainer');
-    const filterText = document.getElementById('filterText');
-    if (filterContainer.style.display === 'none' || filterContainer.style.display === '') {
-        filterContainer.style.display = 'block';
-        filterText.innerHTML = 'Ocultar Filtrador';
-    } else {
-        filterContainer.style.display = 'none';
-        filterText.innerHTML = 'Mostrar Filtrador';
-    }
-}
-
 //de aqui en adelante la tarjeta
 document.addEventListener('DOMContentLoaded', function () {
     // Seleccionar todas las tarjetas
@@ -173,7 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Unificación de la función applyFilters
 function applyFilters() {
+    // Cerrar la barra lateral de filtros desmarcando el checkbox
+    document.getElementById('btn-menu').checked = false;
+
+    // Capturar valores de los filtros
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
     const duracion = document.getElementById("duracion").value.toLowerCase();
@@ -181,36 +114,31 @@ function applyFilters() {
 
     const ofertas = document.querySelectorAll(".offer-container .card");
 
+    // Capturar modalidades seleccionadas
+    const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
+    const selectedModalities = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value.toLowerCase());
+
+    // Aplicar los filtros a cada tarjeta de oferta
     ofertas.forEach(oferta => {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
         const duracionOferta = oferta.querySelector(".duracion span").innerText.toLowerCase();
         const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
         const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
 
+        // Lógica para mostrar/ocultar la oferta según los filtros
         let isVisible = true;
 
         if (salario < salarioMin || salario > salarioMax) isVisible = false;
         if (duracion && !duracionOferta.includes(duracion)) isVisible = false;
         if (tipoEmpleo && tipoEmpleo !== tipoEmpleoOferta) isVisible = false;
-
-        const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
-        const selectedModalities = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
         if (selectedModalities.length > 0 && !selectedModalities.includes(modalidadOferta)) isVisible = false;
 
+        // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
     });
 }
-
-// menu desplegable
-const toggler = document.getElementById('navbar-toggler');
-const offcanvas = document.getElementById('offcanvas');
-
-toggler.addEventListener('click', () => {
-    offcanvas.classList.toggle('active');
-});
-
 
 // no borrar
 document.addEventListener('DOMContentLoaded', function () {
@@ -233,7 +161,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function applyFilters() {
-    // Cerrar la barra lateral de filtros desmarcando el checkbox
-    document.getElementById('btn-menu').checked = false;
-}

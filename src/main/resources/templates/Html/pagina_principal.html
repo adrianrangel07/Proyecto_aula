@@ -23,7 +23,7 @@
             style="background: #0a1128;">
             <div class="container-fluid d-flex flex-column p-0"><a
                     class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-                    th:href="@{/}"><img src="../Imagenes/working wise 32x32 white.png" width="61" height="58"
+                    th:href="@{/}"><img src="../Imagenes/wknLogo.png" width="61" height="58"
                         style="width: 50px;height: 50px;">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span>Workwise</span></div>
@@ -84,8 +84,11 @@
                         </ul>
                         <!-- boton barra lateral filtro -->
                         <div class="btn-menu">
-                            <h6><label for="btn-menu" id="navbar-toggler">Filtro</label></h6>
+                            <label for="btn-menu" id="navbar-toggler">
+                                <i class="fa fa-filter"></i>
+                            </label>
                         </div>
+
                         <!-- fin boton barra lateral filtro -->
                     </div>
                 </nav>
@@ -136,12 +139,9 @@
                     <label for="btn-menu" class="back">✖️</label>
                 </div>
             </div>
-            <!-- fin barra lateral filtro -->
 
             <div class="content-area flex-grow-1 p-3">
-                    
                 <div id="resultadoBusqueda"></div>
-
                 <div class="offer-container">
                     <div th:each="Oferta:${Ofertas}" class="card">
                         <div class="offer-content" data-id="${Oferta.id}">
