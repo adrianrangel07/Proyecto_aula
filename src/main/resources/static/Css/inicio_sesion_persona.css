@@ -13,3 +13,18 @@
 .back_a:hover{
     transform: scale(1,1);
 }
+
+#body{
+    background-color: #E0F7FA;
+}
+
+
+#logo {
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#logo:hover {
+    transform: scale(1.1);
+}

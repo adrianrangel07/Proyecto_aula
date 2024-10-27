@@ -1,10 +1,12 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,11 +35,14 @@ public class HvD {
     @Column(name = "estado_civil", columnDefinition = "VARCHAR(45)", nullable = false)
     private String estado_civil;
 
+    @OneToOne(mappedBy = "hvd", cascade = CascadeType.ALL)
+    private Personas persona;
+
     public HvD() {
     }
 
     public HvD(String experienciaLaboral, String educacion, String habilidades, String idiomas, String nacionalidad,
-            String estado_civil) {
+               String estado_civil) {
         this.experienciaLaboral = experienciaLaboral;
         this.educacion = educacion;
         this.habilidades = habilidades;
@@ -45,7 +50,6 @@ public class HvD {
         this.nacionalidad = nacionalidad;
         this.estado_civil = estado_civil;
     }
-
     public String getExperienciaLaboral() {
         return experienciaLaboral;
     }
@@ -92,6 +96,14 @@ public class HvD {
 
     public void setEstado_civil(String estado_civil) {
         this.estado_civil = estado_civil;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

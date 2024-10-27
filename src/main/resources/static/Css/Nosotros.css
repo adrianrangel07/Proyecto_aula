@@ -34,7 +34,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 50px;
+    margin: 10px;
     color: #000000;
 }
 

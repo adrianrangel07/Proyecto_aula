@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,22 +43,25 @@ public class Personas {
 	@Column(name = "genero", columnDefinition = "VARCHAR(20)", nullable = false)
 	private String genero;
 
-	public Personas() {
-	}
+	@OneToOne
+    @JoinColumn(name = "HvD_id", nullable = false) 
+    private HvD hvd;
 
-	public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
-			String tipoIdentificacion, Date fecha_nacimiento, String genero) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.contraseña = contraseña;
-		this.identificacion = identificacion;
-		this.tipoIdentificacion = tipoIdentificacion;
-		this.fecha_nacimiento = fecha_nacimiento;
-		this.genero = genero;
-	}
+    public Personas() {
+    }
 
+    public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
+                    String tipoIdentificacion, Date fecha_nacimiento, String genero) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.contraseña = contraseña;
+        this.identificacion = identificacion;
+        this.tipoIdentificacion = tipoIdentificacion;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.genero = genero;
+    }
 	public int getId() {
 		return id;
 	}
@@ -136,5 +141,6 @@ public class Personas {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
+
 
 }

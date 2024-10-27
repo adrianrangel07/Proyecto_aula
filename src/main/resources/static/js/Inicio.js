@@ -120,6 +120,8 @@ function applyFilters() {
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value.toLowerCase());
 
+    let ofertasVisibles = 0; // Contador de ofertas visibles
+
     // Aplicar los filtros a cada tarjeta de oferta
     ofertas.forEach(oferta => {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
@@ -137,8 +139,23 @@ function applyFilters() {
 
         // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
+        
+        if (isVisible) ofertasVisibles++; // Incrementar si la oferta es visible
     });
+
+    // Mostrar alerta si no se encuentran resultados
+    if (ofertasVisibles === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No se encontraron resultados',
+            text: 'Ninguna oferta coincide con los filtros aplicados. Intenta con otros criterios.',
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            location.reload();
+        });
+    }
 }
+
 
 // no borrar
 document.addEventListener('DOMContentLoaded', function () {
@@ -149,15 +166,20 @@ document.addEventListener('DOMContentLoaded', function () {
             icon: 'info',
             title: 'Debes iniciar sesión primero',
             text: 'Por favor, inicia sesión para poder postularte.',
-            showConfirmButton: false,
-            timerProgressBar: true,
+            showCancelButton: true,
+            confirmButtonText: 'Login',
+            cancelButtonText: 'Return',
             position: "center",
             color: "#000",
-            with: "30%",
-            padding: "1 rem",
-            toast: true,
-            timer: 3000,
+            width: "30%",
+            padding: "1rem",
+            reverseButtons: true 
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/login/personas'; // Redirige a la página de inicio de sesión
+            }
         });
     });
 });
+
 
