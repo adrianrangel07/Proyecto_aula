@@ -1,12 +1,17 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,7 +25,8 @@ public class Empresas {
 	@Column(name = "NombreEmp", columnDefinition = "varchar(45)", nullable = false)
 	String nombreEmp;
 	// Columna de direccion de la empresa
-	@Column(name = "Direccion", columnDefinition = "varchar(45)", nullable = false)
+	@Lob
+	@Column(name = "Direccion", columnDefinition = "LONGBLOB", nullable = false)
 	String direccion;
 	// Columna de Razon_social de la empresa
 	@Column(name = "Razon_social", columnDefinition = "varchar(45)", nullable = false)
@@ -35,16 +41,17 @@ public class Empresas {
 	@Column(name = "contraseña", columnDefinition = "VARCHAR(45)", nullable = false)
 	String contraseña;
 
-	@OneToOne
-    @JoinColumn(name = "ofertas_id", nullable = false) 
-    private Ofertas Ofertas;
-
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Ofertas> ofertas = new ArrayList<>();
 
 	public Empresas() {
 	}
 
+
+	
+
 	public Empresas(int id, String nombreEmp, String direccion, String razon_social, int nit, String email,
-			String contraseña) {
+			String contraseña, List<Ofertas> ofertas) {
 		this.id = id;
 		this.nombreEmp = nombreEmp;
 		this.direccion = direccion;
@@ -52,7 +59,10 @@ public class Empresas {
 		this.nit = nit;
 		this.email = email;
 		this.contraseña = contraseña;
+		this.ofertas = ofertas;
 	}
+
+
 
 	// Getter and Setter
 	public int getId() {
@@ -111,4 +121,21 @@ public class Empresas {
 		this.contraseña = contraseña;
 	}
 
+	public List<Ofertas> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<Ofertas> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+	public int getNit() {
+		return nit;
+	}
+
+	public void setNit(int nit) {
+		this.nit = nit;
+	}
+
+	
 }

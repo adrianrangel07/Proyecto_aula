@@ -1,5 +1,7 @@
 package com.proyectodeaula.proyecto_de_aula.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.proyectodeaula.proyecto_de_aula.interfaceService.IofertaService;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Empresas.Interfaz_Emp;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Empresas.Interfaz_Empresa;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
+import com.proyectodeaula.proyecto_de_aula.model.Ofertas;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
@@ -22,6 +28,9 @@ public class EmpresaController {
 
     @Autowired
     private Interfaz_Empresa emp;
+
+    @Autowired
+    private IofertaService ofertaService;
 
     // Método para mostrar el formulario de registro de la empresa
     @GetMapping("/Registrar/Empresa") // ruta para llevarlo a registrar empresa
@@ -49,25 +58,32 @@ public class EmpresaController {
 
     // Método para validar las credenciales del usuario y redirigir a la página de
     // inicio
-    @PostMapping("/login/Empresa") // ruta para validar si la cuenta es correcta o no
-    public String iniciarSesionemp(Model model, @RequestParam String email, @RequestParam String contraseña) {
-        // Buscar al usuario_empresa por su email y contraseña
-        Empresas empresa = u_emp.findByEmailAndContraseña(email, contraseña); // Reemplazamos Usuario_empresa con
-                                                                              // Empresas
+    @PostMapping("/login/Empresa")
+    public String iniciarSesionemp(HttpSession session, Model model, @RequestParam String email,
+            @RequestParam String contraseña) {
+        Empresas empresa = u_emp.findByEmailAndContraseña(email, contraseña);
 
-        // Validar si la empresa existe
         if (empresa != null) {
+            session.setAttribute("empresa", empresa); // Guardar la empresa en la sesión
             model.addAttribute("nombreEmpresa", empresa.getNombreEmp());
-            return "html/pagina_principal_empresa"; // Redirigir a la página de inicio de empresa
+            return "redirect:/empresas/pagina_principal"; // Redirigir a la página de inicio de empresa
         } else {
             model.addAttribute("error", "Credenciales incorrectas o empresa no encontrada");
             return "redirect:/datos_incorrectaemp"; // Vista de error
         }
     }
 
-    @GetMapping("/empresa/pagina_principal") // inicio de empresa, como lo verian las empresas
-    public String inicio() {
-        return "html/pagina_principal_empresa";
+    @GetMapping("/empresas/pagina_principal")
+    public String mostrarPaginaPrincipal(Model model, HttpSession session) {
+        Empresas empresa = (Empresas) session.getAttribute("empresa");
+        if (empresa != null) {
+            List<Ofertas> ofertas = ofertaService.listarOfertasPorEmpresa(empresa);
+            model.addAttribute("Ofertas", ofertas); // Asegúrate de que el nombre sea "Ofertas"
+            model.addAttribute("nombreEmpresa", empresa.getNombreEmp());
+            return "html/pagina_principal_empresa"; // Asegúrate de que esta vista es correcta
+        } else {
+            return "redirect:/login/Empresa";
+        }
     }
 
     @GetMapping("/datos_incorrectaemp") // ruta para cuando coloque mal los datos

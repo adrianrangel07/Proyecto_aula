@@ -1,12 +1,12 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -32,13 +32,17 @@ public class Ofertas {
     @Column(name = "Salario", columnDefinition = "int", nullable = false)
     int salario;
 
+    @Column(name = "Moneda", columnDefinition = "Varchar(10)", nullable = false) 
+    String moneda;
+
     @Column(name = "Periodo", columnDefinition = "Varchar(45)", nullable = false)
     String periodo;
 
     @Column(name = "modalidad", columnDefinition = "varchar(45)", nullable = false)
     String modalidad;
 
-    @OneToOne(mappedBy = "Ofertas", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "empresa_id") // Asegúrate de que el nombre de la columna sea correcto
     private Empresas empresa;
 
     @OneToOne
@@ -58,6 +62,30 @@ public class Ofertas {
         this.salario = salario;
         this.periodo = periodo;
         this.modalidad = modalidad;
+    }
+    
+    public String getMoneda() {
+        return moneda;
+    }
+
+    public void setMoneda(String moneda) {
+        this.moneda = moneda;
+    }
+
+    public Empresas getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresas empresa) {
+        this.empresa = empresa;
+    }
+
+    public Postulacion getPostulacion() {
+        return postulacion;
+    }
+
+    public void setPostulacion(Postulacion postulacion) {
+        this.postulacion = postulacion;
     }
 
     public int getId() {
