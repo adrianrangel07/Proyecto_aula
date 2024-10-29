@@ -30,16 +30,24 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" th:href="@{/}"><i
-                                class="fas fa-home"></i><span>Home</span></a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/login/personas}"><i
-                                class="far fa-user-circle"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/Register/personas}"><i
-                                class="fas fa-user-circle"></i><span>Register</span></a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/Estadisticas}"><i
-                                class="fas fa-chart-bar"></i><span>Statistics</span></a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/Nosotros}"><i
-                                class="fas fa-users"></i><span>About Us</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/}">
+                        <i class="fas fa-home"></i><span>Home</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">
+                        <i class="far fa-user-circle"></i><span>Profile</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/empresas/oferta}">
+                        <i class="fas fa-plus-circle"></i><span>Crear oferta</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Estadisticas}">
+                        <i class="fas fa-chart-bar"></i><span>Statistics</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/Nosotros}">
+                        <i class="fas fa-users"></i><span>About Us</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/login/personas}">
+                        <i class="fas fa-building"></i><span>Do you want search offers?</span></a>
+                    </li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                         id="sidebarToggle" type="button"></button></div>
@@ -79,66 +87,35 @@
                                 </div>
                             </li>
                         </ul>
-                        <!-- boton barra lateral filtro -->
-                        <div class="btn-menu">
-                            <h6><label for="btn-menu" id="navbar-toggler">Filtro</label></h6>
-                        </div>
-                        <!-- fin boton barra lateral filtro -->
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                        aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
+                                            class="d-none d-lg-inline me-2 text-gray-600 small"
+                                            id="usuario">Empresa</span></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
+                                            class="dropdown-item" href="#"><i
+                                                class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
+                                            class="dropdown-item" href="#"><i
+                                                class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a
+                                            class="dropdown-item" href="#"><i
+                                                class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
+                                            log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
+                                            id="logout" onclick="cerrarSesion(event)">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
             </div>
-
-            <!-- barra lateral filtro -->
-            <input type="checkbox" id="btn-menu">
-            <div class="container-menu" id="container-menu">
-                <div class="cont-menu" id="cont-menu">
-                    <nav>
-                        <div class="dropdown-menu" aria-labelledby="filtersToggle" id="filtersDropdown">
-                            <div class="filter-container">
-                                <h5>Filtros</h5>
-                                <div>
-                                    <label for="salarioMin">Salario Mínimo:</label>
-                                    <input type="number" id="salarioMin" placeholder="0" class="form-control mb-2">
-                                </div>
-                                <div>
-                                    <label for="salarioMax">Salario Máximo:</label>
-                                    <input type="number" id="salarioMax" placeholder="10000" class="form-control mb-2">
-                                </div>
-                                <div>
-                                    <label for="duracion">Duración:</label>
-                                    <select id="duracion" class="form-control mb-2">
-                                        <option value="">--Seleccione--</option>
-                                        <option value="temporal">Temporal</option>
-                                        <option value="indefinido">Indefinido</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="tipoEmpleoSelect">Tipo de Empleo:</label>
-                                    <select id="tipoEmpleoSelect" class="form-control mb-2">
-                                        <option value="">--Seleccione--</option>
-                                        <option value="tiempo completo">Tiempo Completo</option>
-                                        <option value="medio tiempo">Medio Tiempo</option>
-                                    </select>
-                                </div>
-                                <div id="filterModalidad">
-                                    <h6>Modalidad</h6>
-                                    <label><input type="checkbox" value="presencial"> Presencial</label>
-                                    <label><input type="checkbox" value="remoto"> Remoto</label>
-                                    <label><input type="checkbox" value="híbrido"> Híbrido</label>
-                                </div>
-                                <button class="btn btn-primary" onclick="applyFilters()">Aplicar Filtros</button>
-                            </div>
-                        </div>
-                    </nav>
-                    <label for="btn-menu" class="back">✖️</label>
-                </div>
-            </div>
-            <!-- fin barra lateral filtro -->
-
+            
             <div class="content-area flex-grow-1 p-3">
-                    
                 <div id="resultadoBusqueda"></div>
-
                 <div class="offer-container">
                     <div th:each="Oferta:${Ofertas}" class="card">
                         <div class="offer-content" data-id="${Oferta.id}">
@@ -159,7 +136,6 @@
                                         th:text="${Oferta.modalidad}"></span>
                                 </p>
                             </div>
-
                         </div>
                     </div>
                 </div>

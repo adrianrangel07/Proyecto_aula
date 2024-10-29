@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.proyectodeaula.proyecto_de_aula.interfaceService.IpersonaService;
+import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Per;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Persona;
 import com.proyectodeaula.proyecto_de_aula.model.Personas;
  
@@ -13,6 +14,9 @@ public class PersonaService implements IpersonaService{
 
     @Autowired
     private Interfaz_Persona data;
+
+    @Autowired
+    private Interfaz_Per user;
 
     @Override
     public List<Personas> listar() {
@@ -38,6 +42,10 @@ public class PersonaService implements IpersonaService{
     @Override
     public void delete(int Id) {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    public Personas findByEmail(String email) {
+        return user.findByEmail(email);
     }
 
 }

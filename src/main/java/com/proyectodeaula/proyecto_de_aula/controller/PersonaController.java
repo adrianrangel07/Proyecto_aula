@@ -1,5 +1,8 @@
 package com.proyectodeaula.proyecto_de_aula.controller;
 
+import java.io.IOException;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Per;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Persona;
 import com.proyectodeaula.proyecto_de_aula.model.Personas;
+import com.proyectodeaula.proyecto_de_aula.service.PersonaService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping
@@ -22,6 +29,9 @@ public class PersonaController {
 
     @Autowired
     private Interfaz_Persona per;
+
+    @Autowired
+    private PersonaService personaService;
 
     // Esto te lleva a que las personas se registren
     @GetMapping("/Register/personas") // recuerda colocar esta ruta para que te lleve a registrar personas
@@ -48,27 +58,75 @@ public class PersonaController {
     }
 
     // Método para validar las credenciales del usuario
-    @PostMapping("/login/personas") // con esto se valida si esta bien o mal la contraseña
-    public String iniciarSesion(Model model, @RequestParam String email, @RequestParam String contraseña) {
+    @PostMapping("/login/personas")
+    public String iniciarSesion(HttpSession session, Model model, @RequestParam String email,
+            @RequestParam String contraseña) {
+        Personas persona = user.findByEmailAndContraseña(email, contraseña);
 
-        // Buscar persona por email y contraseña
-        Personas persona = user.findByEmailAndContraseña(email, contraseña); // metodo de busqueda de persona (correo y
-                                                                             // contraseña)
-
-        // Validar si la persona existe
         if (persona != null) {
             model.addAttribute("nombreUsuario", persona.getnombre());
-            return "redirect:/login_inicio";
+            // Guardar el email en la sesión
+            session.setAttribute("email", email);
+            return "redirect:/login_inicio"; // Redirige a la página principal
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
             return "redirect:/datos_incorrectos";
         }
-
     }
 
+    // no tocar
     @GetMapping("/login_inicio")
-    public String pagina_principal() {
+    public String pagPrinc() {
         return "redirect:/personas/pagina_principal";
+    }
+
+    // Método para mostrar el perfil
+    @GetMapping("/perfil/persona") // Ruta para ver el perfil
+    public String myProfile(Model model, HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        if (email != null) {
+            // Buscar la persona por email
+            Personas persona = personaService.findByEmail(email);
+
+            if (persona == null) {
+                // Manejar el caso en que no se encuentra la persona
+                model.addAttribute("error", "Persona no encontrada.");
+                return "html/error"; // Redirigir a una página de error o similar
+            }
+
+            // Verificar si la foto no es nula
+            if (persona.getFoto() != null) {
+                String base64Image = Base64.getEncoder().encodeToString(persona.getFoto());
+                model.addAttribute("base64Image", "data:image/png;base64," + base64Image); // Pasar la cadena Base64 al
+                                                                                           // modelo
+            } else {
+                model.addAttribute("base64Image", ""); // Manejo para caso de imagen nula
+            }
+
+            // Agregar la persona al modelo
+            model.addAttribute("persona", persona);
+            return "html/Mi_perfil"; // Devuelve la vista del perfil
+        } else {
+            return "redirect:/login/personas"; // Redirigir si no hay sesión
+        }
+    }
+
+    @PostMapping("/upload/photo")
+    public String uploadPhoto(@RequestParam("file") MultipartFile file, HttpSession session) {
+        String email = (String) session.getAttribute("email"); // Obtener el email del usuario en sesión
+        Personas persona = personaService.findByEmail(email); // Buscar a la persona
+
+        if (persona != null) {
+            try {
+                byte[] foto = file.getBytes(); // Obtener los bytes de la imagen
+                persona.setFoto(foto); // Establecer la foto en el objeto persona
+                per.save(persona); // Guardar los cambios en la base de datos
+            } catch (IOException e) {
+                e.printStackTrace(); // Manejo de excepción
+            }
+        }
+
+        return "redirect:/perfil/persona"; // Redirecciona a la página principal o donde necesites
     }
 
     @GetMapping("/Nosotros") // ruta para enviar a nosotros (informacion sobre la pagina )
@@ -89,11 +147,6 @@ public class PersonaController {
     @GetMapping("/Contraseña-olvidada") // ruta para cuando quieren volver a recordar la contraseña
     public String olvidar() {
         return "html/contraseña_olvidada_per";
-    }
-
-    @GetMapping("/perfil/persona") // ruta para el perfil de las personas, cuando quieran dirigirse a ella
-    public String Myperfil() {
-        return "html/Mi_perfil";
     }
 
     @GetMapping("/configuracion/persona") // ruta para configuracion de las personas

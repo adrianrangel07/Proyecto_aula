@@ -1,10 +1,13 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +37,13 @@ public class Ofertas {
 
     @Column(name = "modalidad", columnDefinition = "varchar(45)", nullable = false)
     String modalidad;
+
+    @OneToOne(mappedBy = "Ofertas", cascade = CascadeType.ALL)
+    private Empresas empresa;
+
+    @OneToOne
+    @JoinColumn(name = "postulacion_id") 
+    private Postulacion postulacion;
     
     public Ofertas(){
     }

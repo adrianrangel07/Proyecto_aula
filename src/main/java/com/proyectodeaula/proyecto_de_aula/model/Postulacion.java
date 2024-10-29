@@ -1,10 +1,13 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.sql.*;
 
@@ -21,6 +24,13 @@ public class Postulacion {
     Date fecha_postulacion;
     @Column(name = "Hora_postulacion", columnDefinition = "date", nullable = false)
     Date hora_postulacion;
+
+    @OneToOne(mappedBy = "postulacion", cascade = CascadeType.ALL)
+    private Ofertas ofertas;
+
+    @OneToOne
+    @JoinColumn(name = "personas_id", nullable = false) 
+    private Personas personas;
 
     public Postulacion() {
     }

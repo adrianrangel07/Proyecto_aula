@@ -5,7 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +34,11 @@ public class Empresas {
 	// Columna contraseña para iniciar sesion la empresa
 	@Column(name = "contraseña", columnDefinition = "VARCHAR(45)", nullable = false)
 	String contraseña;
+
+	@OneToOne
+    @JoinColumn(name = "ofertas_id", nullable = false) 
+    private Ofertas Ofertas;
+
 
 	public Empresas() {
 	}

@@ -172,7 +172,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Unificación de la función applyFilters
 function applyFilters() {
+    // Cerrar la barra lateral de filtros desmarcando el checkbox
+    document.getElementById('btn-menu').checked = false;
+
+    // Capturar valores de los filtros
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
     const duracion = document.getElementById("duracion").value.toLowerCase();
@@ -180,35 +185,47 @@ function applyFilters() {
 
     const ofertas = document.querySelectorAll(".offer-container .card");
 
+    // Capturar modalidades seleccionadas
+    const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
+    const selectedModalities = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value.toLowerCase());
+
+    let ofertasVisibles = 0; // Contador de ofertas visibles
+
+    // Aplicar los filtros a cada tarjeta de oferta
     ofertas.forEach(oferta => {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
         const duracionOferta = oferta.querySelector(".duracion span").innerText.toLowerCase();
         const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
         const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
 
+        // Lógica para mostrar/ocultar la oferta según los filtros
         let isVisible = true;
 
         if (salario < salarioMin || salario > salarioMax) isVisible = false;
         if (duracion && !duracionOferta.includes(duracion)) isVisible = false;
         if (tipoEmpleo && tipoEmpleo !== tipoEmpleoOferta) isVisible = false;
-
-        const checkboxes = document.querySelectorAll('#filterModalidad input[type="checkbox"]');
-        const selectedModalities = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
         if (selectedModalities.length > 0 && !selectedModalities.includes(modalidadOferta)) isVisible = false;
 
+        // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
+        
+        if (isVisible) ofertasVisibles++; // Incrementar si la oferta es visible
     });
+
+    // Mostrar alerta si no se encuentran resultados
+    if (ofertasVisibles === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No se encontraron resultados',
+            text: 'Ninguna oferta coincide con los filtros aplicados. Intenta con otros criterios.',
+            confirmButtonText: 'Aceptar'
+        }).then(() => {
+            location.reload();
+        });
+    }
 }
-
-// menu desplegable
-const toggler = document.getElementById('navbar-toggler');
-const offcanvas = document.getElementById('offcanvas');
-
-toggler.addEventListener('click', () => {
-    offcanvas.classList.toggle('active');
-});
 
 function cerrarSesion(event) {
     event.preventDefault(); // Evitar que se ejecute el href del enlace

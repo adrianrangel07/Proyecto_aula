@@ -2,12 +2,14 @@ package com.proyectodeaula.proyecto_de_aula.model;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -43,25 +45,39 @@ public class Personas {
 	@Column(name = "genero", columnDefinition = "VARCHAR(20)", nullable = false)
 	private String genero;
 
+	@Lob // Indica que el campo puede ser grande
+    @Column(name = "foto", columnDefinition = "LONGBLOB")
+    private byte[] foto;
+
 	@OneToOne
-    @JoinColumn(name = "HvD_id", nullable = false) 
+    @JoinColumn(name = "HvD_id") 
     private HvD hvd;
+
+	@OneToOne(mappedBy = "personas", cascade = CascadeType.ALL)
+    private Postulacion postulacion;
 
     public Personas() {
     }
 
-    public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
-                    String tipoIdentificacion, Date fecha_nacimiento, String genero) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.contraseña = contraseña;
-        this.identificacion = identificacion;
-        this.tipoIdentificacion = tipoIdentificacion;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.genero = genero;
-    }
+	public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
+			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, HvD hvd,
+			Postulacion postulacion) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contraseña = contraseña;
+		this.identificacion = identificacion;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.genero = genero;
+		this.foto = foto;
+		this.hvd = hvd;
+		this.postulacion = postulacion;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -142,5 +158,28 @@ public class Personas {
 		this.genero = genero;
 	}
 
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
+	public HvD getHvd() {
+		return hvd;
+	}
+
+	public void setHvd(HvD hvd) {
+		this.hvd = hvd;
+	}
+
+	public Postulacion getPostulacion() {
+		return postulacion;
+	}
+
+	public void setPostulacion(Postulacion postulacion) {
+		this.postulacion = postulacion;
+	}
 
 }
