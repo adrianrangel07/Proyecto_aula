@@ -41,6 +41,9 @@ public class Ofertas {
     @Column(name = "modalidad", columnDefinition = "varchar(45)", nullable = false)
     String modalidad;
 
+    @Column(name = "tipo_contrato", columnDefinition = "varchar(45)", nullable = false)
+    String tipo_contrato;
+
     @ManyToOne
     @JoinColumn(name = "empresa_id") // Asegúrate de que el nombre de la columna sea correcto
     private Empresas empresa;
@@ -150,6 +153,14 @@ public class Ofertas {
 
     public void setModalidad(String modalidad) {
         this.modalidad = modalidad;
+    }
+
+    public String getTipo_contrato() {
+        return tipo_contrato;
+    }
+
+    public void setTipo_contrato(String tipo_contrato) {
+        this.tipo_contrato = tipo_contrato;
     }
 
 }

@@ -4,11 +4,16 @@
 body {
     background: linear-gradient(to right, #0a1128, #4b6cb7); /* Gradiente de fondo */
     color: #fff; /* Color de texto blanco */
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 /* Estilo del contenedor principal */
 .container {
     max-width: 600px; /* Limitar el ancho del formulario */
+    max-height: 850px;
     margin: 0 auto; /* Centrar el contenedor */
     padding: 20px; /* Espaciado interno */
     border-radius: 8px; /* Bordes redondeados */
@@ -32,6 +37,19 @@ h1 {
 .btn:hover {
     background-color: #0056b3; /* Color de fondo al pasar el ratón */
 }
+
+/* boton regreso */
+.back{
+    float: right;
+    margin: 7px;
+    font-size: 30px;
+    transition: all 0.2s ease;
+}
+
+.back:hover{
+    transform: scale(1,1);
+}
+/* fin boton regreso */
 
 /* Estilo de los campos de entrada */
 input.form-control, 

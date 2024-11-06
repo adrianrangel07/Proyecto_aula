@@ -144,6 +144,11 @@ public class PersonaController {
         return "html/Estadisticas";
     }
 
+    @GetMapping("/Estadisticas/personas") // ruta para llevarlo a estadisticas sobre lo que podemos mostrar
+    public String estadistica_persona() {
+        return "html/Estadisticas_persona";
+    }
+    
     @GetMapping("/Contraseña-olvidada") // ruta para cuando quieren volver a recordar la contraseña
     public String olvidar() {
         return "html/contraseña_olvidada_per";

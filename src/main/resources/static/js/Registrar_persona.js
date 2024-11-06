@@ -11,9 +11,25 @@ document.getElementById('btn-register').addEventListener('click', function (even
             icon: 'error',
             title: '¡Error!',
             text: 'Las contraseñas no coinciden. Por favor, verifica.'
+        }).then(() => {
+            location.reload();
         });
         event.preventDefault(); // Evita que el formulario se envíe
     }
+});
+
+document.getElementById('registerForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Previene el envío automático del formulario
+
+    Swal.fire({
+        icon: 'success',
+        title: '¡Te registraste con éxito!',
+        confirmButtonText: 'Aceptar'
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            document.getElementById('registerForm').submit(); // Envía el formulario después de la confirmación del SweetAlert
+        }
+    });
 });
 
 
