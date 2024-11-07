@@ -101,38 +101,43 @@
                     <nav>
                         <div class="dropdown-menu" aria-labelledby="filtersToggle" id="filtersDropdown">
                             <div class="filter-container">
-                                <h5>Filtros</h5>
+                                <h5>Filters</h5>
                                 <div>
-                                    <label for="salarioMin">Salario Mínimo:</label>
+                                    <label for="salarioMin">Minimum salary:</label>
                                     <input type="number" id="salarioMin" placeholder="0" class="form-control mb-2">
                                 </div>
                                 <div>
-                                    <label for="salarioMax">Salario Máximo:</label>
+                                    <label for="salarioMax">Maximum salary:</label>
                                     <input type="number" id="salarioMax" placeholder="10000" class="form-control mb-2">
                                 </div>
                                 <div>
-                                    <label for="duracion">Duración:</label>
-                                    <select id="duracion" class="form-control mb-2">
-                                        <option value="">--Seleccione--</option>
-                                        <option value="temporal">Temporal</option>
-                                        <option value="indefinido">Indefinido</option>
+                                    <label for="typeContract">TypeContract:</label>
+                                    <select id="typeContract" class="form-control mb-2">
+                                        <option value="">--Select--</option>
+                                        <option value="contrato obra o labor">Contract for work or labor</option>
+                                        <option value="contrato fijo">Fixed term contract</option>
+                                        <option value="contrato por practcas">Internship contract</option>
+                                        <option value="indefinido">Indefinite term contract</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="tipoEmpleoSelect">Tipo de Empleo:</label>
+                                    <label for="tipoEmpleoSelect">Type of employment:</label>
                                     <select id="tipoEmpleoSelect" class="form-control mb-2">
-                                        <option value="">--Seleccione--</option>
-                                        <option value="tiempo completo">Tiempo Completo</option>
-                                        <option value="medio tiempo">Medio Tiempo</option>
+                                        <option value="">--Select--</option>
+                                        <option value="tiempo completo">Full time</option>
+                                        <option value="medio tiempo">half-time</option>
+                                        <option value="freelance"> Freelance</option>
+                                        <option value="hours"> For hours</option>
                                     </select>
                                 </div>
                                 <div id="filterModalidad">
-                                    <h6>Modalidad</h6>
-                                    <label><input type="checkbox" value="presencial"> Presencial</label>
-                                    <label><input type="checkbox" value="remoto"> Remoto</label>
-                                    <label><input type="checkbox" value="híbrido"> Híbrido</label>
+                                    <h6>Mode</h6>
+                                    <label><input type="checkbox" value="presencial"> In person</label>
+                                    <label><input type="checkbox" value="remoto"> Remote</label>
+                                    <label><input type="checkbox" value="híbrido"> Hybrid</label>
                                 </div>
-                                <button class="btn btn-primary" onclick="applyFilters()">Aplicar Filtros</button>
+                                <br>
+                                <button class="btn btn-primary" onclick="applyFilters()">apply filters</button>
                             </div>
                         </div>
                     </nav>
@@ -148,21 +153,23 @@
                             <h3 th:text="${Oferta.titulo_puesto}"></h3>
                             <p th:text="${Oferta.descripcion}"></p>
                             <div class="hidden-info">
-                                <p class="salario"><strong>Salario:</strong> <span th:text="${Oferta.salario}"></span>
+                                <p class="salario"><strong>Salary:</strong> <span th:text="${Oferta.salario}"></span>
                                 </p>
-                                <p class="duracion"><strong>Duración:</strong> <span
+                                <p class="duracion"><strong>Duration:</strong> <span
                                         th:text="${Oferta.duracion}"></span>
                                 </p>
-                                <p class="periodo"><strong>Periodo:</strong> <span th:text="${Oferta.periodo}"></span>
+                                <p class="periodo"><strong>Period:</strong> <span th:text="${Oferta.periodo}"></span>
                                 </p>
-                                <p class="tipo_empleo"><strong>Tipo de empleo:</strong> <span
+                                <p class="tipo_empleo"><strong>Type of employment:</strong> <span
                                         th:text="${Oferta.tipo_empleo}"></span>
                                 </p>
-                                <p class="modalidad"><strong>Modalidad:</strong> <span
+                                <p class="modalidad"><strong>mode:</strong> <span
                                         th:text="${Oferta.modalidad}"></span>
                                 </p>
+                                <p class="tipo_contrato"><strong>Type of contract:</strong> <span
+                                        th:text="${Oferta.tipo_contrato}"></span>
+                                </p>             
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -180,9 +187,11 @@
                         <p id="modal-period"></p>
                         <p id="modal-modalidad"></p>
                         <p id="modal-type"></p>
+                        <p id="modal-typeContract"></p>
+
                         <!-- Botón para postularse dentro del modal -->
                         <div class="container-pos">
-                            <button class="apply-btn-modal" id="postularseBtn">Postularse</button>
+                            <button class="apply-btn-modal" id="postularseBtn">Apply</button>
                         </div>
                     </div>
 

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalPeriod = document.getElementById('modal-period');
     const modalType = document.getElementById('modal-type');
     const modalModalidad = document.getElementById('modal-modalidad');
+    const modalTypeContract = document.getElementById('modal-typeContract')
 
     // Función para abrir el modal
     const openModal = (card) => {
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const period = card.querySelector('.periodo span').innerText;
         const type = card.querySelector('.tipo_empleo span').innerText;
         const modalidad = card.querySelector('.modalidad span').innerText;
+        const typeContract = card.querySelector('.tipo_contrato span').innerText;
 
         // Llenar el modal con los datos de la tarjeta
         modalTitle.innerText = title;
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalPeriod.innerHTML = `<strong>Periodo:</strong> ${period}`;
         modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${type}`;
         modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${modalidad}`;
+        modalTypeContract.innerHTML = `<strong>tipo de contrato:</strong> ${typeContract}`;
 
         // Mostrar el modal
         modal.style.display = 'flex';
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Unificación de la función applyFilters
+
 function applyFilters() {
     // Cerrar la barra lateral de filtros desmarcando el checkbox
     document.getElementById('btn-menu').checked = false;
@@ -109,8 +112,8 @@ function applyFilters() {
     // Capturar valores de los filtros
     const salarioMin = parseFloat(document.getElementById("salarioMin").value) || 0;
     const salarioMax = parseFloat(document.getElementById("salarioMax").value) || Infinity;
-    const duracion = document.getElementById("duracion").value.toLowerCase();
     const tipoEmpleo = document.getElementById("tipoEmpleoSelect").value.toLowerCase();
+    const tipoContrato = document.getElementById("typeContract").value.toLowerCase();  // Capturamos el valor del tipo de contrato
 
     const ofertas = document.querySelectorAll(".offer-container .card");
 
@@ -125,17 +128,18 @@ function applyFilters() {
     // Aplicar los filtros a cada tarjeta de oferta
     ofertas.forEach(oferta => {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
-        const duracionOferta = oferta.querySelector(".duracion span").innerText.toLowerCase();
         const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
         const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
+        const tipoContratoOferta = oferta.querySelector(".tipo_contrato span").innerText.toLowerCase(); // Asumiendo que hay una clase 'tipo_contrato' en la tarjeta de oferta
 
         // Lógica para mostrar/ocultar la oferta según los filtros
         let isVisible = true;
 
+        // Filtramos según los valores de los filtros
         if (salario < salarioMin || salario > salarioMax) isVisible = false;
-        if (duracion && !duracionOferta.includes(duracion)) isVisible = false;
         if (tipoEmpleo && tipoEmpleo !== tipoEmpleoOferta) isVisible = false;
         if (selectedModalities.length > 0 && !selectedModalities.includes(modalidadOferta)) isVisible = false;
+        if (tipoContrato && tipoContrato !== tipoContratoOferta) isVisible = false; // Filtramos por el tipo de contrato
 
         // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
@@ -155,7 +159,6 @@ function applyFilters() {
         });
     }
 }
-
 
 // no borrar
 document.addEventListener('DOMContentLoaded', function () {

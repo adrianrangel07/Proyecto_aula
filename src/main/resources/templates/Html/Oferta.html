@@ -57,11 +57,11 @@
 
              <!-- Modalidad -->
              <div class="mb-3">
-                <label for="jobMode" class="form-label">Modalidad</label>
+                <label for="jobMode" class="form-label">Mode</label>
                 <select class="form-select" id="jobMode" name="modalidad" required>
-                    <option value="Presencial">Presencial</option>
-                    <option value="Remoto">Remoto</option>
-                    <option value="Híbrido">Híbrido</option>
+                    <option value="Presencial"> in person</option>
+                    <option value="Remoto"> Remote</option>
+                    <option value="Híbrido"> Hybrid</option>
                 </select>
             </div>
 
@@ -69,21 +69,21 @@
             <div class="mb-3">
                 <label class="form-label">Type of contract</label>
                 <div class="contract-type-buttons">
-                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('Conts obra')">Contract for work or labor</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('conts fijo')">Fixed term contract</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('conts indefinido')">Indefinite term contract</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('conts practicas')">Internship contract</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('Contrato obra o labor')">Contract for work or labor</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('contrato fijo')">Fixed term contract</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('contrato indefinido')">Indefinite term contract</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setContractType('contrato por practicas')">Internship contract</button>
                 </div>
                 <input type="hidden" name="tipo_contrato" id="contractType">
             </div>
 
             <!-- Tipo de Trabajo -->
             <div class="mb-3">
-                <label class="form-label">Tipo de Trabajo</label>
+                <label class="form-label">Type of work</label>
                 <div class="job-type-buttons">
-                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Tiempo Completo')">Tiempo Completo</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Medio Tiempo')">Medio Tiempo</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Horas')">Por Horas</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Tiempo Completo')">Full time</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Medio Tiempo')">half-time</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Horas')">For hours</button>
                     <button type="button" class="btn btn-outline-secondary" onclick="setJobType('Freelance')">Freelance</button>
                 </div>
                 <input type="hidden" name="tipo_empleo" id="jobType">
@@ -91,20 +91,20 @@
             
             <!-- Duración -->
             <div class="mb-3">
-                <label class="form-label">Duración</label>
+                <label class="form-label">Duration</label>
                 <div class="duration-buttons">
-                    <button type="button" class="btn btn-outline-success" onclick="setDuration('1 mes')">1 mes</button>
-                    <button type="button" class="btn btn-outline-success" onclick="setDuration('3 meses')">3 meses</button>
-                    <button type="button" class="btn btn-outline-success" onclick="setDuration('6 meses')">6 meses</button>
-                    <button type="button" class="btn btn-outline-success" onclick="setDuration('1 año')">1 año</button>
-                    <button type="button" class="btn btn-outline-success" onclick="setDuration('Indefinido')">Indefinido</button>
+                    <button type="button" class="btn btn-outline-success" onclick="setDuration('1 mes')">1 month</button>
+                    <button type="button" class="btn btn-outline-success" onclick="setDuration('3 meses')">3 month</button>
+                    <button type="button" class="btn btn-outline-success" onclick="setDuration('6 meses')">6 month</button>
+                    <button type="button" class="btn btn-outline-success" onclick="setDuration('1 año')">1 year</button>
+                    <button type="button" class="btn btn-outline-success" onclick="setDuration('Indefinido')">Indefinite</button>
                 </div>
                 <input type="hidden" name="duracion" id="jobDuration">
             </div>
             <br>
             <br>
             <!-- Guardar Oferta -->
-            <button type="submit" class="btn btn-primary">Guardar Oferta</button>
+            <button type="submit" class="btn btn-primary">Save offer</button>
         </form>
     </div>
 
