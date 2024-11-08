@@ -1,5 +1,8 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +19,8 @@ public class Ofertas {
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
+
     @Column(name = "Titulo_puesto", columnDefinition = "Varchar(45)", nullable = false)
     String titulo_puesto;
 
@@ -48,25 +52,32 @@ public class Ofertas {
     @JoinColumn(name = "empresa_id") // Asegúrate de que el nombre de la columna sea correcto
     private Empresas empresa;
 
-    @OneToOne
-    @JoinColumn(name = "postulacion_id") 
-    private Postulacion postulacion;
+    @OneToMany(mappedBy = "ofertas", cascade = CascadeType.ALL)
+    private List<Postulacion> postulaciones;
     
     public Ofertas(){
     }
 
-    public Ofertas(int id, String titulo_puesto, String descripcion, String duracion, String tipo_empleo, int salario,
-            String periodo, String modalidad) {
+    
+
+
+    public Ofertas(Long id, String titulo_puesto, String descripcion, String duracion, String tipo_empleo, int salario,
+            String moneda, String periodo, String modalidad, String tipo_contrato, Empresas empresa,
+            List<Postulacion> postulaciones) {
         this.id = id;
         this.titulo_puesto = titulo_puesto;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.tipo_empleo = tipo_empleo;
         this.salario = salario;
+        this.moneda = moneda;
         this.periodo = periodo;
         this.modalidad = modalidad;
+        this.tipo_contrato = tipo_contrato;
+        this.empresa = empresa;
+        this.postulaciones = postulaciones;
     }
-    
+
     public String getMoneda() {
         return moneda;
     }
@@ -81,22 +92,6 @@ public class Ofertas {
 
     public void setEmpresa(Empresas empresa) {
         this.empresa = empresa;
-    }
-
-    public Postulacion getPostulacion() {
-        return postulacion;
-    }
-
-    public void setPostulacion(Postulacion postulacion) {
-        this.postulacion = postulacion;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitulo_puesto() {
@@ -162,5 +157,22 @@ public class Ofertas {
     public void setTipo_contrato(String tipo_contrato) {
         this.tipo_contrato = tipo_contrato;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Postulacion> getPostulaciones() {
+        return postulaciones;
+    }
+
+    public void setPostulaciones(List<Postulacion> postulaciones) {
+        this.postulaciones = postulaciones;
+    }
+
 
 }

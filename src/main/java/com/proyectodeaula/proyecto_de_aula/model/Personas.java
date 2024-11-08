@@ -1,6 +1,7 @@
 package com.proyectodeaula.proyecto_de_aula.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,16 +11,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Personas") // crear tabla llamada persona con los datos de abajo
+@Table(name = "Personas")
 public class Personas {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	@Column(name = "Nombre", columnDefinition = "VARCHAR(45)", nullable = false)
 	private String nombre;
@@ -45,23 +47,24 @@ public class Personas {
 	@Column(name = "genero", columnDefinition = "VARCHAR(20)", nullable = false)
 	private String genero;
 
-	@Lob // Indica que el campo puede ser grande
-    @Column(name = "foto", columnDefinition = "LONGBLOB")
-    private byte[] foto;
+	@Lob
+	@Column(name = "foto", columnDefinition = "LONGBLOB")
+	private byte[] foto;
 
 	@OneToOne
-    @JoinColumn(name = "HvD_id") 
-    private HvD hvd;
+	@JoinColumn(name = "HvD_id")
+	private HvD hvd;
 
-	@OneToOne(mappedBy = "personas", cascade = CascadeType.ALL)
-    private Postulacion postulacion;
+	@OneToMany(mappedBy = "personas", cascade = CascadeType.ALL)
+    private List<Postulacion> postulaciones;
 
-    public Personas() {
-    }
+	public Personas() {
+	}
 
-	public Personas(int id, String nombre, String apellido, String email, String contraseña, String identificacion,
+
+	public Personas(long id, String nombre, String apellido, String email, String contraseña, String identificacion,
 			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, HvD hvd,
-			Postulacion postulacion) {
+			List<Postulacion> postulaciones) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -73,13 +76,7 @@ public class Personas {
 		this.genero = genero;
 		this.foto = foto;
 		this.hvd = hvd;
-		this.postulacion = postulacion;
-	}
-
-
-
-	public int getId() {
-		return id;
+		this.postulaciones = postulaciones;
 	}
 
 	public String getNombre() {
@@ -96,10 +93,6 @@ public class Personas {
 
 	public void setFecha_nacimiento(Date fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getnombre() {
@@ -174,12 +167,27 @@ public class Personas {
 		this.hvd = hvd;
 	}
 
-	public Postulacion getPostulacion() {
-		return postulacion;
+	public List<Postulacion> getPostulaciones() {
+		return postulaciones;
 	}
 
-	public void setPostulacion(Postulacion postulacion) {
-		this.postulacion = postulacion;
+	public void setPostulaciones(List<Postulacion> postulaciones) {
+		this.postulaciones = postulaciones;
+	}
+
+	// Método para agregar una postulación a la lista
+    public void addPostulacion(Postulacion postulacion) {
+        this.postulaciones.add(postulacion);
+    }
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

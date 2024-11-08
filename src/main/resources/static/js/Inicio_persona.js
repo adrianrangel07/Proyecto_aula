@@ -1,18 +1,3 @@
-
-//mostrar y ocultar filtro 
-let openCategory = null;
-function toggleFilter() {
-    const filterContainer = document.getElementById('filterContainer');
-    const filterText = document.getElementById('filterText');
-    if (filterContainer.style.display === 'none' || filterContainer.style.display === '') {
-        filterContainer.style.display = 'block';
-        filterText.innerHTML = 'Ocultar Filtrador';
-    } else {
-        filterContainer.style.display = 'none';
-        filterText.innerHTML = 'Mostrar Filtrador';
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     // Seleccionar todas las tarjetas
     const cards = document.querySelectorAll('.offer-content');
@@ -27,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalPeriod = document.getElementById('modal-period');
     const modalType = document.getElementById('modal-type');
     const modalModalidad = document.getElementById('modal-modalidad');
-    const modalTypeContract = document.getElementById('modal-typeContract')
+    const modalTypeContract = document.getElementById('modal-typeContract');
 
     // Función para abrir el modal
     const openModal = (card) => {
@@ -41,15 +26,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const modalidad = card.querySelector('.modalidad span').innerText;
         const typeContract = card.querySelector('.tipo_contrato span').innerText;
 
+        // Obtener el id de la oferta
+        const ofertaId = card.getAttribute('data-id'); // Aquí se obtiene el ID del atributo data-id
+
         // Llenar el modal con los datos de la tarjeta
         modalTitle.innerText = title;
         modalDescription.innerText = description;
-        modalSalary.innerHTML = `<strong>Salario:</strong> ${salary}`;
-        modalDuration.innerHTML = `<strong>Duración:</strong> ${duration}`;
-        modalPeriod.innerHTML = `<strong>Periodo:</strong> ${period}`;
-        modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${type}`;
-        modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${modalidad}`;
-        modalTypeContract.innerHTML = `<strong>tipo de contrato:</strong> ${typeContract}`;
+        modalSalary.innerHTML = `<strong>Salary:</strong> ${salary}`;
+        modalDuration.innerHTML = `<strong>Duration:</strong> ${duration}`;
+        modalPeriod.innerHTML = `<strong>Period:</strong> ${period}`;
+        modalType.innerHTML = `<strong>Type of employment:</strong> ${type}`;
+        modalModalidad.innerHTML = `<strong>Mode:</strong> ${modalidad}`;
+        modalTypeContract.innerHTML = `<strong>Type of contract:</strong> ${typeContract}`;
+
+        // Asignar el ID de la oferta al botón de postulación (de forma segura)
+        const postularseBtn = document.getElementById('postularseBtn');
+        if (postularseBtn) {
+            postularseBtn.setAttribute('data-oferta-id', ofertaId); // Usamos 'data-oferta-id' para evitar problemas con el atributo 'ofertaId'
+        }
 
         // Mostrar el modal
         modal.style.display = 'flex';
@@ -73,8 +67,118 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'none';
         }
     });
+
 });
 
+// const postularseBtn = document.getElementById('postularseBtn');
+// postularseBtn.addEventListener("click", function () {
+//     // Obtener el ID de la oferta desde el botón
+//     const ofertaId = postularseBtn.getAttribute('data-oferta-id');
+
+//     // Obtener el usuarioId desde el campo oculto
+//     const usuarioId = document.getElementById('usuarioId').value;
+//     console.log('Usuario ID:', usuarioId);  // Verifica el valor de usuarioId
+
+//     console.log('Oferta ID:', ofertaId, 'Usuario ID:', usuarioId);  // Ver los valores en consola
+
+//     if (!ofertaId || !usuarioId) return;  // Verificar que ambos IDs estén presentes
+
+//     // Confirmación con SweetAlert
+//     Swal.fire({
+//         title: '¿Estás seguro?',
+//         text: "¿Quieres postularte a esta oferta?",
+//         icon: 'question',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Sí, postularme'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             // Enviar los datos al backend
+//             fetch(`/postularse`, {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({
+//                     ofertaId: ofertaId,
+//                     usuarioId: usuarioId
+//                 })
+//             })
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     if (data.success) {
+//                         Swal.fire('Postulación exitosa', data.message, 'success');
+//                         // Redirigir si es necesario
+//                     } else {
+//                         Swal.fire('Error en la postulación', data.message, 'error');
+//                     }
+//                 })
+//                 .catch(error => {
+//                     Swal.fire('Error', 'Hubo un problema al postularse. Inténtalo de nuevo más tarde.', 'error');
+//                 });
+//         }
+//     });
+// });
+
+const postularseBtn = document.getElementById('postularseBtn');
+postularseBtn.addEventListener("click", function () {
+    // Obtener el ID de la oferta desde el botón
+    const ofertaId = postularseBtn.getAttribute('data-oferta-id');
+
+    // Obtener el usuarioId desde el campo oculto
+    const usuarioId = document.getElementById('usuarioId').value;
+
+    console.log('Oferta ID:', ofertaId, 'Usuario ID:', usuarioId);  // Ver los valores en consola
+
+    if (!ofertaId || !usuarioId) return;  // Verificar que ambos IDs estén presentes
+
+    // Confirmación con SweetAlert
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¿Quieres postularte a esta oferta?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, postularme'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Enviar los datos al backend para comprobar si ya está postulado
+            fetch(`/postularse`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ofertaId: ofertaId,
+                    usuarioId: usuarioId
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Postulación exitosa', data.message, 'success');
+                        // Cambiar el botón a 'Postulado'
+                        postularseBtn.textContent = 'Postulado';
+                        postularseBtn.disabled = true;  // Desactivar el botón
+                    } else {
+                        Swal.fire('Ya estás postulado', data.message, 'info');
+                        // Cambiar el botón a 'Postulado'
+                        postularseBtn.textContent = 'Postulado';
+                        postularseBtn.disabled = true;  // Desactivar el botón
+                    }
+                })
+                .catch(error => {
+                    Swal.fire('Error', 'Hubo un problema al postularse. Inténtalo de nuevo más tarde.', 'error');
+                });
+        }
+    });
+});
+
+
+
+//no borrar
 //codigo para filtrador de busqueda por termino 
 document.addEventListener("DOMContentLoaded", function () {
     const formBusqueda = document.getElementById('formBusqueda');
@@ -117,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+//no borrar
 //funcion para aplicar filtros
 function applyFilters() {
     // Cerrar la barra lateral de filtros desmarcando el checkbox
@@ -156,7 +261,7 @@ function applyFilters() {
 
         // Mostrar u ocultar la oferta
         oferta.style.display = isVisible ? "block" : "none";
-        
+
         if (isVisible) ofertasVisibles++; // Incrementar si la oferta es visible
     });
 
@@ -173,6 +278,8 @@ function applyFilters() {
     }
 }
 
+
+//no borrar
 function cerrarSesion(event) {
     event.preventDefault(); // Evitar que se ejecute el href del enlace
 
@@ -187,4 +294,3 @@ function cerrarSesion(event) {
         }
     });
 }
-

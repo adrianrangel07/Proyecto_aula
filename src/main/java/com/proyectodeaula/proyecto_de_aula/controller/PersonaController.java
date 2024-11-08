@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Per;
@@ -61,23 +62,21 @@ public class PersonaController {
     @PostMapping("/login/personas")
     public String iniciarSesion(HttpSession session, Model model, @RequestParam String email,
             @RequestParam String contraseña) {
+        // Buscar a la persona por email y contraseña
         Personas persona = user.findByEmailAndContraseña(email, contraseña);
 
         if (persona != null) {
             model.addAttribute("nombreUsuario", persona.getnombre());
-            // Guardar el email en la sesión
+
+            // Guardar el email y el usuarioId en la sesión
             session.setAttribute("email", email);
-            return "redirect:/login_inicio"; // Redirige a la página principal
+            session.setAttribute("usuarioId", persona.getId()); // Guarda el usuarioId en la sesión como Long
+
+            return "redirect:/personas/pagina_principal"; // Redirige a la página principal
         } else {
             model.addAttribute("error", "Credenciales incorrectas");
-            return "redirect:/datos_incorrectos";
+            return "redirect:/datos_incorrectos"; // Si las credenciales son incorrectas
         }
-    }
-
-    // no tocar
-    @GetMapping("/login_inicio")
-    public String pagPrinc() {
-        return "redirect:/personas/pagina_principal";
     }
 
     // Método para mostrar el perfil
@@ -129,6 +128,13 @@ public class PersonaController {
         return "redirect:/perfil/persona"; // Redirecciona a la página principal o donde necesites
     }
 
+    @GetMapping("/update/perfil")
+    public String mostrarPerfil(@RequestParam String email, Model model) {
+        Personas usuario = personaService.findByEmail(email);
+        model.addAttribute("usuario", usuario);
+        return "html/update_per";
+    }
+
     @GetMapping("/Nosotros") // ruta para enviar a nosotros (informacion sobre la pagina )
     public String Nosotros() {
         return "html/Nosotros";
@@ -148,7 +154,7 @@ public class PersonaController {
     public String estadistica_persona() {
         return "html/Estadisticas_persona";
     }
-    
+
     @GetMapping("/Contraseña-olvidada") // ruta para cuando quieren volver a recordar la contraseña
     public String olvidar() {
         return "html/contraseña_olvidada_per";
@@ -158,4 +164,5 @@ public class PersonaController {
     public String configuracion() {
         return "html/Configuracion";
     }
+
 }

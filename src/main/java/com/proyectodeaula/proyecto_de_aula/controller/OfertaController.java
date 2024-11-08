@@ -31,11 +31,23 @@ public class OfertaController {
 	private OfertaService offerta;
 
 	@GetMapping("/personas/pagina_principal")
-	public String listar_ofertas_1(Model model) {
-		List<Ofertas> ofertas = offerService.listar_ofertas();
-		model.addAttribute("Ofertas", ofertas);
-		return "html/pagina_principal_personas";
-	}
+    public String listar_ofertas_1(Model model, HttpSession session) {
+        // Obtén las ofertas desde el servicio
+        List<Ofertas> ofertas = offerService.listar_ofertas();
+		Long usuarioId = (Long) session.getAttribute("usuarioId");
+        
+        // Pasamos las ofertas al modelo con el nombre "Ofertas"
+        model.addAttribute("Ofertas", ofertas);
+        
+		if (usuarioId != null) {
+            model.addAttribute("usuarioId", usuarioId); // Pasar el usuarioId al modelo
+        } else {
+            return "redirect:/login/personas"; // Si no está autenticado, redirigir al login
+        }
+
+        return "html/pagina_principal_personas"; // Vista de la página principal
+        // Devolvemos la vista "pagina_principal_personas"
+    }
 
 	@GetMapping("/")
 	public String listar_ofertas(Model model) {
