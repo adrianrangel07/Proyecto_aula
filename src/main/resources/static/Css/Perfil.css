@@ -1,424 +1,117 @@
-
-* {
-    font-family: Arial, sans-serif;
-}
-
-/* te sivre para cambiar el fondo */
-body {
-    background-color: #bde0fe;
-}
-.navbar {
-    background-color: #0a1128;
-    /* barra superior */
-}
-
-.offcanvas {
-    background-color: #0a1128;
-    /* barra de navegacion */
-}
-
-.letras {
-    color: #ffffff;
-}
-
-.dropdown-menu {
-    background-color: #001f54;
-    /* barra desplegable dentro de la barra lateral de navegacion */
-}
-
-
-.nav-rp {
-    border-radius: 8px;
-    /* el bordeado de las opciones de inicio de sesesion y registrarse */
-    width: 100%;
-}
-
-.nav-rp:hover {
-    color: #001f54;
-    background-color: #ffffff;
-    border-radius: 8px;
-}
-
-#logo {
-    width: 150px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-#logo:hover {
-    transform: scale(1.1);
-}
-
-.form{
-    /*barra de busqueda */
-    width: 300px;
-    background: transparent;
-    border-radius: 0;         
-    border-bottom: 1px solid #ffffff;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-}
-.form::placeholder{
-    color: #ffffff;
-}
-
-.btn{
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-.btn:hover{
-    color: #001f54;
-    border-color: #ffffff;
-    background-color: #ffffff;
-}
-
-#btn:active{
-    color: #001f54;
-    border-color: #ffffff;
-    background-color: #ffffff;
-}
-
-.barra_busqueda_responsive{
-    display: none;
-}
-
-.offer {  
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 8px;
-    cursor: pointer;
-    background-color: #f8f9fa;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-}
-
-.offer.pressed {
-    border: 1px solid #0a1128; /* Estilo del borde cuando está presionado */
-    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5); /* Sombra para resaltar */
-}
-
-.offer:hover {
-    border: 1px solid #0a1128;
-    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5);
-}
-
-.offer h3 {
-    font-size: 24px;  
-    text-align: center;  
-}
-
-/* estilo de la seccion detalles de la ofertas */
-.offerDetails {
-    position: fixed;
-    border: 2px solid #000;
-    padding: 20px;
-    min-height: 400px;
-    max-height: 320px;
-    overflow-y: auto;
-    width: 470px; /* ancho de la oferta */
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    transition: opacity 0.4s ease-in-out;
-
-    scrollbar-color: #001f54 #ffffff; /* Cambiar el color de la barra y el thumb */
-    scrollbar-width: thin; 
-    
-}
-
-.offerDetails h3{
-    text-align: center;
-}
-
-.offerDetails p{
-    text-align: justify;
-}
-
-/* boton x en los detalles de oferts */
- #closeOfferDetails {   
-    margin-bottom: 20px;
-    border-radius: 20px;
-    height: 30px;
-    width: 40px;
-    font-size: 16px; 
-}
-
-#closeOfferDetails:hover {
-    background-color: #ccc;
-    color: #000;
-}
-
-/* Ajuste de la altura del contenido para evitar que se solape con el footer */
-main {
-    margin-top: 80px; /* Altura del header */
-    /* margin-bottom: 100px; Altura del footer */
-}
-
-.w3-text-tealp{
-    color: #001f54;
-}
-
-.w3-teals{
-    background-color: #001f54 !important;
-    color: #ffffff;
-}
-
-.camara:hover{
-    transform: scale(1.2);
-}
-
-.camara{
-    color: #001f54;
-    position: absolute;
-    left: 80%;
-    font-size: 30px !important;
-    z-index: 100;
-    margin: 10px;
-    transition: .3s;
-}
-
-.w3-display-container{
-    height: 300px;
-    width: 60%;
-    margin-bottom: 10px;
-    border-bottom: solid 1px #999999;
-    border-right: solid 1px #999999;
-    border-right: solid 1px #999999;
-
-}
-
-.w3-display-container img{
-    height: 100%;
-    width: 100%;
-    margin: 0;
-}
-
-.datos{
-    justify-content: space-between;
-    width: 40%;
-} 
-
-.w3-container input{
-    padding: 10px;
-    background-color: #dddddd;
-    border: 0;
-    border-radius: 7px;
-    height: 30px;
-    width: calc(100% - 40px)
-}
-.porta{
-    font-size: 30px !important;
-}
-
-button {
-    padding: 15px 20px;
-    margin-bottom: 8px !important;
-    background-color: #001f54;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-    background-color: #034078;
-}
-
-.content{
+/* Contenedor principal de las ofertas */
+.offer-container {
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1.5rem; /* Espacio entre tarjetas */
+    padding: 1rem;
+}
+
+/* Tarjeta de cada oferta */
+.offer-container .card {
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    background-color: #ffffff;
+}
+
+/* Efecto al pasar el cursor */
+.offer-container .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para el título */
+.offer-content h3 {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Descripción y otros detalles */
+.offer-content p {
+    color: #666;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+/* Información adicional */
+.hidden-info {
+    margin-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 1rem;
+}
+
+/* Estilo del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Cerrar botón en el modal */
+.container-span .close-btn {
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+    float: right;
+}
+
+.container-span .close-btn:hover {
+    color: #333;
+}
+
+/* Estilo para los textos dentro del modal */
+#modal-content h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+#modal-content p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.5rem 0;
+}
+
+.container-span {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
-@media (min-width: 700px){
-    
-    .w3-third{
-        width: 40% !important;
-    }
 
-    .w3-twothird{
-        width: 60% !important;
-    }
-}
-
-
-/* footer */
-
-.footer {
-    background-color: #99B3FF;
-    padding: 20px;
-    position: relative;
-    text-align: center;
-    bottom: 0;
-    left: 0; /* Ajustado a 0 */
-    width: 100%; /* Ajuste para el ancho del footer */
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Añade sombra al footer */
-    border-top: 1px solid #ccc; /* Añade borde superior */
-}
-
-.footer ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.footer ul li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-.letras {
-    font-size: 14px; /* Ajusta el tamaño de la fuente */
-}
-
-/* redes */
-
-.redes {
-    background-color: #99B3FF;
-    display: flex;
-    justify-content: space-between;
-    width: 250px;
-    height: 30px;
-    margin-left: 15%;
-}
-
-.redes-1{
-    color: #000;
-}
-
-.Links{
-    text-decoration: none;
-}
-
-.link{
-    margin-left: -10%;
-    color: #000;
-}
-
-.contacto{
-    margin-right: 10%;
-    color: #000;
-}
-
-.facebook{
-    width: 50px;
-    height: 50px;
-    image-rendering: auto;
-    margin-top: 1%;
+.close-btn, .delete-btn {
+    font-size: 20px;
     cursor: pointer;
+    color: #777;
+    transition: color 0.3s;
 }
 
-.instagram{
-    width: 60px;
-    height: 60px;
-    image-rendering: auto;
-    cursor: pointer;
+.close-btn:hover, .delete-btn:hover {
+    color: #d9534f;
 }
 
-.twitter{
-    width: 40px;
-    height: 40px;
-    image-rendering: auto;
-    margin-top: 2.6%;
-    cursor: pointer;
-}
-
-.facebook:hover{
-    transform: scale(1.1);
-}
-.facebook{
-    transition: .4s;
-}
-
-.instagram:hover{
-    transform: scale(1.1);
-}
-.instagram{
-    transition: .4s;
-}
-
-.twitter{
-    transition: .4s;
-}
-
-.twitter:hover{
-    transform: scale(1.1);
-}
-
-.imagen{
-    border-radius: 30px ;
-    position: fixed;
-    box-shadow: 0 0 5px rgba(10, 17, 40, 0.5);
-    width: 480px;
-    height: 350px;
-    opacity: 0.9;
-}
-
-@media (max-width: 600px){
-    .barra_busqueda{
-        display: none;
-    }
-
-    .barra_busqueda_responsive{
-        display: block;
-    }
-    .imagen {
-        display: none;
-    }
-}
-
-@media (max-width: 767px) {
-    .offer {
-        padding: 4px; 
-        font-size: 16px; 
-    }
-    .offerDetails {
-        position: fixed;
-        z-index: 9999;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
-    }
-    .imagen {
-        display: none;
-    }
-}
-
-@media (min-width: 400px) and (max-width: 991px) {
-    .offer {
-        padding: 6px; 
-        font-size: 18px;
-    }
-    .offerDetails {
-        position: fixed;
-        z-index: 9999;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
-    }
-    .imagen {
-        display: none;
-    }
-}
-
-.centered-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;   
-}
-
-#postularseBtn {
-    padding: 10px 20px;
-    background-color: #001f54;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#postularseBtn:hover{
-    background-color: #007bff;
+.delete-btn {
+    margin-left: auto;
+    padding: 5px;
 }

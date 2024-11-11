@@ -58,21 +58,22 @@ public class Postulacion {
         this.n_personas = n_personas;
     }
 
-    public Ofertas getOferta() {
+    
+
+    public Ofertas getOfertas() {
         return ofertas;
     }
 
-    public void setOferta(Ofertas ofertas) {
+    public void setOfertas(Ofertas ofertas) {
         this.ofertas = ofertas;
     }
 
-    public Personas getPersona() {
+    public Personas getPersonas() {
         return personas;
     }
 
-    public void setPersona(Personas persona) {
-        this.personas = persona;
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
     }
-
-    
+ 
 }

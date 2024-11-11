@@ -6,9 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
+
 import java.util.Optional;
 
 import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.OfertasRepository;
@@ -20,7 +24,7 @@ import com.proyectodeaula.proyecto_de_aula.model.Postulacion;
 
 // import jakarta.servlet.http.HttpSession;
 
-@RestController
+@Controller
 public class PostulacionController {
 
     @Autowired
@@ -63,14 +67,34 @@ public class PostulacionController {
         Ofertas oferta = ofertaOpt.get();
         Personas persona = personaOpt.get();
         Postulacion postulacion = new Postulacion();
-        postulacion.setOferta(oferta);
-        postulacion.setPersona(persona);
+        postulacion.setOfertas(oferta);
+        postulacion.setPersonas(persona);
         postulacion.setN_personas(1);
         postulacionRepository.save(postulacion);
 
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "Postulación exitosa");
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/postulacion/eliminar/{id}")
+    public ResponseEntity<Map<String, Object>> eliminarPostulacion(@PathVariable Long id) {
+        Optional<Postulacion> postulacionOpt = postulacionRepository.findById(id);
+
+        if (!postulacionOpt.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Postulación no encontrada.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        // Eliminar la postulación
+        postulacionRepository.delete(postulacionOpt.get());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Postulación eliminada con éxito.");
         return ResponseEntity.ok(response);
     }
 

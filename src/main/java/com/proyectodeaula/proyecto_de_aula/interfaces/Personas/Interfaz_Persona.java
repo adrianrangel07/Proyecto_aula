@@ -8,6 +8,7 @@ import com.proyectodeaula.proyecto_de_aula.model.Personas;
 
 @Repository
 public interface Interfaz_Persona extends CrudRepository <Personas, Integer>{
+    
 }
 
 

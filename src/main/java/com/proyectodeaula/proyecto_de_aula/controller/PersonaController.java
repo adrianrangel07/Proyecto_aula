@@ -2,6 +2,7 @@ package com.proyectodeaula.proyecto_de_aula.controller;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Per;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Persona;
 import com.proyectodeaula.proyecto_de_aula.model.Personas;
+import com.proyectodeaula.proyecto_de_aula.model.Postulacion;
 import com.proyectodeaula.proyecto_de_aula.service.PersonaService;
+import com.proyectodeaula.proyecto_de_aula.service.PostulacionService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,6 +35,9 @@ public class PersonaController {
 
     @Autowired
     private PersonaService personaService;
+
+    @Autowired
+    private PostulacionService postulacionService;
 
     // Esto te lleva a que las personas se registren
     @GetMapping("/Register/personas") // recuerda colocar esta ruta para que te lleve a registrar personas
@@ -66,7 +71,7 @@ public class PersonaController {
         Personas persona = user.findByEmailAndContraseña(email, contraseña);
 
         if (persona != null) {
-            model.addAttribute("nombreUsuario", persona.getnombre());
+            model.addAttribute("nombreUsuario", persona.getNombre());
 
             // Guardar el email y el usuarioId en la sesión
             session.setAttribute("email", email);
@@ -79,8 +84,7 @@ public class PersonaController {
         }
     }
 
-    // Método para mostrar el perfil
-    @GetMapping("/perfil/persona") // Ruta para ver el perfil
+    @GetMapping("/perfil/persona")
     public String myProfile(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");
         if (email != null) {
@@ -88,28 +92,77 @@ public class PersonaController {
             Personas persona = personaService.findByEmail(email);
 
             if (persona == null) {
-                // Manejar el caso en que no se encuentra la persona
                 model.addAttribute("error", "Persona no encontrada.");
-                return "html/error"; // Redirigir a una página de error o similar
+                return "html/error";
             }
+
+            // Obtener las postulaciones de esta persona
+            List<Postulacion> postulaciones = postulacionService.obtenerPostulacionesPorUsuario(persona.getId());
+            model.addAttribute("postulaciones", postulaciones);
 
             // Verificar si la foto no es nula
             if (persona.getFoto() != null) {
                 String base64Image = Base64.getEncoder().encodeToString(persona.getFoto());
-                model.addAttribute("base64Image", "data:image/png;base64," + base64Image); // Pasar la cadena Base64 al
-                                                                                           // modelo
+                model.addAttribute("base64Image", "data:image/png;base64," + base64Image);
             } else {
-                model.addAttribute("base64Image", ""); // Manejo para caso de imagen nula
+                model.addAttribute("base64Image", "");
             }
 
             // Agregar la persona al modelo
             model.addAttribute("persona", persona);
             return "html/Mi_perfil"; // Devuelve la vista del perfil
         } else {
-            return "redirect:/login/personas"; // Redirigir si no hay sesión
+            return "redirect:/login/personas";
         }
     }
 
+    @PostMapping("/actualizar")
+    public String actualizarPerfil(@RequestParam String nombre, @RequestParam String apellido,
+            @RequestParam String contraseña, @RequestParam String genero, HttpSession session, Model model) {
+        try {
+            String email = (String) session.getAttribute("email");
+            if (email == null) {
+                model.addAttribute("error", "Sesión expirada, por favor inicie sesión de nuevo.");
+                return "redirect:/login/personas"; // Redirigir si no hay sesión
+            }
+
+            // Buscar persona por email
+            Personas persona = personaService.findByEmail(email);
+            if (persona == null) {
+                model.addAttribute("error", "Usuario no encontrado.");
+                return "html/error"; // Redirigir si no se encuentra la persona
+            }
+
+            // Actualizar los campos de la persona solo si no están vacíos
+            if (nombre != null && !nombre.isEmpty()) {
+                persona.setNombre(nombre);
+            }
+            if (apellido != null && !apellido.isEmpty()) {
+                persona.setApellido(apellido);
+            }
+            if (contraseña != null && !contraseña.isEmpty()) {
+                persona.setContraseña(contraseña);
+            }
+            if (email != null && !email.isEmpty()) {
+                persona.setEmail(email); // Actualizar email
+            }
+            if (genero != null && !genero.isEmpty()) {
+                persona.setGenero(genero);
+            }
+
+            // Guardar los cambios
+            personaService.actualizarPerfil(persona);
+
+            model.addAttribute("success", "Perfil actualizado con éxito");
+            return "redirect:/perfil/persona"; // Redirige de vuelta a la vista del perfil
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al actualizar el perfil: " + e.getMessage());
+            e.printStackTrace(); // Imprimir el stack trace para depuración
+            return "html/error"; // Mostrar una página de error si algo falla
+        }
+    }
+
+    // metodo para subir la foto
     @PostMapping("/upload/photo")
     public String uploadPhoto(@RequestParam("file") MultipartFile file, HttpSession session) {
         String email = (String) session.getAttribute("email"); // Obtener el email del usuario en sesión
@@ -128,6 +181,9 @@ public class PersonaController {
         return "redirect:/perfil/persona"; // Redirecciona a la página principal o donde necesites
     }
 
+    // metodo para subir la hoja de vida
+
+    // metodo para actualizar el perfil
     @GetMapping("/update/perfil")
     public String mostrarPerfil(@RequestParam String email, Model model) {
         Personas usuario = personaService.findByEmail(email);

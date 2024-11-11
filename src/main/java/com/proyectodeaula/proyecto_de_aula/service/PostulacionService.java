@@ -61,8 +61,8 @@ public class PostulacionService implements IpostulacionService {
 
             // Crear una nueva postulación
             Postulacion postulacion = new Postulacion();
-            postulacion.setOferta(oferta); // Asignar la oferta
-            postulacion.setPersona(persona); // Asignar la persona
+            postulacion.setOfertas(oferta); // Asignar la oferta
+            postulacion.setPersonas(persona); // Asignar la persona
             postulacion.setN_personas(1); // Aquí puedes definir la cantidad de personas postuladas, dependiendo de tu
                                           // lógica
 
@@ -74,8 +74,17 @@ public class PostulacionService implements IpostulacionService {
         }
     }
 
+    public List<Postulacion> obtenerPostulacionesPorUsuario(Long personaId) {
+        return postulacionRepository.findByPersonasId(personaId);
+    }
+    
+
     @Override
     public void delete(int Id) {
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    public void eliminarPostulacion(Long id) {
+        postulacionRepository.deleteById(id);
     }
 }

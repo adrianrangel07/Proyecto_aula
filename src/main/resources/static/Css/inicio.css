@@ -323,13 +323,12 @@ nav-rp:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .container-span{
     display: flex;
     text-align: right;
     width: 100%;
     flex-direction: row-reverse;
-    align-items: center;ac
+    align-items: center;
     height: 30px;
 }
 

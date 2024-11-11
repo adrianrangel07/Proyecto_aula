@@ -51,19 +51,23 @@ public class Personas {
 	@Column(name = "foto", columnDefinition = "LONGBLOB")
 	private byte[] foto;
 
+	@Lob
+	@Column(name = "cv", columnDefinition = "LONGBLOB")
+	private byte[] cv;
+
+	@OneToMany(mappedBy = "personas", cascade = CascadeType.ALL)
+	private List<Postulacion> postulaciones;
+
 	@OneToOne
 	@JoinColumn(name = "HvD_id")
 	private HvD hvd;
 
-	@OneToMany(mappedBy = "personas", cascade = CascadeType.ALL)
-    private List<Postulacion> postulaciones;
-
+	
 	public Personas() {
 	}
 
-
 	public Personas(long id, String nombre, String apellido, String email, String contraseña, String identificacion,
-			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, HvD hvd,
+			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, byte[] cv, HvD hvd,
 			List<Postulacion> postulaciones) {
 		this.id = id;
 		this.nombre = nombre;
@@ -75,8 +79,17 @@ public class Personas {
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.genero = genero;
 		this.foto = foto;
+		this.cv = cv;
 		this.hvd = hvd;
 		this.postulaciones = postulaciones;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -85,22 +98,6 @@ public class Personas {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public Date getFecha_nacimiento() {
-		return fecha_nacimiento;
-	}
-
-	public void setFecha_nacimiento(Date fecha_nacimiento) {
-		this.fecha_nacimiento = fecha_nacimiento;
-	}
-
-	public String getnombre() {
-		return nombre;
-	}
-
-	public void setnombre(String nombrePer) {
-		this.nombre = nombrePer;
 	}
 
 	public String getApellido() {
@@ -143,6 +140,14 @@ public class Personas {
 		this.tipoIdentificacion = tipoIdentificacion;
 	}
 
+	public Date getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+
+	public void setFecha_nacimiento(Date fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
+	}
+
 	public String getGenero() {
 		return genero;
 	}
@@ -157,6 +162,14 @@ public class Personas {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public byte[] getCv() {
+		return cv;
+	}
+
+	public void setCv(byte[] cv) {
+		this.cv = cv;
 	}
 
 	public HvD getHvd() {
@@ -175,19 +188,7 @@ public class Personas {
 		this.postulaciones = postulaciones;
 	}
 
-	// Método para agregar una postulación a la lista
-    public void addPostulacion(Postulacion postulacion) {
-        this.postulaciones.add(postulacion);
-    }
-
-
-	public long getId() {
-		return id;
-	}
-
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 
 }
+

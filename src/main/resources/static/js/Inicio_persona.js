@@ -70,57 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-// const postularseBtn = document.getElementById('postularseBtn');
-// postularseBtn.addEventListener("click", function () {
-//     // Obtener el ID de la oferta desde el botón
-//     const ofertaId = postularseBtn.getAttribute('data-oferta-id');
-
-//     // Obtener el usuarioId desde el campo oculto
-//     const usuarioId = document.getElementById('usuarioId').value;
-//     console.log('Usuario ID:', usuarioId);  // Verifica el valor de usuarioId
-
-//     console.log('Oferta ID:', ofertaId, 'Usuario ID:', usuarioId);  // Ver los valores en consola
-
-//     if (!ofertaId || !usuarioId) return;  // Verificar que ambos IDs estén presentes
-
-//     // Confirmación con SweetAlert
-//     Swal.fire({
-//         title: '¿Estás seguro?',
-//         text: "¿Quieres postularte a esta oferta?",
-//         icon: 'question',
-//         showCancelButton: true,
-//         confirmButtonColor: '#3085d6',
-//         cancelButtonColor: '#d33',
-//         confirmButtonText: 'Sí, postularme'
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             // Enviar los datos al backend
-//             fetch(`/postularse`, {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({
-//                     ofertaId: ofertaId,
-//                     usuarioId: usuarioId
-//                 })
-//             })
-//                 .then(response => response.json())
-//                 .then(data => {
-//                     if (data.success) {
-//                         Swal.fire('Postulación exitosa', data.message, 'success');
-//                         // Redirigir si es necesario
-//                     } else {
-//                         Swal.fire('Error en la postulación', data.message, 'error');
-//                     }
-//                 })
-//                 .catch(error => {
-//                     Swal.fire('Error', 'Hubo un problema al postularse. Inténtalo de nuevo más tarde.', 'error');
-//                 });
-//         }
-//     });
-// });
-
 const postularseBtn = document.getElementById('postularseBtn');
 postularseBtn.addEventListener("click", function () {
     // Obtener el ID de la oferta desde el botón
@@ -133,7 +82,6 @@ postularseBtn.addEventListener("click", function () {
 
     if (!ofertaId || !usuarioId) return;  // Verificar que ambos IDs estén presentes
 
-    // Confirmación con SweetAlert
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¿Quieres postularte a esta oferta?",
@@ -158,25 +106,49 @@ postularseBtn.addEventListener("click", function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        Swal.fire('Postulación exitosa', data.message, 'success');
-                        // Cambiar el botón a 'Postulado'
-                        postularseBtn.textContent = 'Postulado';
-                        postularseBtn.disabled = true;  // Desactivar el botón
+                        // Mostrar el mensaje de éxito con un temporizador antes de recargar
+                        Swal.fire({
+                            title: 'Postulación exitosa',
+                            text: data.message,
+                            icon: 'success',
+                            timer: 3000,  // Establece un temporizador de 3 segundos antes de cerrar
+                            showConfirmButton: false // Ocultar el botón de confirmación
+                        }).then(() => {
+                            postularseBtn.textContent = 'Postulado';
+                            postularseBtn.disabled = true;
+                            location.reload(); // Recargar la página después de que cierre el mensaje
+                        });
                     } else {
-                        Swal.fire('Ya estás postulado', data.message, 'info');
-                        // Cambiar el botón a 'Postulado'
-                        postularseBtn.textContent = 'Postulado';
-                        postularseBtn.disabled = true;  // Desactivar el botón
+                        // Mostrar mensaje si ya está postulado
+                        Swal.fire({
+                            title: 'Ya estás postulado',
+                            text: data.message,
+                            icon: 'info',
+                            timer: 3000,  // Temporizador de 3 segundos
+                            showConfirmButton: false // No mostrar el botón de confirmación
+                        }).then(() => {
+                            postularseBtn.textContent = 'Postulado';
+                            postularseBtn.disabled = true;
+                            location.reload(); // Recargar la página después de que cierre el mensaje
+                        });
                     }
                 })
                 .catch(error => {
-                    Swal.fire('Error', 'Hubo un problema al postularse. Inténtalo de nuevo más tarde.', 'error');
+                    // Mostrar mensaje de error con temporizador
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Hubo un problema al postularse. Inténtalo de nuevo más tarde.',
+                        icon: 'error',
+                        timer: 3000,  // Temporizador de 3 segundos
+                        showConfirmButton: false // Ocultar el botón de confirmación
+                    }).then(() => {
+                        location.reload(); // Recargar la página después de que cierre el mensaje
+                    });
                 });
         }
     });
+
 });
-
-
 
 //no borrar
 //codigo para filtrador de busqueda por termino 
@@ -294,3 +266,4 @@ function cerrarSesion(event) {
         }
     });
 }
+
