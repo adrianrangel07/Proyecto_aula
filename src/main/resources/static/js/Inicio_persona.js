@@ -250,7 +250,6 @@ function applyFilters() {
     }
 }
 
-
 //no borrar
 function cerrarSesion(event) {
     event.preventDefault(); // Evitar que se ejecute el href del enlace

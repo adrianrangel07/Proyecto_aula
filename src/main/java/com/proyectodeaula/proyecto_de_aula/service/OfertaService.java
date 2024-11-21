@@ -3,9 +3,9 @@ package com.proyectodeaula.proyecto_de_aula.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.proyectodeaula.proyecto_de_aula.interfaceService.IofertaService;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.Interfaz_ofertas;
@@ -14,8 +14,9 @@ import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.OfertasRepository;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
 import com.proyectodeaula.proyecto_de_aula.model.Ofertas;
 
+
 @Service
-public class OfertaService implements IofertaService{
+public class OfertaService implements IofertaService {
 
     @Autowired
     private Interfaz_ofertas oferr;
@@ -26,9 +27,9 @@ public class OfertaService implements IofertaService{
     @Autowired
     private OfertasRepository ofertaRepository;
 
-    @Override 
+    @Override
     public List<Ofertas> listar_ofertas() {
-       return (List<Ofertas>)oferr.findAll();
+        return (List<Ofertas>) oferr.findAll();
     }
 
     @Override
@@ -38,18 +39,18 @@ public class OfertaService implements IofertaService{
 
     @Override
     public int save(Ofertas O) {
-        int res= 0;
+        int res = 0;
         Ofertas Usu = oferr.save(O);
-        if(!Usu.equals(null)){
-            res=1;
+        if (!Usu.equals(null)) {
+            res = 1;
         }
         return res;
-        
+
     }
 
     @Override
-    public void delete(int Id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(long id) {
+        ofertaRepository.deleteById(id); // El método deleteById acepta `Long`, por lo que no necesitas conversión.
     }
 
     @Override
@@ -59,6 +60,26 @@ public class OfertaService implements IofertaService{
 
     public List<Ofertas> buscarOfertasPorTermino(String termino) {
         return offer_buscar.findByTituloPuestoContaining(termino);
+    }
+
+    @Override
+    public void update(long id, Ofertas updatedOffer) {
+        Optional<Ofertas> existingOfferOpt = ofertaRepository.findById(id);
+        if (existingOfferOpt.isPresent()) {
+            Ofertas existingOffer = existingOfferOpt.get();
+            // Actualiza los campos de la oferta
+            existingOffer.setTitulo_puesto(updatedOffer.getTitulo_puesto());
+            existingOffer.setDescripcion(updatedOffer.getDescripcion());
+            existingOffer.setSalario(updatedOffer.getSalario());
+            existingOffer.setDuracion(updatedOffer.getDuracion());
+            existingOffer.setPeriodo(updatedOffer.getPeriodo());
+            existingOffer.setModalidad(updatedOffer.getModalidad());
+            existingOffer.setTipo_contrato(updatedOffer.getTipo_contrato());
+
+            ofertaRepository.save(existingOffer); // Guarda los cambios
+        } else {
+            throw new ResourceNotFoundException("Oferta no encontrada con id: " + id);
+        }
     }
 
 }

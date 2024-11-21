@@ -1,3 +1,4 @@
+//no quitar 
 document.addEventListener('DOMContentLoaded', function () {
     // Mostrar el formulario al hacer clic en "Change Photo"
     document.getElementById('changePhotoBtn').addEventListener('click', function () {
@@ -69,7 +70,13 @@ function eliminarPostulacion(button) {
         if (data.success) {
             // Eliminar la postulación del DOM
             button.closest('.card').remove();
-            alert('Postulación eliminada con éxito');
+            Swal.fire({
+                icon: 'success',
+                title: 'postulacion',
+                text: 'Tu postulacion a sido borrada nexitosamente!',
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            })
         } else {
             alert('Hubo un problema al eliminar la postulación');
         }
@@ -80,3 +87,51 @@ function eliminarPostulacion(button) {
     });
 }
 
+// borrar HDV
+function eliminarHojaDeVida() {
+    fetch('/eliminarHDV', {
+        method: 'POST'
+    })
+    .then(response => {
+        if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Hoja de Vida',
+                text: '¡Tu hoja de vida ha sido borrada exitosamente!',
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            });
+            // Esperar 2 segundos antes de recargar
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            return response.text().then(errorMessage => {
+                throw new Error(errorMessage);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al eliminar la hoja de vida.',
+            showConfirmButton: true,
+            confirmButtonText: 'Ok'
+        });
+    });
+}
+// fin borrar HDV
+
+// Obtener referencias a los botones
+const changeButton = document.getElementById('change_btn');
+const saveButton = document.getElementById('save_btn');
+
+// Bloquear el botón "Save changes" al cargar la página
+saveButton.disabled = true;
+
+// Agregar evento al botón "Change Settings" para habilitar "Save changes"
+changeButton.addEventListener('click', () => {
+    saveButton.disabled = false;
+});

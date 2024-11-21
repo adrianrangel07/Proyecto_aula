@@ -58,9 +58,6 @@ public class Ofertas {
     public Ofertas(){
     }
 
-    
-
-
     public Ofertas(Long id, String titulo_puesto, String descripcion, String duracion, String tipo_empleo, int salario,
             String moneda, String periodo, String modalidad, String tipo_contrato, Empresas empresa,
             List<Postulacion> postulaciones) {

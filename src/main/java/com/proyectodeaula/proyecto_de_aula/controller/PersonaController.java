@@ -1,10 +1,15 @@
 package com.proyectodeaula.proyecto_de_aula.controller;
 
 import java.io.IOException;
+// import java.net.http.HttpHeaders;
+import org.springframework.http.HttpHeaders;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -165,6 +170,7 @@ public class PersonaController {
     // metodo para subir la foto
     @PostMapping("/upload/photo")
     public String uploadPhoto(@RequestParam("file") MultipartFile file, HttpSession session) {
+
         String email = (String) session.getAttribute("email"); // Obtener el email del usuario en sesión
         Personas persona = personaService.findByEmail(email); // Buscar a la persona
 
@@ -182,6 +188,81 @@ public class PersonaController {
     }
 
     // metodo para subir la hoja de vida
+    @PostMapping("/uploadHDV")
+    public String uploadHDV(@RequestParam("file") MultipartFile file, Model model, HttpSession session) {
+        try {
+            if (file.isEmpty() || !file.getContentType().equals("application/pdf")) {
+                model.addAttribute("error", "Por favor, seleccione un archivo PDF válido.");
+                return "redirect:/perfil/persona";  
+            }
+
+            String email = (String) session.getAttribute("email"); // Obtener el email de la sesión
+            Personas persona = personaService.findByEmail(email);
+            if (persona == null) {
+                model.addAttribute("error", "Usuario no encontrado.");
+                return "html/error"; // Redirige a la página de error
+            }
+
+            // Convertir el archivo en un arreglo de bytes y asignarlo al campo correspondiente
+            byte[] pdfBytes = file.getBytes();
+            persona.setCv(pdfBytes);  // campo "pdf" debe estar en la entidad Personas
+
+            personaService.actualizarPerfil(persona); // Guardar cambios en la base de datos
+            model.addAttribute("success", "PDF cargado con éxito.");
+            return "redirect:/perfil/persona"; // Redirige a la vista del perfil
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al cargar el PDF: " + e.getMessage());
+            e.printStackTrace();
+            return "html/error"; // Redirige a la página de error en caso de fallo
+        }
+    }
+    // fin del metodo para subir la HDV
+
+    // obtener la HDV
+    @GetMapping("/perfil/verHDV")
+    public ResponseEntity<byte[]> verHDV(HttpSession session) {
+        String email = (String) session.getAttribute("email");
+        Personas persona = personaService.findByEmail(email);
+
+        if (persona == null || persona.getCv() == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Crear encabezados para el contenido PDF
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.inline().filename("HDV.pdf").build());
+
+        return ResponseEntity.ok().headers(headers).body(persona.getCv());
+    }
+    // fin medoto para obtener la HDV
+
+    // borrar hoja de vida
+   @PostMapping("/eliminarHDV") // Si usas POST
+    public String eliminarHojaDeVida(HttpSession session, Model model) {
+        try {
+            String email = (String) session.getAttribute("email");
+            if (email == null) {
+                model.addAttribute("error", "Sesión expirada, por favor inicie sesión.");
+                return "redirect:/login/personas"; // Redirigir si no hay sesión
+            }
+
+            // Llamar al servicio para eliminar el archivo
+            personaService.eliminarHojaDeVida(email); // Asegúrate de que este método existe y elimina el archivo correctamente.
+
+            model.addAttribute("success", "Hoja de vida eliminada con éxito.");
+            return "redirect:/perfil/persona"; // Redirigir al perfil
+        } catch (Exception e) {
+            model.addAttribute("error", "Error al eliminar la hoja de vida: " + e.getMessage());
+            e.printStackTrace(); // Mostrar detalles del error para depuración
+            return "html/error"; // Mostrar una página de error si algo falla
+        }
+    }
+
+
+    // fin borrar hoja de vida
+
+
 
     // metodo para actualizar el perfil
     @GetMapping("/update/perfil")

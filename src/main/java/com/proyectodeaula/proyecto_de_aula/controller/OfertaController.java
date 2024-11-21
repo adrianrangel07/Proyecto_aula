@@ -3,13 +3,19 @@ package com.proyectodeaula.proyecto_de_aula.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.proyectodeaula.proyecto_de_aula.interfaceService.IofertaService;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
@@ -31,23 +37,23 @@ public class OfertaController {
 	private OfertaService offerta;
 
 	@GetMapping("/personas/pagina_principal")
-    public String listar_ofertas_1(Model model, HttpSession session) {
-        // Obtén las ofertas desde el servicio
-        List<Ofertas> ofertas = offerService.listar_ofertas();
+	public String listar_ofertas_1(Model model, HttpSession session) {
+		// Obtén las ofertas desde el servicio
+		List<Ofertas> ofertas = offerService.listar_ofertas();
 		Long usuarioId = (Long) session.getAttribute("usuarioId");
-        
-        // Pasamos las ofertas al modelo con el nombre "Ofertas"
-        model.addAttribute("Ofertas", ofertas);
-        
-		if (usuarioId != null) {
-            model.addAttribute("usuarioId", usuarioId); // Pasar el usuarioId al modelo
-        } else {
-            return "redirect:/login/personas"; // Si no está autenticado, redirigir al login
-        }
 
-        return "html/pagina_principal_personas"; // Vista de la página principal
-        // Devolvemos la vista "pagina_principal_personas"
-    }
+		// Pasamos las ofertas al modelo con el nombre "Ofertas"
+		model.addAttribute("Ofertas", ofertas);
+
+		if (usuarioId != null) {
+			model.addAttribute("usuarioId", usuarioId); // Pasar el usuarioId al modelo
+		} else {
+			return "redirect:/login/personas"; // Si no está autenticado, redirigir al login
+		}
+
+		return "html/pagina_principal_personas"; // Vista de la página principal
+		// Devolvemos la vista "pagina_principal_personas"
+	}
 
 	@GetMapping("/")
 	public String listar_ofertas(Model model) {
@@ -68,6 +74,18 @@ public class OfertaController {
 		oferta.setEmpresa(empresa); // Establecer la empresa para la oferta
 		offerService.save(oferta); // Guarda la oferta usando el servicio
 		return "redirect:/empresas/pagina_principal"; // Redirige a la página principal
+	}
+
+	@DeleteMapping("/offers/delete/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteOffer(@PathVariable long id) {
+		offerService.delete(id); // Llama al servicio con el `id` como `long`
+	}
+
+	@PutMapping("/offers/edit/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public void updateOffer(@PathVariable long id, @RequestBody Ofertas updatedOffer) {
+		offerService.update(id, updatedOffer); // Llamada al servicio para actualizar la oferta
 	}
 
 }

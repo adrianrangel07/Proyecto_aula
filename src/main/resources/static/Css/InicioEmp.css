@@ -414,6 +414,66 @@ nav-rp:hover {
   .list-group-item-text {
     margin: 0 0 11px;
   }
+
+  #edit-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+#edit-form input,
+#edit-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#edit-form input:focus,
+#edit-form textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+#edit-title {
+    font-weight: bold;
+}
+
+#edit-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#save-button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#save-button:hover {
+    background-color: #45a049;
+}
+
+#edit-form input::placeholder,
+#edit-form textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
   
 
   

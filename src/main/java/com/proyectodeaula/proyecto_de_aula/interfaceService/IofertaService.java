@@ -10,6 +10,7 @@ public interface IofertaService {
     public List<Ofertas>listar_ofertas();
     public Optional<Ofertas>listarId(int id);
     public int save(Ofertas O);
-    public void delete (int Id);
+    public void delete (long Id);
     List<Ofertas> listarOfertasPorEmpresa(Empresas empresa);
+    public void update(long id, Ofertas updatedOffer);
 }

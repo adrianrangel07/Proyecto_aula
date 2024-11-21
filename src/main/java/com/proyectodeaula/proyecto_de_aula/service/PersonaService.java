@@ -8,9 +8,9 @@ import com.proyectodeaula.proyecto_de_aula.interfaceService.IpersonaService;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Per;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Personas.Interfaz_Persona;
 import com.proyectodeaula.proyecto_de_aula.model.Personas;
- 
+
 @Service
-public class PersonaService implements IpersonaService{
+public class PersonaService implements IpersonaService {
 
     @Autowired
     private Interfaz_Persona data;
@@ -20,7 +20,7 @@ public class PersonaService implements IpersonaService{
 
     @Override
     public List<Personas> listar() {
-       return (List<Personas>)data.findAll();
+        return (List<Personas>) data.findAll();
     }
 
     @Override
@@ -30,13 +30,12 @@ public class PersonaService implements IpersonaService{
 
     @Override
     public int save(Personas U) {
-        int res= 0;
+        int res = 0;
         Personas Usu = data.save(U);
-        if(!Usu.equals(null)){
-            res=1;
+        if (!Usu.equals(null)) {
+            res = 1;
         }
         return res;
-        
     }
 
     @Override
@@ -47,7 +46,6 @@ public class PersonaService implements IpersonaService{
     public Personas findByEmail(String email) {
         return user.findByEmail(email);
     }
-
 
     public void actualizarPerfil(Personas persona) throws Exception {
         // Busca el usuario en la base de datos por su email
@@ -61,7 +59,17 @@ public class PersonaService implements IpersonaService{
         per.setContraseña(persona.getContraseña());
         per.setGenero(persona.getGenero());
         per.setEmail(persona.getEmail());
-        
+
         user.save(per);
+    }
+
+    public void eliminarHojaDeVida(String email) throws Exception {
+        Personas persona = user.findByEmail(email);
+        if (persona == null) {
+            throw new Exception("Usuario no encontrado");
+        }
+
+        persona.setCv(null);
+        user.save(persona);
     }
 }

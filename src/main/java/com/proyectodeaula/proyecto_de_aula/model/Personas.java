@@ -67,7 +67,7 @@ public class Personas {
 	}
 
 	public Personas(long id, String nombre, String apellido, String email, String contraseña, String identificacion,
-			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, byte[] cv, HvD hvd,
+			String tipoIdentificacion, Date fecha_nacimiento, String genero, byte[] foto, byte[] cv,
 			List<Postulacion> postulaciones) {
 		this.id = id;
 		this.nombre = nombre;
@@ -80,7 +80,6 @@ public class Personas {
 		this.genero = genero;
 		this.foto = foto;
 		this.cv = cv;
-		this.hvd = hvd;
 		this.postulaciones = postulaciones;
 	}
 
@@ -170,14 +169,6 @@ public class Personas {
 
 	public void setCv(byte[] cv) {
 		this.cv = cv;
-	}
-
-	public HvD getHvd() {
-		return hvd;
-	}
-
-	public void setHvd(HvD hvd) {
-		this.hvd = hvd;
 	}
 
 	public List<Postulacion> getPostulaciones() {

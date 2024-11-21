@@ -23,8 +23,8 @@
             style="background: #0a1128;">
             <div class="container-fluid d-flex flex-column p-0"><a
                     class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-                    th:href="@{/empresas/pagina_principal}"><img src="../Imagenes/working wise 32x32 white.png" width="61" height="58"
-                        style="width: 50px;height: 50px;">
+                    th:href="@{/empresas/pagina_principal}"><img src="../Imagenes/working wise 32x32 white.png"
+                        width="61" height="58" style="width: 50px;height: 50px;">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
                     <div class="sidebar-brand-text mx-3"><span>Workwise</span></div>
                 </a>
@@ -115,7 +115,7 @@
                 <div id="resultadoBusqueda"></div>
                 <div class="offer-container">
                     <div th:each="Oferta:${Ofertas}" class="card">
-                        <div class="offer-content" data-id="${Oferta.id}">
+                        <div class="offer-content" th:data-id="${Oferta.id}">
                             <h3 th:text="${Oferta.titulo_puesto}"></h3>
                             <p th:text="${Oferta.descripcion}"></p>
                             <div class="hidden-info">
@@ -129,12 +129,11 @@
                                 <p class="tipo_empleo"><strong>Type of employment:</strong> <span
                                         th:text="${Oferta.tipo_empleo}"></span>
                                 </p>
-                                <p class="modalidad"><strong>mode:</strong> <span
-                                        th:text="${Oferta.modalidad}"></span>
+                                <p class="modalidad"><strong>mode:</strong> <span th:text="${Oferta.modalidad}"></span>
                                 </p>
                                 <p class="tipo_contrato"><strong>Type of contract:</strong> <span
                                         th:text="${Oferta.tipo_contrato}"></span>
-                                </p>             
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -155,11 +154,22 @@
                 <p id="modal-period"></p>
                 <p id="modal-modalidad"></p>
                 <p id="modal-type"></p>
-        
+
                 <!-- Botones de editar y eliminar -->
                 <div class="modal-buttons">
                     <button id="edit-button" class="btn btn-primary">Edit</button>
                     <button id="delete-button" class="btn btn-danger">Delete</button>
+                </div>
+
+                <div id="edit-form" style="display: none;">
+                    <input type="text" id="edit-title" placeholder="Edit Title">
+                    <textarea id="edit-description" placeholder="Edit Description"></textarea>
+                    <input type="text" id="edit-salary" placeholder="Edit Salary">
+                    <input type="text" id="edit-duration" placeholder="Edit Duration">
+                    <input type="text" id="edit-period" placeholder="Edit Period">
+                    <input type="text" id="edit-modalidad" placeholder="Edit Modality">
+                    <input type="text" id="edit-type" placeholder="Edit Employment Type">
+                    <button id="save-button" class="btn btn-success">Save Changes</button>
                 </div>
             </div>
         </div>

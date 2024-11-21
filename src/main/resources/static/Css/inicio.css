@@ -302,9 +302,9 @@ nav-rp:hover {
 
 /* Diseño del modal */
 .modal {
-    display: none; /* Oculto por defecto */
+    display: none; 
     position: fixed;
-    z-index: 1000; /* Siempre al frente */
+    z-index: 1000; 
     left: 0;
     top: 0;
     width: 100%;
@@ -414,6 +414,67 @@ nav-rp:hover {
     margin: 0 0 11px;
   }
   
+/* footer */
+
+.custom-footer {
+    margin-top: auto;
+    background: linear-gradient(90deg, #0a1128, #001f54);
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left, .footer-center, .footer-right {
+    flex: 1;
+}
+
+.footer-left {
+    text-align: left; 
+}
+
+.footer-center {
+    text-align: center; 
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-socials a {
+    margin: 0 10px;
+}
+
+.custom-footer a img {
+    transition: transform 0.2s ease;  
+    outline: none; 
+    border: none;  
+}
+
+.custom-footer a img:hover {
+    transform: scale(1.1); 
+    filter: brightness(1.1); 
+}
+
+.custom-footer a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.custom-footer a:hover {
+    color: #4db8ff;
+}
+
+
+
+
 
   
     

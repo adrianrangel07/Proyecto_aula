@@ -48,7 +48,6 @@ public class Empresas {
 	}
 
 
-	
 
 	public Empresas(int id, String nombreEmp, String direccion, String razon_social, int nit, String email,
 			String contraseña, List<Ofertas> ofertas) {
@@ -64,78 +63,118 @@ public class Empresas {
 
 
 
-	// Getter and Setter
+
 	public int getId() {
 		return id;
 	}
+
+
+
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+
+
+
 	public String getNombreEmp() {
 		return nombreEmp;
 	}
+
+
+
 
 	public void setNombreEmp(String nombreEmp) {
 		this.nombreEmp = nombreEmp;
 	}
 
+
+
+
 	public String getDireccion() {
 		return direccion;
 	}
+
+
+
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
+
+
+
 	public String getRazon_social() {
 		return razon_social;
 	}
+
+
+
 
 	public void setRazon_social(String razon_social) {
 		this.razon_social = razon_social;
 	}
 
-	public int getnit() {
-		return nit;
-	}
 
-	public void setnit(int nit) {
-		this.nit = nit;
-	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getContraseña() {
-		return contraseña;
-	}
-
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
-
-	public List<Ofertas> getOfertas() {
-		return ofertas;
-	}
-
-	public void setOfertas(List<Ofertas> ofertas) {
-		this.ofertas = ofertas;
-	}
 
 	public int getNit() {
 		return nit;
 	}
 
+
+
+
 	public void setNit(int nit) {
 		this.nit = nit;
 	}
+
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+
+
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+
+
+
+	public List<Ofertas> getOfertas() {
+		return ofertas;
+	}
+
+
+
+
+	public void setOfertas(List<Ofertas> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+
+
 
 	
 }
