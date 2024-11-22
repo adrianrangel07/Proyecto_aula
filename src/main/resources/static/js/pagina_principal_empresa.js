@@ -1,28 +1,5 @@
 
-//Mostrar las ofertas en la pagina 
-document.addEventListener('DOMContentLoaded', function () {
-    const offers = document.querySelectorAll('.offer');
-    const offerDetails = document.querySelector('.offerDetails');
-
-    offers.forEach(offer => {
-        offer.addEventListener('click', function () {
-            const tituloPuesto = this.querySelector('h3').innerText;
-            const descripcion = this.querySelector('p').innerText;
-            offerDetails.querySelector('h3').innerText = tituloPuesto;
-            offerDetails.querySelector('p').innerText = descripcion;
-            offerDetails.style.display = 'block';
-        });
-    });
-
-    const closeOfferDetails = document.getElementById('closeOfferDetails');
-    if (closeOfferDetails) {
-        closeOfferDetails.addEventListener('click', function () {
-            offerDetails.style.display = 'none';
-        });
-    }
-});
-
-//de aqui en adelante la tarjeta
+// de aqui en adelante la tarjeta
 document.addEventListener('DOMContentLoaded', function () {
     // Seleccionar todas las tarjetas
     const cards = document.querySelectorAll('.offer-content');
@@ -37,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalPeriod = document.getElementById('modal-period');
     const modalType = document.getElementById('modal-type');
     const modalModalidad = document.getElementById('modal-modalidad');
+    const modalTypeContract = document.getElementById('modal-typeContract');
 
     // Función para abrir el modal
     const openModal = (card) => {
@@ -52,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const period = card.querySelector('.periodo span').innerText;
         const type = card.querySelector('.tipo_empleo span').innerText;
         const modalidad = card.querySelector('.modalidad span').innerText;
+        const typeContract = card.querySelector('.tipo_contrato span').innerText;
 
         // Llenar el modal con los datos de la tarjeta
         modalTitle.innerText = title;
@@ -61,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalPeriod.innerHTML = `<strong>Periodo:</strong> ${period}`;
         modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${type}`;
         modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${modalidad}`;
+        modalTypeContract.innerHTML = `<strong>Tipo de contrato:</strong> ${typeContract}`;
 
         // Mostrar el modal
         modal.style.display = 'flex';
@@ -85,6 +65,154 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.offer-content');
+    const modal = document.getElementById('modal');
+    const closeModalBtn = document.querySelector('.close-btn');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalSalary = document.getElementById('modal-salary');
+    const modalDuration = document.getElementById('modal-duration');
+    const modalPeriod = document.getElementById('modal-period');
+    const modalType = document.getElementById('modal-type');
+    const modalModalidad = document.getElementById('modal-modalidad');
+    const modalTypeContract = document.getElementById('modal-typeContract');
+
+    const editForm = document.getElementById('edit-form');
+    const editButton = document.getElementById('edit-button');
+    const saveButton = document.getElementById('save-button');
+    const deleteButton = document.getElementById('delete-button');
+    const postCount = document.getElementById('postCount');
+
+    const editTitle = document.getElementById('edit-title');
+    const editDescription = document.getElementById('edit-description');
+    const editSalary = document.getElementById('edit-salary');
+    const editDuration = document.getElementById('edit-duration');
+    const editPeriod = document.getElementById('edit-period');
+    const editModalidad = document.getElementById('edit-modalidad');
+    const editType = document.getElementById('edit-type');
+    const editTypeContract = document.getElementById('edit-typeContract');
+
+    let currentOfferId = null;
+
+    // Función para abrir el modal con la oferta
+    const openModal = (card) => {
+        currentOfferId = card.getAttribute('data-id'); // Obtener el ID de la oferta
+
+        // Llenar el modal con los datos actuales
+        modalTitle.innerText = card.querySelector('h3').innerText;
+        modalDescription.innerText = card.querySelector('p').innerText;
+        modalSalary.innerHTML = `<strong>Salario:</strong> ${card.querySelector('.salario span').innerText}`;
+        modalDuration.innerHTML = `<strong>Duración:</strong> ${card.querySelector('.duracion span').innerText}`;
+        modalPeriod.innerHTML = `<strong>Periodo:</strong> ${card.querySelector('.periodo span').innerText}`;
+        modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${card.querySelector('.tipo_empleo span').innerText}`;
+        modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${card.querySelector('.modalidad span').innerText}`;
+        modalTypeContract.innerHTML = `<strong>tipo de contrato:</strong> ${card.querySelector('.tipo_contrato span').innerText}`;
+
+        mostrarPostulaciones(currentOfferId);
+
+        // Mostrar el modal
+        modal.style.display = 'flex';
+    };
+
+    // Agregar evento 'click' a cada tarjeta para abrir el modal
+    cards.forEach(card => {
+        card.addEventListener('click', function () {
+            openModal(card);
+        });
+    });
+
+    // Cerrar el modal
+    closeModalBtn.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+
+    document.getElementById('cancel-button').addEventListener('click', function () {
+        // Recarga la página
+        location.reload();
+    });
+
+    editButton.addEventListener('click', function () {
+        // Mostrar el formulario de edición y ocultar la vista original
+        modalTitle.style.display = 'none';
+        modalDescription.style.display = 'none';
+        modalSalary.style.display = 'none';
+        modalDuration.style.display = 'none';
+        modalPeriod.style.display = 'none';
+        modalType.style.display = 'none';
+        modalModalidad.style.display = 'none';
+        modalTypeContract.style.display = 'none';
+        editButton.style.display = 'none';
+        deleteButton.style.display = 'none';
+        postCount.style.display = 'none';
+
+        // Pre-llenar el formulario con los datos actuales
+        editTitle.value = modalTitle.textContent;
+        editDescription.value = modalDescription.textContent;
+        editSalary.value = modalSalary.textContent.replace('Salario: ', '');
+        editDuration.value = modalDuration.textContent.replace('Duración: ', '');
+        editPeriod.value = modalPeriod.textContent.replace('Periodo: ', '');
+        editModalidad.value = modalModalidad.textContent.replace('Modalidad: ', '');
+        editType.value = modalType.textContent.replace('Tipo de empleo: ', '');
+        editTypeContract.value = modalTypeContract.textContent.replace('Tipo de contrato: ', '');
+
+        editForm.style.display = 'block';
+    });
+
+    // Guardar los cambios
+    saveButton.addEventListener('click', function () {
+        const updatedOffer = {
+            id: currentOfferId,
+            titulo_puesto: editTitle.value,
+            descripcion: editDescription.value,
+            salario: parseInt(editSalary.value),
+            duracion: editDuration.value,
+            periodo: editPeriod.value,
+            modalidad: editModalidad.value,
+            tipo_empleo: editType.value,
+            tipo_contrato: editTypeContract.value
+        };
+
+        fetch(`/offers/edit/${currentOfferId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedOffer)
+        })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Oferta actualizada con éxito',
+                        text: 'La oferta fue actualizada correctamente.',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        modal.style.display = 'none';
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al actualizar la oferta',
+                        text: 'Hubo un problema al intentar actualizar la oferta. Inténtalo nuevamente.',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error en la solicitud:", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al actualizar la oferta',
+                    text: 'Hubo un error al procesar la solicitud. Inténtalo nuevamente.'
+                });
+            });
+    });
+
+});
+
 
 //codigo para filtrador de busqueda por termino 
 document.addEventListener("DOMContentLoaded", function () {
@@ -206,7 +334,6 @@ function openModal(offer) {
     document.getElementById('modal').style.display = 'block';
 }
 
-
 document.getElementById('delete-button').addEventListener('click', function () {
     const offerId = document.getElementById('modal').getAttribute('data-offer-id');
     console.log("ID de la oferta a eliminar: ", offerId);  // Agregar esta línea
@@ -238,119 +365,48 @@ document.getElementById('delete-button').addEventListener('click', function () {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const cards = document.querySelectorAll('.offer-content');
-    const modal = document.getElementById('modal');
-    const closeModalBtn = document.querySelector('.close-btn');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalSalary = document.getElementById('modal-salary');
-    const modalDuration = document.getElementById('modal-duration');
-    const modalPeriod = document.getElementById('modal-period');
-    const modalType = document.getElementById('modal-type');
-    const modalModalidad = document.getElementById('modal-modalidad');
 
-    const editForm = document.getElementById('edit-form');
-    const editButton = document.getElementById('edit-button');
-    const saveButton = document.getElementById('save-button');
-
-    const editTitle = document.getElementById('edit-title');
-    const editDescription = document.getElementById('edit-description');
-    const editSalary = document.getElementById('edit-salary');
-    const editDuration = document.getElementById('edit-duration');
-    const editPeriod = document.getElementById('edit-period');
-    const editModalidad = document.getElementById('edit-modalidad');
-    const editType = document.getElementById('edit-type');
-
-    let currentOfferId = null;
-
-    // Función para abrir el modal con la oferta
-    const openModal = (card) => {
-        currentOfferId = card.getAttribute('data-id'); // Obtener el ID de la oferta
-
-        // Llenar el modal con los datos actuales
-        modalTitle.innerText = card.querySelector('h3').innerText;
-        modalDescription.innerText = card.querySelector('p').innerText;
-        modalSalary.innerHTML = `<strong>Salario:</strong> ${card.querySelector('.salario span').innerText}`;
-        modalDuration.innerHTML = `<strong>Duración:</strong> ${card.querySelector('.duracion span').innerText}`;
-        modalPeriod.innerHTML = `<strong>Periodo:</strong> ${card.querySelector('.periodo span').innerText}`;
-        modalType.innerHTML = `<strong>Tipo de empleo:</strong> ${card.querySelector('.tipo_empleo span').innerText}`;
-        modalModalidad.innerHTML = `<strong>Modalidad:</strong> ${card.querySelector('.modalidad span').innerText}`;
-
-        // Mostrar el modal
-        modal.style.display = 'flex';
-    };
-
-    // Agregar evento 'click' a cada tarjeta para abrir el modal
-    cards.forEach(card => {
-        card.addEventListener('click', function () {
-            openModal(card);
-        });
+fetch(`/ofertas/${idOferta}/postulaciones/count`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener postulaciones');
+        }
+        return response.json(); // Convierte la respuesta en JSON
+    })
+    .then(data => {
+        console.log("Respuesta de postulaciones: ", data);  // Verifica la respuesta
+        if (typeof data === 'number') {
+            document.getElementById('postulaciones-count').innerText = `${data} personas se han postulado`;
+        } else {
+            document.getElementById('postulaciones-count').innerText = 'Error al obtener postulaciones';
+        }
+    })
+    .catch(error => {
+        console.error('Error al obtener el número de postulaciones:', error);
+        document.getElementById('postulaciones-count').innerText = 'Error al obtener postulaciones';
     });
 
-    // Cerrar el modal
-    closeModalBtn.addEventListener('click', function () {
-        modal.style.display = 'none';
-    });
 
-    editButton.addEventListener('click', function () {
-        // Mostrar el formulario de edición y ocultar la vista original
-        modalTitle.style.display = 'none';
-        modalDescription.style.display = 'none';
-        modalSalary.style.display = 'none';
-        modalDuration.style.display = 'none';
-        modalPeriod.style.display = 'none';
-        modalType.style.display = 'none';
-        modalModalidad.style.display = 'none';
-
-        editForm.style.display = 'block';
-
-        // Pre-llenar el formulario con los datos actuales
-        editTitle.value = modalTitle.textContent;
-        editDescription.value = modalDescription.textContent;
-        editSalary.value = modalSalary.textContent.replace('Salario: ', '');
-        editDuration.value = modalDuration.textContent.replace('Duración: ', '');
-        editPeriod.value = modalPeriod.textContent.replace('Periodo: ', '');
-        editModalidad.value = modalModalidad.textContent.replace('Modalidad: ', '');
-        editType.value = modalType.textContent.replace('Tipo de empleo: ', '');
-    });
-
-    // Guardar los cambios
-    saveButton.addEventListener('click', function () {
-        const updatedOffer = {
-            id: currentOfferId,
-            titulo_puesto: editTitle.value,
-            descripcion: editDescription.value,
-            salario: parseInt(editSalary.value),
-            duracion: editDuration.value,
-            periodo: editPeriod.value,
-            modalidad: editModalidad.value,
-            tipo_contrato: editType.value
-        };
-    
-        fetch(`/offers/edit/${currentOfferId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedOffer)
-        })
+function mostrarPostulaciones(idOferta) {
+    console.log("ID de oferta:", idOferta);  // Verifica el valor de idOferta
+    fetch(`/ofertas/${idOferta}/postulaciones/count`)
         .then(response => {
-            if (response.ok) {
-                alert("Oferta actualizada con éxito");
-                modal.style.display = 'none';
-                location.reload();
+            if (!response.ok) {
+                throw new Error('Error al obtener postulaciones');
+            }
+            return response.json(); // Convierte la respuesta en JSON
+        })
+        .then(data => {
+            console.log("Respuesta de postulaciones: ", data);
+            // Asegurarse de que data es un número
+            if (typeof data === 'number') {
+                document.getElementById('postulaciones-count').innerText = `${data} personas se han postulado`;
             } else {
-                alert("Error al actualizar la oferta");
+                document.getElementById('postulaciones-count').innerText = 'Error al obtener postulaciones';
             }
         })
         .catch(error => {
-            console.error("Error en la solicitud:", error);
-            alert("Error al actualizar la oferta");
+            console.error('Error al obtener el número de postulaciones:', error);
+            document.getElementById('postulaciones-count').innerText = 'Error al obtener postulaciones';
         });
-    });
-
-});
-
-
-
+}

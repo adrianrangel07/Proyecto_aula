@@ -45,12 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // boton cambio de datos
+const saveButton = document.getElementById('save_btn');
 document.getElementById('change_btn').addEventListener('click', function () {
     // Selecciona todos los inputs del formulario
     document.querySelectorAll('input').forEach(input => {
         // Verifica si el input no es el de fecha
         if (input.id !== 'birthdate') {
-            input.disabled = false; // Habilita el campo
+            input.disabled = false; 
+            saveButton.disabled = false;
         }
     });
 });
@@ -124,14 +126,3 @@ function eliminarHojaDeVida() {
 }
 // fin borrar HDV
 
-// Obtener referencias a los botones
-const changeButton = document.getElementById('change_btn');
-const saveButton = document.getElementById('save_btn');
-
-// Bloquear el botón "Save changes" al cargar la página
-saveButton.disabled = true;
-
-// Agregar evento al botón "Change Settings" para habilitar "Save changes"
-changeButton.addEventListener('click', () => {
-    saveButton.disabled = false;
-});

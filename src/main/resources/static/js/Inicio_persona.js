@@ -220,7 +220,7 @@ function applyFilters() {
         const salario = parseFloat(oferta.querySelector(".salario span").innerText) || 0;
         const tipoEmpleoOferta = oferta.querySelector(".tipo_empleo span").innerText.toLowerCase();
         const modalidadOferta = oferta.querySelector(".modalidad span").innerText.toLowerCase();
-        const tipoContratoOferta = oferta.querySelector(".tipo_contrato span").innerText.toLowerCase(); // Asumiendo que hay una clase 'tipo_contrato' en la tarjeta de oferta
+        const tipoContratoOferta = oferta.querySelector(".tipo_contrato span").innerText.toLowerCase();
 
         // Lógica para mostrar/ocultar la oferta según los filtros
         let isVisible = true;

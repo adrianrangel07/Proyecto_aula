@@ -32,4 +32,33 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
     });
 });
 
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+    const fechaInput = document.getElementById("fecha").value;
+    const fechaNacimiento = new Date(fechaInput);
+    const hoy = new Date();
+
+    // Calculamos la edad
+    const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+    const dia = hoy.getDate() - fechaNacimiento.getDate();
+    const edadReal = (mes < 0 || (mes === 0 && dia < 0)) ? edad - 1 : edad;
+
+    if (edadReal < 18) {
+        event.preventDefault(); // Cancela el envío del formulario
+
+        // SweetAlert para mostrar el mensaje
+        Swal.fire({
+            icon: 'error',
+            title: 'Edad inválida',
+            text: 'Debes tener al menos 18 años para registrarte.',
+            confirmButtonText: 'Entendido'
+        }).then(() => {
+            // Opcional: Recargar la página para limpiar el formulario
+            window.location.reload();
+        });
+    }
+});
+
+
+
 

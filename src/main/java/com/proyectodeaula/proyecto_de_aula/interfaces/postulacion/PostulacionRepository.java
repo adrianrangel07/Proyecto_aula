@@ -13,5 +13,4 @@ public interface PostulacionRepository extends JpaRepository<Postulacion, Long> 
 
     Optional<Postulacion> findByOfertasIdAndPersonasId(Long ofertaId, Long usuarioId);
     List<Postulacion> findByPersonasId(Long personaId);
-
 }

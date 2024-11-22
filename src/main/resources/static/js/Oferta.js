@@ -22,7 +22,6 @@ toggleButtonGroup(jobTypeButtons);
 toggleButtonGroup(durationButtons);
 toggleButtonGroup(typeJobContract);
 
-
 // JavaScript para manejar la selección de tipo de trabajo y duración
 function setJobType(type) {
     document.getElementById('jobType').value = type;

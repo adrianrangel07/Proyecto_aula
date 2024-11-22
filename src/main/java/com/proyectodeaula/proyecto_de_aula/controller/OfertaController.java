@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.proyectodeaula.proyecto_de_aula.interfaceService.IofertaService;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
 import com.proyectodeaula.proyecto_de_aula.model.Ofertas;
 import com.proyectodeaula.proyecto_de_aula.service.OfertaService;
+import com.proyectodeaula.proyecto_de_aula.service.PostulacionService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,6 +37,9 @@ public class OfertaController {
 
 	@Autowired
 	private OfertaService offerta;
+
+	@Autowired
+	PostulacionService postulacionService;
 
 	@GetMapping("/personas/pagina_principal")
 	public String listar_ofertas_1(Model model, HttpSession session) {
@@ -86,6 +91,16 @@ public class OfertaController {
 	@ResponseStatus(HttpStatus.OK)
 	public void updateOffer(@PathVariable long id, @RequestBody Ofertas updatedOffer) {
 		offerService.update(id, updatedOffer); // Llamada al servicio para actualizar la oferta
+	}
+
+	@GetMapping("/ofertas/{idOferta}/postulaciones/count")
+	public ResponseEntity<Integer> obtenerPostulacionesCount(@PathVariable long idOferta) {
+		try {
+			int count = offerta.obtenerNumeroPostulaciones(idOferta);
+			return ResponseEntity.ok(count);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
 	}
 
 }

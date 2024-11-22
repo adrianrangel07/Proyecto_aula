@@ -14,7 +14,6 @@ import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.OfertasRepository;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
 import com.proyectodeaula.proyecto_de_aula.model.Ofertas;
 
-
 @Service
 public class OfertaService implements IofertaService {
 
@@ -50,12 +49,12 @@ public class OfertaService implements IofertaService {
 
     @Override
     public void delete(long id) {
-        ofertaRepository.deleteById(id); // El método deleteById acepta `Long`, por lo que no necesitas conversión.
+        ofertaRepository.deleteById(id);
     }
 
     @Override
     public List<Ofertas> listarOfertasPorEmpresa(Empresas empresa) {
-        return ofertaRepository.findByEmpresa(empresa); // Este método debe estar definido en tu repositorio
+        return ofertaRepository.findByEmpresa(empresa);
     }
 
     public List<Ofertas> buscarOfertasPorTermino(String termino) {
@@ -74,12 +73,28 @@ public class OfertaService implements IofertaService {
             existingOffer.setDuracion(updatedOffer.getDuracion());
             existingOffer.setPeriodo(updatedOffer.getPeriodo());
             existingOffer.setModalidad(updatedOffer.getModalidad());
+            existingOffer.setTipo_empleo(updatedOffer.getTipo_empleo());
             existingOffer.setTipo_contrato(updatedOffer.getTipo_contrato());
 
             ofertaRepository.save(existingOffer); // Guarda los cambios
         } else {
             throw new ResourceNotFoundException("Oferta no encontrada con id: " + id);
         }
+    }
+
+    public int obtenerNumeroPostulaciones(long idOferta) {
+        // Obtener la oferta
+        Optional<Ofertas> ofertaOpt = ofertaRepository.findById(idOferta);
+        if (ofertaOpt.isPresent()) {
+            Ofertas oferta = ofertaOpt.get();
+            return oferta.getPostulaciones() != null ? oferta.getPostulaciones().size() : 0;
+        }
+        return 0;
+    }
+
+    @Override
+    public Ofertas findById(long id) {
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
 }

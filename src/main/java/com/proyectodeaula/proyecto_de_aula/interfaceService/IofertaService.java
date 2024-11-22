@@ -13,4 +13,5 @@ public interface IofertaService {
     public void delete (long Id);
     List<Ofertas> listarOfertasPorEmpresa(Empresas empresa);
     public void update(long id, Ofertas updatedOffer);
+    public Ofertas findById(long id);
 }

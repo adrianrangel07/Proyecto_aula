@@ -24,7 +24,7 @@ public class Ofertas {
     @Column(name = "Titulo_puesto", columnDefinition = "Varchar(45)", nullable = false)
     String titulo_puesto;
 
-    @Column(name = "Descripcion", columnDefinition = "Varchar(255)", nullable = false)
+    @Column(name = "Descripcion", columnDefinition = "Varchar(800)", nullable = false)
     String descripcion;
 
     @Column(name = "Duracion", columnDefinition = "Varchar(45)", nullable = false)

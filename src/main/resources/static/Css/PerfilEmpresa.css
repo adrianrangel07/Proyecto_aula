@@ -2,10 +2,13 @@
 .offer-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem; /* Espacio más amplio entre tarjetas */
+    gap: 2rem;
+    /* Espacio más amplio entre tarjetas */
     padding: 2rem;
-    justify-content: center; /* Centrar tarjetas */
-    background-color: #f9f9f9; /* Fondo claro para destacar las tarjetas */
+    justify-content: center;
+    /* Centrar tarjetas */
+    background-color: #f9f9f9;
+    /* Fondo claro para destacar las tarjetas */
 }
 
 /* Tarjeta de cada oferta */
@@ -17,13 +20,16 @@
     background-color: #ffffff;
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Para elementos como badges */
-    overflow: hidden; /* Evitar que el contenido desborde */
+    position: relative;
+    /* Para elementos como badges */
+    overflow: hidden;
+    /* Evitar que el contenido desborde */
 }
 
 /* Efecto al pasar el cursor */
 .offer-container .card:hover {
-    transform: translateY(-8px); /* Efecto de elevación */
+    transform: translateY(-8px);
+    /* Efecto de elevación */
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -37,7 +43,8 @@
 }
 
 .offer-container .card:hover h3 {
-    color: #ff6f61; /* Cambiar color en hover */
+    color: #ff6f61;
+    /* Cambiar color en hover */
 }
 
 /* Descripción y otros detalles */
@@ -77,13 +84,15 @@
 
 /* Estilo del modal */
 .modal {
-    display: none; /* Oculto por defecto */
+    display: none;
+    /* Oculto por defecto */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fondo oscuro */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -105,6 +114,7 @@
         opacity: 0;
         transform: scale(0.9);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -143,14 +153,16 @@
     align-items: center;
 }
 
-.close-btn, .delete-btn {
+.close-btn,
+.delete-btn {
     font-size: 20px;
     cursor: pointer;
     color: #777;
     transition: color 0.3s ease;
 }
 
-.close-btn:hover, .delete-btn:hover {
+.close-btn:hover,
+.delete-btn:hover {
     color: #ff6f61;
 }
 
@@ -170,21 +182,25 @@
 
 /* Efecto flotante en hover */
 .card.shadow:hover {
-    box-shadow: 
-        0px 20px 50px rgba(0, 0, 0, 0.25), /* Sombra externa más intensa */
-        inset 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra interna más intensa */
+    box-shadow:
+        0px 20px 50px rgba(0, 0, 0, 0.25),
+        /* Sombra externa más intensa */
+        inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+    /* Sombra interna más intensa */
 }
 
 /* Inputs del formulario */
 .form-control {
     border: 1px solid #ced4da;
     border-radius: 8px;
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra interna */
     transition: box-shadow 0.3s ease;
 }
 
 .form-control:focus {
-    box-shadow: 0px 0px 5px rgba(38, 143, 255, 0.5); /* Sombra externa al enfocar */
+    box-shadow: 0px 0px 5px rgba(38, 143, 255, 0.5);
+    /* Sombra externa al enfocar */
     border-color: #268fff;
 }
 
@@ -210,7 +226,8 @@
 
 /* Contenedor específico de la Hoja de Vida */
 .card-body button {
-    background-color: #007bff; /* Azul claro de Bootstrap */
+    background-color: #007bff;
+    /* Azul claro de Bootstrap */
     color: white;
     border: none;
     border-radius: 6px;
@@ -219,128 +236,113 @@
     font-weight: bold;
     text-align: center;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); /* Sombra externa suave */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    /* Sombra externa suave */
 }
 
 /* Efecto hover: cambia el color de fondo y la sombra */
 .card-body button:hover {
-    background-color: #0056b3; /* Azul más oscuro */
-    transform: scale(1.05); /* Efecto de zoom */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra externa más fuerte */
+    background-color: #0056b3;
+    /* Azul más oscuro */
+    transform: scale(1.05);
+    /* Efecto de zoom */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    /* Sombra externa más fuerte */
 }
 
 /* Efecto activo: reduce el tamaño y cambia la sombra */
 .card-body button:active {
-    background-color: #004494; /* Azul aún más oscuro */
-    transform: scale(0.95); /* Efecto de reducción */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Sombra externa más pequeña */
+    background-color: #004494;
+    /* Azul aún más oscuro */
+    transform: scale(0.95);
+    /* Efecto de reducción */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    /* Sombra externa más pequeña */
 }
 
 /* Estilo específico para el botón de eliminar Hoja de Vida (botón secundario) */
 .card-body button.delete-btn {
-    background-color: #dc3545; /* Rojo de Bootstrap */
+    background-color: #dc3545;
+    /* Rojo de Bootstrap */
     color: white;
 }
 
 .card-body button.delete-btn:hover {
-    background-color: #c82333; /* Rojo más oscuro */
+    background-color: #c82333;
+    /* Rojo más oscuro */
 }
 
 .card-body button.delete-btn:active {
-    background-color: #bd2130; /* Rojo aún más oscuro */
-}
-
-/* footer */
-
-.custom-footer {
-    margin-top: auto;
-    background: linear-gradient(90deg, #0a1128, #001f54);
-    color: white;
-    padding: 20px 0;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.footer-left, .footer-center, .footer-right {
-    flex: 1;
-}
-
-.footer-left {
-    text-align: left; 
-}
-
-.footer-center {
-    text-align: center; 
-}
-
-.footer-right {
-    text-align: right;
-}
-
-.footer-socials a {
-    margin: 0 10px;
+    background-color: #bd2130;
+    /* Rojo aún más oscuro */
 }
 
 /* Estilos generales para el footer */
 .custom-footer {
-    background-color: #0a1128; /* Fondo oscuro para el footer */
-    color: white; /* Texto blanco */
-    padding: 30px 0; /* Espaciado adecuado */
-    position: relative; /* Para usar con sticky-footer si es necesario */
+    background-color: #0a1128;
+    /* Fondo oscuro para el footer */
+    color: white;
+    /* Texto blanco */
+    padding: 30px 0;
+    /* Espaciado adecuado */
+    position: relative;
+    /* Para usar con sticky-footer si es necesario */
     bottom: 0;
     width: 100%;
-  }
-  
-  .custom-footer .footer-content {
+}
+
+.custom-footer .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Asegura que no se estire demasiado */
+    max-width: 1200px;
+    /* Asegura que no se estire demasiado */
     margin: 0 auto;
-  }
-  
-  .custom-footer .footer-left,
-  .custom-footer .footer-center,
-  .custom-footer .footer-right {
-    flex: 1; /* Permite que cada columna ocupe un tercio del ancho */
-  }
-  
-  .custom-footer .footer-left,
-  .custom-footer .footer-center {
-    text-align: left; /* Alineación de texto a la izquierda */
-  }
-  
-  .custom-footer .footer-center {
-    text-align: center; /* Alineación centrada para el texto */
-  }
-  
-  .custom-footer .footer-right {
-    text-align: right; /* Alineación de texto a la derecha */
-  }
-  
-  /* Ajuste para los íconos de redes sociales */
-  .custom-footer .footer-right a {
+}
+
+.custom-footer .footer-left,
+.custom-footer .footer-center,
+.custom-footer .footer-right {
+    flex: 1;
+    /* Permite que cada columna ocupe un tercio del ancho */
+}
+
+.custom-footer .footer-left,
+.custom-footer .footer-center {
+    text-align: left;
+    /* Alineación de texto a la izquierda */
+}
+
+.custom-footer .footer-center {
+    text-align: center;
+    /* Alineación centrada para el texto */
+}
+
+.custom-footer .footer-right {
+    text-align: right;
+    /* Alineación de texto a la derecha */
+}
+
+/* Ajuste para los íconos de redes sociales */
+.custom-footer .footer-right a {
     margin: 0 10px;
-  }
-  
-  .custom-footer .footer-right img {
+}
+
+.custom-footer .footer-right img {
     width: 30px;
     height: 30px;
-    transition: transform 0.3s ease; /* Efecto de hover */
-  }
-  
-  .custom-footer .footer-right img:hover {
-    transform: scale(1.1); /* Efecto de ampliación */
-  }
-  
-  /* Hacer que el footer sea fijo al final */
-  .sticky-footer {
+    transition: transform 0.3s ease;
+    /* Efecto de hover */
+}
+
+.custom-footer .footer-right img:hover {
+    transform: scale(1.1);
+    /* Efecto de ampliación */
+}
+
+/* Hacer que el footer sea fijo al final */
+.sticky-footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-  }
+}

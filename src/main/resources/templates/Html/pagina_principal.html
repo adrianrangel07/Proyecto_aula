@@ -176,25 +176,24 @@
 
                 <!-- Modal que se mostrará al hacer clic en una tarjeta -->
                 <div id="modal" class="modal">
-                    <div id="modal-content">
-                        <div class="container-span">
-                            <span class="close-btn">&times;</span>
+                    <div class="modal-content" id="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-title"></h3>
+                            <span class="close-btn" id="close-btn">&times;</span>
                         </div>
-                        <h3 id="modal-title"></h3>
-                        <p id="modal-description"></p>
-                        <p id="modal-salary"></p>
-                        <p id="modal-duration"></p>
-                        <p id="modal-period"></p>
-                        <p id="modal-modalidad"></p>
-                        <p id="modal-type"></p>
-                        <p id="modal-typeContract"></p>
-
-                        <!-- Botón para postularse dentro del modal -->
-                        <div class="container-pos">
+                        <div class="modal-body">
+                            <p id="modal-description"></p>
+                            <span id="modal-salary"></span></p>
+                            <span id="modal-duration"></span></p>
+                            <span id="modal-period"></span></p>
+                            <span id="modal-modalidad"></span></p>
+                            <span id="modal-type"></span></p>
+                            <span id="modal-typeContract"></span></p>
+                        </div>
+                        <div class="modal-footer">
                             <button class="apply-btn-modal" id="postularseBtn">Apply</button>
                         </div>
                     </div>
-
                 </div>
             </div>
 

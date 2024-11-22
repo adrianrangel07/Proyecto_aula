@@ -72,13 +72,10 @@
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
                                             class="d-none d-lg-inline me-2 text-gray-600 small"
-                                            id="usuario">Usuario</span><data value="${persona.id}"></data></a>
+                                            id="usuario">Account</span><data value="${persona.id}"></data></a>
                                     <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a
                                             class="dropdown-item" th:href="@{/perfil/persona}"><i
-                                                class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
-                                            class="dropdown-item" href="#"><i
-                                                class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
-                                            log</a>
+                                                class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a>
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"
                                             id="logout" onclick="cerrarSesion(event)">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>Logout
@@ -176,42 +173,61 @@
                 <!-- Modal que se mostrará al hacer clic en una tarjeta -->
                 <div id="modal" class="modal">
                     <div class="modal-content" id="modal-content">
-                        <div class="container-span">
-                            <span class="close-btn">&times;</span>
+                        <div class="modal-header">
+                            <h3 id="modal-title"></h3>
+                            <span class="close-btn" id="close-btn">&times;</span>
                         </div>
-                        <h3 id="modal-title"></h3>
-                        <p id="modal-description"></p>
-                        <p id="modal-salary"></p>
-                        <p id="modal-duration"></p>
-                        <p id="modal-period"></p>
-                        <p id="modal-modalidad"></p>
-                        <p id="modal-type"></p>
-                        <p id="modal-typeContract"></p>
-
-                        <!-- Botón para postularse dentro del modal -->
-                        <button class="apply-btn-modal" id="postularseBtn">Apply</button>
+                        <div class="modal-body">
+                            <p id="modal-description"></p>
+                            <span id="modal-salary"></span></p>
+                            <span id="modal-duration"></span></p>
+                            <span id="modal-period"></span></p>
+                            <span id="modal-modalidad"></span></p>
+                            <span id="modal-type"></span></p>
+                            <span id="modal-typeContract"></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="apply-btn-modal" id="postularseBtn">Apply</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <footer class="custom-footer bg-dark text-light text-center py-4 sticky-footer">
+                    <div class="container">
+                        <div class="footer-content">
+                            <div class="footer-left">
+                                <p class="mb-1">PBX: (605) 123-4567 | Email: contacto@workwise.com</p>
+                            </div>
+                            <div class="footer-center">
+                                <p class="mb-1">© 2024 WorkWise. Todos los derechos reservados.</p>
+                            </div>
+                            <div class="footer-right">
+                                <a href="https://facebook.com" target="_blank" class="mx-3">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+                                        alt="Facebook" width="30" height="30">
+                                </a>
+                                <a href="https://instagram.com" target="_blank" class="mx-3">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                                        alt="Instagram" width="30" height="30">
+                                </a>
+                                <a href="https://www.tiktok.com" target="_blank" class="mx-3">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/TikTok_Logo.svg"
+                                        alt="TikTok" width="30" height="30">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        </div>
 
 
-
-
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2024</span></div>
-                </div>
-            </footer>
-        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
-    </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
-    <script src="../js/General/script.min.js"></script>
-    <script src="../js/General/theme.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../js/Inicio_persona.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../js/General/Grid-and-List-view-V10-script.js"></script>
+        <script src="../js/General/script.min.js"></script>
+        <script src="../js/General/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../js/Inicio_persona.js"></script>
 
 </body>
 

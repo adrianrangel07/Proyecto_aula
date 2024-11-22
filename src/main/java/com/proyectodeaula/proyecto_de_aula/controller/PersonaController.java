@@ -188,6 +188,7 @@ public class PersonaController {
     }
 
     // metodo para subir la hoja de vida
+    @SuppressWarnings("null")
     @PostMapping("/uploadHDV")
     public String uploadHDV(@RequestParam("file") MultipartFile file, Model model, HttpSession session) {
         try {
@@ -258,11 +259,7 @@ public class PersonaController {
             return "html/error"; // Mostrar una página de error si algo falla
         }
     }
-
-
     // fin borrar hoja de vida
-
-
 
     // metodo para actualizar el perfil
     @GetMapping("/update/perfil")
