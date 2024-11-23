@@ -70,18 +70,17 @@ public class EmpresaController {
         if (empresa != null) {
 
             model.addAttribute("nombreEmpresa", empresa.getNombreEmp());
-            
+
             session.setAttribute("email", email);
-            session.setAttribute("empresa", empresa);    
+            session.setAttribute("empresa", empresa);
             session.setAttribute("usuarioId", empresa.getId());
-            
+
             return "redirect:/empresas/pagina_principal"; // Redirigir a la página de inicio de empresa
         } else {
             model.addAttribute("error", "Credenciales incorrectas o empresa no encontrada");
             return "redirect:/datos_incorrectaemp"; // Vista de error
         }
     }
-
 
     @GetMapping("/empresas/pagina_principal")
     public String mostrarPaginaPrincipal(Model model, HttpSession session) {
@@ -111,7 +110,7 @@ public class EmpresaController {
         return "html/contraseña_olvidada_emp";
     }
 
-    @GetMapping("/perfil/empresa") // 
+    @GetMapping("/perfil/empresa") //
     public String myProfile(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email");
         if (email != null) {
@@ -175,5 +174,10 @@ public class EmpresaController {
             e.printStackTrace(); // Imprimir el stack trace para depuración
             return "html/error"; // Mostrar una página de error si algo falla
         }
+    }
+
+    @GetMapping("/Estadisticas/empresas")
+    public String estadisticaempresa() {
+        return "html/Estadisticas_empresas";
     }
 }

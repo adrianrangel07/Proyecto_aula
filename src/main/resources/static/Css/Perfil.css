@@ -266,16 +266,18 @@
     width: 100%;
 }
 
-.footer-left, .footer-center, .footer-right {
+.footer-left,
+.footer-center,
+.footer-right {
     flex: 1;
 }
 
 .footer-left {
-    text-align: left; 
+    text-align: left;
 }
 
 .footer-center {
-    text-align: center; 
+    text-align: center;
 }
 
 .footer-right {
@@ -286,61 +288,24 @@
     margin: 0 10px;
 }
 
-/* Estilos generales para el footer */
-.custom-footer {
-    background-color: #0a1128; /* Fondo oscuro para el footer */
-    color: white; /* Texto blanco */
-    padding: 30px 0; /* Espaciado adecuado */
-    position: relative; /* Para usar con sticky-footer si es necesario */
-    bottom: 0;
-    width: 100%;
-  }
-  
-  .custom-footer .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px; /* Asegura que no se estire demasiado */
-    margin: 0 auto;
-  }
-  
-  .custom-footer .footer-left,
-  .custom-footer .footer-center,
-  .custom-footer .footer-right {
-    flex: 1; /* Permite que cada columna ocupe un tercio del ancho */
-  }
-  
-  .custom-footer .footer-left,
-  .custom-footer .footer-center {
-    text-align: left; /* Alineación de texto a la izquierda */
-  }
-  
-  .custom-footer .footer-center {
-    text-align: center; /* Alineación centrada para el texto */
-  }
-  
-  .custom-footer .footer-right {
-    text-align: right; /* Alineación de texto a la derecha */
-  }
-  
-  /* Ajuste para los íconos de redes sociales */
-  .custom-footer .footer-right a {
-    margin: 0 10px;
-  }
-  
-  .custom-footer .footer-right img {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.3s ease; /* Efecto de hover */
-  }
-  
-  .custom-footer .footer-right img:hover {
-    transform: scale(1.1); /* Efecto de ampliación */
-  }
-  
-  /* Hacer que el footer sea fijo al final */
-  .sticky-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
+.custom-footer a img {
+    transition: transform 0.2s ease;
+    outline: none;
+    border: none;
+}
+
+.custom-footer a img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
+.custom-footer a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.custom-footer a:hover {
+    color: #4db8ff;
+}

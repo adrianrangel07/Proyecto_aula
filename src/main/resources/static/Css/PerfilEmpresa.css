@@ -276,19 +276,11 @@
     background-color: #bd2130;
     /* Rojo aún más oscuro */
 }
-
-/* Estilos generales para el footer */
 .custom-footer {
-    background-color: #0a1128;
-    /* Fondo oscuro para el footer */
+    margin-top: auto;
+    background: linear-gradient(90deg, #310632, #310632);
     color: white;
-    /* Texto blanco */
-    padding: 30px 0;
-    /* Espaciado adecuado */
-    position: relative;
-    /* Para usar con sticky-footer si es necesario */
-    bottom: 0;
-    width: 100%;
+    padding: 20px 0;
 }
 
 .custom-footer .footer-content {
