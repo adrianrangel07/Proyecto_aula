@@ -77,7 +77,6 @@ public class PostulacionService implements IpostulacionService {
     public List<Postulacion> obtenerPostulacionesPorUsuario(Long personaId) {
         return postulacionRepository.findByPersonasId(personaId);
     }
-    
 
     @Override
     public void delete(int Id) {

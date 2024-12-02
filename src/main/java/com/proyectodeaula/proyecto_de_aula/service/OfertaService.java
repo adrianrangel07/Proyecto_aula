@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.proyectodeaula.proyecto_de_aula.interfaceService.IofertaService;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.Interfaz_ofertas;
-import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.Interfaz_ofertas_buscar;
 import com.proyectodeaula.proyecto_de_aula.interfaces.Ofertas.OfertasRepository;
 import com.proyectodeaula.proyecto_de_aula.model.Empresas;
 import com.proyectodeaula.proyecto_de_aula.model.Ofertas;
@@ -19,9 +18,6 @@ public class OfertaService implements IofertaService {
 
     @Autowired
     private Interfaz_ofertas oferr;
-
-    @Autowired
-    private Interfaz_ofertas_buscar offer_buscar;
 
     @Autowired
     private OfertasRepository ofertaRepository;
@@ -58,7 +54,7 @@ public class OfertaService implements IofertaService {
     }
 
     public List<Ofertas> buscarOfertasPorTermino(String termino) {
-        return offer_buscar.findByTituloPuestoContaining(termino);
+        return oferr.findByTituloPuestoContaining(termino);
     }
 
     @Override
